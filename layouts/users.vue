@@ -2,16 +2,7 @@
   <div>
     <div
       v-if="$nuxt.isOffline"
-      class="
-        w-full
-        text-center
-        py-2
-        bg-red-200
-        text-red-900
-        font-semibold
-        fixed
-        top-0
-      "
+      class="w-full text-center py-2 bg-red-200 text-red-900 font-semibold fixed top-0"
     >
       You are offline
     </div>
@@ -40,8 +31,8 @@
 
 <script>
 import Header from "./users/header";
-import Sidebar from "./users/sidebar";
 import RightSidebar from "./users/right-sidebar";
+import Sidebar from "./users/sidebar";
 export default {
   name: "Users",
   components: {

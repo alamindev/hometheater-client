@@ -28,9 +28,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import authImg from "@/components/auth/authImg";
 import Search from "@/components/Search";
+import authImg from "@/components/auth/authImg";
 export default {
   name: "Header",
   components: {
@@ -62,7 +61,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style   scoped>
 @media (max-width: 1170px) {
   .custom-click {
     display: block;

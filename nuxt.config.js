@@ -138,8 +138,7 @@ export default {
     "vue-sweetalert2/nuxt",
     "vue-social-sharing/nuxt",
     "cookie-universal-nuxt",
-    ["vue-scrollto/nuxt", { duration: 300 }],
-    ["@nuxtjs/html-minifier", { log: "once", logHtml: true }],
+    ["vue-scrollto/nuxt", { duration: 300 }], 
     [
       "nuxt-lazy-load",
       {
@@ -173,6 +172,14 @@ export default {
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
+      },
+    },
+    loaders: {
+      sass: {
+        implementation: require('sass'),
+      },
+      scss: {
+        implementation: require('sass'),
       },
     },
     extend(config, ctx) {
