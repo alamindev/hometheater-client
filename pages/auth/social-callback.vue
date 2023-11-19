@@ -1,0 +1,86 @@
+<template>
+  <div class="container mx-auto">
+    <div class="py-10">
+      <div class="loader"></div>
+      <p class="text-lg text-dark-sm font-semibold">
+        Please wait while we're logging you in...
+      </p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  middleware: ["guest"],
+  data() {
+    return {
+      token: this.$route.query.token ? this.$route.query.token : null,
+    };
+  },
+  mounted() {
+    this.$auth.setToken("local", "Bearer " + this.token);
+    this.$auth.setStrategy("local");
+    this.$auth
+      .fetchUser()
+      .then(() => {
+        this.$axios
+          .get(`/auth/check-fields/${this.$auth.user.id}`)
+          .then((res) => {
+            let lastLocation = this.$cookies.get("last-location");
+            if (typeof lastLocation !== "undefined" && lastLocation !== null) {
+              window.location.href =
+                "https://hometheaterproz.com/" + lastLocation;
+            } else {
+              if (res.data.success === true) {
+                window.location.href = "https://hometheaterproz.com/booking";
+              } else {
+                window.location.href =
+                  "https://hometheaterproz.com/users/settings";
+              }
+            }
+          });
+      })
+      .catch((e) => {
+        this.$auth.logout();
+        return this.$router.push(
+          `/auth/${
+            this.$route.query.origin ? this.$route.query.origin : "register"
+          }?err=${this.$route.query.error}`
+        );
+      });
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.container {
+  text-align: center;
+}
+.loader {
+  margin: 20px auto;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3b5998;
+  border-bottom: 8px solid #3b5998;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 1.2s linear infinite;
+  animation: spin 1.2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
