@@ -1,6 +1,6 @@
 <template>
   <div class="user--settings">
-    <form v-if="!loading"   @submit.prevent="UpdateInfo">
+    <form v-if="!loading" @submit.prevent="UpdateInfo">
       <div
         v-if="require_msg"
         class="mb-5 text-red-800 bg-red-200 rounded-md py-5 px-10"
@@ -36,7 +36,9 @@
                 accept="image/*"
               />
               <div class="rounded-full p-3 bg-white" v-if="!photo">
-                <img
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
                   v-if="loaduser != null"
                   :src="
                     loaduser.includes('http') ? loaduser : imgurl + loaduser
@@ -45,7 +47,9 @@
                   alt=""
                 />
                 <div class="w-24 h-24" v-if="loaduser == null">
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     src="/images/dashboard-img-1.svg"
                     class="w-24 h-24 object-cover rounded-full"
                     alt=""
@@ -53,7 +57,9 @@
                 </div>
               </div>
               <div class="rounded-full p-3 bg-white" v-else>
-                <img
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
                   v-if="photo"
                   :src="photo"
                   alt="profile photo"

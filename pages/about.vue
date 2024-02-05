@@ -2,41 +2,43 @@
   <main v-if="!loading" class="about--page">
     <section class="relative">
       <client-only>
-        <swiper ref="carousel" class="swiper" :options="SliderOption">
-          <swiper-slide
-            class="flex justify-center items-center"
-            v-for="slider in sliders"
-            :key="slider.id"
-          >
+        <div class="swiper" v-swiper:mySwiper="SliderOption">
+          <div class="swiper-wrapper">
             <div
-              class="w-full py-48 lg:py-56 xl:py-72 bg-center bg-no-repeat bg-cover px-4 lg:px-16"
-              :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.7) ),url('${
-                imgurl + 'storage' + slider.image
-              }');`"
+              class="flex justify-center items-center swiper-slide"
+              v-for="slider in sliders"
+              :key="slider.id"
             >
-              <div class="container mx-auto">
-                <div class="w-full lg:w-10/12 mx-auto">
-                  <div class="w-full md:w-8/12 lg:w-7/12 xl:w-6/12">
-                    <div>
-                      <h1
-                        v-if="slider.title"
-                        class="text-center md:text-left text-white text-xl sm:text-2xl md:text-3xl leading-relaxed pb-5 font-semibold"
-                      >
-                        {{ slider.title }}
-                      </h1>
-                      <p
-                        v-if="slider.details"
-                        class="text-white text-center md:text-left text-base pb-5"
-                      >
-                        {{ slider.details }}
-                      </p>
+              <div
+                class="w-full py-48 lg:py-56 xl:py-72 bg-center bg-no-repeat bg-cover px-4 lg:px-16"
+                :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.7) ),url('${
+                  imgurl + 'storage' + slider.image
+                }');`"
+              >
+                <div class="container mx-auto">
+                  <div class="w-full lg:w-10/12 mx-auto">
+                    <div class="w-full md:w-8/12 lg:w-7/12 xl:w-6/12">
+                      <div>
+                        <h1
+                          v-if="slider.title"
+                          class="text-center md:text-left text-white text-xl sm:text-2xl md:text-3xl leading-relaxed pb-5 font-semibold"
+                        >
+                          {{ slider.title }}
+                        </h1>
+                        <p
+                          v-if="slider.details"
+                          class="text-white text-center md:text-left text-base pb-5"
+                        >
+                          {{ slider.details }}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </swiper-slide>
-        </swiper>
+          </div>
+        </div>
       </client-only>
       <div class="flex justify-center">
         <div
@@ -62,8 +64,10 @@
     <section class="px-4 lg:px-16 py-20">
       <div class="w-full lg:w-11/12 xl:w-9/12 mx-auto">
         <div class="flex flex-col md:flex-row gap-10 items-start">
-          <div class="w-full md:w-5/12  lg:pr-12">
-            <img
+          <div class="w-full md:w-5/12 lg:pr-12">
+            <nuxt-img
+              quality="50"
+              loading="lazy"
               class="w-full"
               :src="imgurl + 'storage' + information.image"
               alt="client-affiliation"
@@ -94,9 +98,15 @@
         {{ header.title }}
       </h2>
       <ul class="flex justify-center items-start pt-6 flex-wrap">
-        <li class="px-8 flex justify-center" v-for="mem in members" :key="mem.id">
+        <li
+          class="px-8 flex justify-center"
+          v-for="mem in members"
+          :key="mem.id"
+        >
           <div class="p-5 px-8 flex justify-center flex-col items-center">
-            <img
+            <nuxt-img
+              quality="50"
+              loading="lazy"
               class="rounded-full w-24 h-24 object-cover"
               :src="imgurl + 'storage' + mem.image"
               alt="client-affiliation"
@@ -135,7 +145,12 @@
     </section>
     <section class="px-4 lg:px-16 pt-20 pb-16 relative">
       <div class="absolute left-0 top-0 mt-20 -ml-64">
-        <img src="images/about-circle.svg" alt="about" />
+        <nuxt-img
+          quality="50"
+          loading="lazy"
+          src="images/about-circle.svg"
+          alt="about"
+        />
       </div>
       <div class="w-full md:w-11/12 lg:w-10/12 xl:w-8/12 mx-auto">
         <h2
@@ -220,10 +235,10 @@ export default {
   },
   methods: {
     onSwiperClickSlidePrev() {
-      this.$refs.carousel.$swiper.slidePrev();
+      this.mySwiper.slidePrev();
     },
     onSwiperClickSlideNext() {
-      this.$refs.carousel.$swiper.slideNext();
+      this.mySwiper.slideNext();
     },
   },
   async fetch() {

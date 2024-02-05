@@ -5,12 +5,20 @@
         <div class="sm:flex flex-wrap">
           <div class="w-full md:w-6/12 lg:w-4/12 md:pr-10 pb-5 sm:pb-0">
             <div class="flex items-center pb-1 sm:pb-5 md:pb-10 -mt-2">
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 v-if="setting.footer_logo"
                 :src="imgurl + 'storage' + setting.footer_logo"
                 alt="client-affiliation"
               />
-              <img v-else src="/images/logo-white-full.svg" alt="logo white" />
+              <nuxt-img
+                quality="50"
+                loading="lazy"
+                v-else
+                src="/images/logo-white-full.svg"
+                alt="logo white"
+              />
             </div>
             <p
               class="text-whitesmoke text-base pt-3"
@@ -22,16 +30,7 @@
               <li class="px-2" v-if="setting.facebook">
                 <a
                   :href="setting.facebook"
-                  class="
-                    w-12
-                    h-12
-                    flex
-                    justify-center
-                    items-center
-                    border border-white
-                    text-whitesmoke
-                    rounded-full
-                  "
+                  class="w-12 h-12 flex justify-center items-center border border-white text-whitesmoke rounded-full"
                 >
                   <i class="fab fa-facebook-f"></i>
                 </a>
@@ -39,16 +38,7 @@
               <li class="px-2" v-if="setting.instagram">
                 <a
                   :href="setting.instagram"
-                  class="
-                    w-12
-                    h-12
-                    flex
-                    justify-center
-                    items-center
-                    border border-white
-                    text-whitesmoke
-                    rounded-full
-                  "
+                  class="w-12 h-12 flex justify-center items-center border border-white text-whitesmoke rounded-full"
                 >
                   <i class="fab fa-instagram"></i>
                 </a>
@@ -56,16 +46,7 @@
               <li class="px-2" v-if="setting.twitter">
                 <a
                   :href="setting.twitter"
-                  class="
-                    w-12
-                    h-12
-                    flex
-                    justify-center
-                    items-center
-                    border border-white
-                    text-whitesmoke
-                    rounded-full
-                  "
+                  class="w-12 h-12 flex justify-center items-center border border-white text-whitesmoke rounded-full"
                 >
                   <i class="fab fa-twitter"></i>
                 </a>
@@ -73,25 +54,10 @@
             </ul>
           </div>
           <div
-            class="
-              w-full
-              sm:w-6/12
-              md:w-3/12
-              lg:w-2/12
-              md:pl-3
-              pt-3
-              sm:pt-8
-              lg:pt-0
-            "
+            class="w-full sm:w-6/12 md:w-3/12 lg:w-2/12 md:pl-3 pt-3 sm:pt-8 lg:pt-0"
           >
             <span
-              class="
-                inline-block
-                text-whitesmoke text-2xl
-                pb-1
-                sm:pb-5
-                md:pb-10
-              "
+              class="inline-block text-whitesmoke text-2xl pb-1 sm:pb-5 md:pb-10"
             >
               Company
             </span>
@@ -119,25 +85,10 @@
             </ul>
           </div>
           <div
-            class="
-              w-full
-              sm:w-6/12
-              md:w-3/12
-              lg:w-2/12
-              md:pl-3
-              pt-3
-              sm:pt-8
-              lg:pt-0
-            "
+            class="w-full sm:w-6/12 md:w-3/12 lg:w-2/12 md:pl-3 pt-3 sm:pt-8 lg:pt-0"
           >
             <span
-              class="
-                inline-block
-                text-whitesmoke text-2xl
-                pb-1
-                sm:pb-5
-                md:pb-10
-              "
+              class="inline-block text-whitesmoke text-2xl pb-1 sm:pb-5 md:pb-10"
             >
               Service
             </span>
@@ -157,25 +108,10 @@
             </ul>
           </div>
           <div
-            class="
-              w-full
-              sm:w-6/12
-              md:w-6/12
-              lg:w-2/12
-              md:pl-3
-              pt-3
-              sm:pt-8
-              lg:pt-0
-            "
+            class="w-full sm:w-6/12 md:w-6/12 lg:w-2/12 md:pl-3 pt-3 sm:pt-8 lg:pt-0"
           >
             <span
-              class="
-                inline-block
-                text-whitesmoke text-2xl
-                pb-1
-                sm:pb-5
-                md:pb-10
-              "
+              class="inline-block text-whitesmoke text-2xl pb-1 sm:pb-5 md:pb-10"
             >
               On Social
             </span>
@@ -209,26 +145,11 @@
             </ul>
           </div>
           <div
-            class="
-              w-full
-              sm:w-6/12
-              md:w-6/12
-              lg:w-2/12
-              md:pl-3
-              pt-3
-              sm:pt-8
-              lg:pt-0
-            "
+            class="w-full sm:w-6/12 md:w-6/12 lg:w-2/12 md:pl-3 pt-3 sm:pt-8 lg:pt-0"
           >
             <div class="flex lg:items-start flex-col">
               <span
-                class="
-                  inline-block
-                  text-whitesmoke text-2xl
-                  pb-1
-                  sm:pb-5
-                  md:pb-10
-                "
+                class="inline-block text-whitesmoke text-2xl pb-1 sm:pb-5 md:pb-10"
               >
                 Contact us
               </span>

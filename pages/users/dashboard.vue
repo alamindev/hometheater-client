@@ -253,7 +253,12 @@
         </div>
         <div v-else class="w-full pt-20">
           <div class="flex w-full justify-center">
-            <img src="/images/no-result.png" alt="no resutl" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              src="/images/no-result.png"
+              alt="no resutl"
+            />
           </div>
           <h1 class="text-center pt-10 text-3xl text-gray-800 font-semibold">
             No booking here.

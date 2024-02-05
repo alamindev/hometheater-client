@@ -14,7 +14,9 @@
                 <div class="flex justify-between">
                   <div class="flex">
                     <div class="pr-3">
-                      <img
+                      <nuxt-img
+                        quality="50"
+                        loading="lazy"
                         class="w-12 h-12 object-cover rounded-full"
                         :src="imgurl + 'storage/' + post.user.photo"
                         :alt="post.user.username"
@@ -37,13 +39,17 @@
                 </div>
               </div>
               <div class="py-10">
-                <img
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
                   class="rounded-lg w-full object-cover"
                   :src="imgurl + 'storage/' + post.photo"
                   alt="blog-image"
                 />
               </div>
-              <div class="py-10 prose !max-w-full prose-dark prose-strong:font-semibold prose-b:font-semibold prose-a:font-bold prose-h1:text-brand-dark prose-h2:text-brand-dark prose-h3:text-brand-dark prose-strong:text-brand-dark prose-b:text-brand-dark prose-h4:text-brand-dark prose-h5:text-brand-dark prose-h6:text-brand-dark prose-h1:text-[2rem] prose-h2:text-[1.5rem] prose-h3:text-[1.3rem] prose-h4:text-[1rem] prose-h5:text-[0.8rem] prose-h6:text-[0.7rem]  prose-a:text-brand-color prose-a:no-underline hover:prose-a:underline hover:prose-a:text-brand-color-hover">
+              <div
+                class="py-10 prose !max-w-full prose-dark prose-strong:font-semibold prose-b:font-semibold prose-a:font-bold prose-h1:text-brand-dark prose-h2:text-brand-dark prose-h3:text-brand-dark prose-strong:text-brand-dark prose-b:text-brand-dark prose-h4:text-brand-dark prose-h5:text-brand-dark prose-h6:text-brand-dark prose-h1:text-[2rem] prose-h2:text-[1.5rem] prose-h3:text-[1.3rem] prose-h4:text-[1rem] prose-h5:text-[0.8rem] prose-h6:text-[0.7rem] prose-a:text-brand-color prose-a:no-underline hover:prose-a:underline hover:prose-a:text-brand-color-hover"
+              >
                 <div v-html="post.details"></div>
               </div>
             </div>
@@ -67,8 +73,8 @@
 
 <script>
 import RecentPost from "@/components/Blog/RecentPost";
-import SubscribeBlog from "@/components/Blog/SubscribeBlog";
 import ShareBlogLike from "@/components/Blog/ShareBlogLike";
+import SubscribeBlog from "@/components/Blog/SubscribeBlog";
 import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta],

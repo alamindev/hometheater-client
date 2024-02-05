@@ -8,44 +8,22 @@
     >
       <div class="bg-white shadow-lg p-3 rounded-lg">
         <div class="pb-1 sm:pb-3">
-          <img
+          <nuxt-img
+            quality="50"
+            loading="lazy"
             :src="imgurl + 'storage' + service.image"
-            class="
-              w-full
-              image--booking-custom
-              h-48
-              md:h-64
-              lg:h-56
-              xl:h-72
-              2xl:h-80
-              object-cover
-              rounded-lg
-            "
+            class="w-full image--booking-custom h-48 md:h-64 lg:h-56 xl:h-72 2xl:h-80 object-cover rounded-lg"
             :alt="service.slug"
           />
         </div>
         <div class="py-2">
           <div class="flex items-center">
             <i
-              class="
-                hidden
-                sm:block
-                text-lg
-                md:text-xl
-                lg:text-2xl
-                text-center text-gray-700
-              "
+              class="hidden sm:block text-lg md:text-xl lg:text-2xl text-center text-gray-700"
               :class="service.icon"
             ></i>
             <h2
-              class="
-                sm:pl-4
-                text-brand-dark-gray
-                font-semibold font-rubik
-                text-sm
-                sm:text-base
-                truncate
-              "
+              class="sm:pl-4 text-brand-dark-gray font-semibold font-rubik text-sm sm:text-base truncate"
               :class="title"
             >
               {{ service.title }}

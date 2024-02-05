@@ -6,7 +6,6 @@
     >
       You are offline
     </div>
-
     <div
       class="bg min-h-screen font-custom"
       :class="$nuxt.isOffline ? 'mt-8' : ''"

@@ -4,7 +4,13 @@
       <div class="flex flex-col-reverse md:flex-row items-center">
         <div class="w-full md:w-6/12">
           <div class="py-5 flex justify-center items-center">
-            <img src="/images/login.png" class="w-8/12" alt="login" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              src="/images/login.png"
+              class="w-8/12"
+              alt="login"
+            />
           </div>
         </div>
         <div class="w-full md:w-6/12 lg:pr-20">
@@ -42,7 +48,9 @@
               <form @submit.prevent="forgotPass">
                 <div class="w-full pb-6">
                   <div class="flex items-center relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/password.svg"
                       alt="password"
@@ -58,7 +66,9 @@
                       autocomplete="off"
                       class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                     />
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="-ml-12 z-30 cursor-pointer"
                       @click="showPass"
                       src="/images/eye.svg"
@@ -71,7 +81,9 @@
                 </div>
                 <div class="w-full">
                   <div class="flex items-center relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/password.svg"
                       alt="password"
@@ -87,7 +99,9 @@
                       autocomplete="off"
                       class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                     />
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="-ml-12 z-30 cursor-pointer"
                       @click="showConfirmPass"
                       src="/images/eye.svg"

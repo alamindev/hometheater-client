@@ -4,16 +4,29 @@
       class="flex flex-col items-center justify-center py-10 relative"
       v-if="error.statusCode === 404"
     >
-      <img
+      <nuxt-img
+        quality="50"
+        loading="lazy"
         class="sm:w-5/12 md:w-5/12 lg:w-4/12 xl:w-3/12"
         src="/images/404.svg"
         alt="404 page img"
       />
       <div class="absolute top-0 right-0 w-6/12">
-        <img src="/images/404-dot-1.svg" alt="404" />
+        <nuxt-img
+          quality="50"
+          loading="lazy"
+          src="/images/404-dot-1.svg"
+          alt="404"
+        />
       </div>
       <div class="absolute left-0 top-0 mt-20 -ml-20">
-        <img class="w-96" src="/images/about-circle.svg" alt="about" />
+        <nuxt-img
+          quality="50"
+          loading="lazy"
+          class="w-96"
+          src="/images/about-circle.svg"
+          alt="about"
+        />
       </div>
       <h1 class="text-center text-4xl">Whoops!</h1>
       <h2 class="text-center text-red-500 text-lg">{{ error.message }}</h2>

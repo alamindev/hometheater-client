@@ -24,7 +24,9 @@
               <div class="">
                 <div class="pb-4">
                   <div class="flex items-center relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                       src="/images/user.svg"
                       alt="mail"
@@ -47,7 +49,9 @@
                 </div>
                 <div class="pb-4">
                   <div class="flex items-center relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                       src="/images/user.svg"
                       alt="mail"
@@ -72,7 +76,9 @@
               <div class="">
                 <div class="pb-4">
                   <div class="flex items-center relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                       src="/images/mail.svg"
                       alt="mail"
@@ -115,7 +121,9 @@
               </div>
               <div class="w-full pb-4">
                 <div class="flex items-center relative">
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="absolute left-0 top-0 mt-5 ml-5"
                     src="/images/password.svg"
                     alt="password"
@@ -131,7 +139,9 @@
                     autocomplete="off"
                     class="px-12 py-4 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                   />
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="-ml-12 z-30 cursor-pointer"
                     @click="showPass"
                     src="/images/eye.svg"
@@ -144,7 +154,9 @@
               </div>
               <div class="w-full">
                 <div class="flex items-center relative">
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="absolute left-0 top-0 mt-5 ml-5"
                     src="/images/password.svg"
                     alt="password"
@@ -160,7 +172,9 @@
                     autocomplete="off"
                     class="px-12 py-4 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                   />
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="-ml-12 z-30 cursor-pointer"
                     @click="showConfirmPass"
                     src="/images/eye.svg"

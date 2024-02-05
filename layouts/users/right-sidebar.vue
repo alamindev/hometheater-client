@@ -50,7 +50,9 @@
                     target="_blank"
                   >
                     <div class="">
-                      <img
+                      <nuxt-img
+                        quality="50"
+                        loading="lazy"
                         class="w-16 h-12 object-cover rounded-lg"
                         :src="
                           activity.photo.includes('http')

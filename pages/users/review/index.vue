@@ -154,7 +154,12 @@
         </div>
         <div v-else class="w-full pt-10">
           <div class="flex w-full justify-center">
-            <img src="/images/no-result.png" alt="no resutl" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              src="/images/no-result.png"
+              alt="no resutl"
+            />
           </div>
           <h1 class="text-center py-10 text-xl text-gray-800 font-medium">
             No Reviews found yet!

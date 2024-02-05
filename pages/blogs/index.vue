@@ -86,7 +86,12 @@
             </div>
             <div v-else class="w-full">
               <div class="flex w-full justify-center">
-                <img src="/images/no-result.png" alt="no resutl" />
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
+                  src="/images/no-result.png"
+                  alt="no resutl"
+                />
               </div>
               <h1 class="text-center py-10 text-xl text-gray-800 font-medium">
                 {{ errors.message }}
@@ -112,12 +117,12 @@
 </template>
 
 <script>
-import Heading from "@/components/Heading";
 import Blog from "@/components/Blog/Blog";
 import RecentPost from "@/components/Blog/RecentPost";
 import Dot from "@/components/DotBlog";
+import Heading from "@/components/Heading";
 
-import { setCookie, getCookie } from "@/Utils/Cookie";
+import { getCookie, setCookie } from "@/Utils/Cookie";
 import blogMeta from "@/mixins/blogMeta.js";
 
 export default {
@@ -183,7 +188,7 @@ export default {
     this.$store.commit("blog/LOADING_POST", true);
     this.$store.commit("blog/LOADING_RECENT_POST", true);
   },
-  async created() {
+  async fetch() {
     const getslug = this.$cookies.get("post-slug");
     if (getslug != "" || getslug != undefined) {
       this.$store.dispatch("blog/fetchPostData", getslug);

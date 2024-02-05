@@ -22,7 +22,9 @@
           <div class="flex justify-center">
             <div class="">
               <div class="flex justify-center">
-                <img
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
                   class="w-8/12"
                   src="/images/no-result-found.svg"
                   alt="no-result-found.svg"

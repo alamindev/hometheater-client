@@ -12,36 +12,14 @@
                 </h3>
                 <div v-else class="flex gap-4">
                   <div
-                    class="
-                      animate-pulse
-                      opacity-60
-                      bg-brand-color
-                      w-20
-                      h-5
-                      rounded-lg
-                    "
+                    class="animate-pulse opacity-60 bg-brand-color w-20 h-5 rounded-lg"
                   ></div>
                   <div
-                    class="
-                      animate-pulse
-                      opacity-60
-                      bg-brand-color
-                      w-20
-                      h-5
-                      rounded-lg
-                    "
+                    class="animate-pulse opacity-60 bg-brand-color w-20 h-5 rounded-lg"
                   ></div>
                 </div>
                 <button
-                  class="
-                    border-0
-                    py-2
-                    px-5
-                    bg-brand-color
-                    hover:bg-brand-color-hover
-                    rounded-sm
-                    text-white
-                  "
+                  class="border-0 py-2 px-5 bg-brand-color hover:bg-brand-color-hover rounded-sm text-white"
                   @click="$router.go(-1)"
                 >
                   Back
@@ -51,13 +29,7 @@
               <div v-if="!loading" class="pt-2">
                 <div
                   v-if="!errors.message"
-                  class="
-                    grid grid-cols-2
-                    lg:grid-cols-4
-                    xl:grid-cols-5
-                    gap-5
-                    py-5
-                  "
+                  class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5 py-5"
                 >
                   <figure
                     class="cursor-pointer"
@@ -65,15 +37,10 @@
                     :key="img.id"
                     @click="ShowImages(img.slug)"
                   >
-                    <img
-                      class="
-                        w-full
-                        h-48
-                        md:h-56
-                        lg:h-40
-                        object-cover
-                        rounded-lg
-                      "
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
+                      class="w-full h-48 md:h-56 lg:h-40 object-cover rounded-lg"
                       :data-src="imgurl + 'storage/' + img.url"
                       alt="gellary-img"
                       v-lazy-load
@@ -107,16 +74,7 @@
         <div class="pt-2 absolute right-2 z-20">
           <div
             @click="hidemodal"
-            class="
-              cursor-pointer
-              w-6
-              h-6
-              bg-gray-300
-              rounded-full
-              flex
-              justify-center
-              items-center
-            "
+            class="cursor-pointer w-6 h-6 bg-gray-300 rounded-full flex justify-center items-center"
           >
             <i class="fas fa-times"></i>
           </div>
@@ -124,51 +82,26 @@
 
         <div class="w-full sm:flex custom--design-main">
           <div
-            class="
-              w-full
-              sm:w-7/12
-              lg:w-8/12
-              flex
-              items-center
-              bg-dark
-              relative
-              custom--design-sub
-            "
+            class="w-full sm:w-7/12 lg:w-8/12 flex items-center bg-dark relative custom--design-sub"
           >
             <div class="flex items-center w-full justify-between absolute px-3">
               <button
-                class="
-                  flex
-                  justify-center
-                  items-center
-                  w-10
-                  h-10
-                  bg-black bg-opacity-60
-                  rounded-lg
-                  cursor-pointer
-                "
+                class="flex justify-center items-center w-10 h-10 bg-black bg-opacity-60 rounded-lg cursor-pointer"
                 @click="ShowImages(imgData.previous_slug)"
               >
                 <i class="fas fa-chevron-left text-white"></i>
               </button>
               <button
-                class="
-                  flex
-                  justify-center
-                  items-center
-                  w-10
-                  h-10
-                  bg-black bg-opacity-60
-                  rounded-lg
-                  cursor-pointer
-                "
+                class="flex justify-center items-center w-10 h-10 bg-black bg-opacity-60 rounded-lg cursor-pointer"
                 @click="ShowImages(imgData.next_slug)"
               >
                 <i class="fas fa-chevron-right text-white"></i>
               </button>
             </div>
             <figure class="w-full">
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 class="w-full h-4/5 max-height-custom object-contain"
                 :src="imgurl + 'storage/' + imgData.url"
                 :alt="imgData.title"
@@ -179,13 +112,7 @@
             <div class="rounded shadow-md px-5 py-2 bg-white">
               <div class="pb-3 border-b border-gray-200">
                 <h1
-                  class="
-                    text-lg
-                    sm:text-xl
-                    font-bold
-                    text-dark-sm
-                    leading-relaxed
-                  "
+                  class="text-lg sm:text-xl font-bold text-dark-sm leading-relaxed"
                 >
                   {{ imgData.title }}
                 </h1>
@@ -209,11 +136,11 @@
 </template>
 
 <script>
+import CommentSubmit from "@/components/Gallery/CommentSubmit";
+import Comments from "@/components/Gallery/Comments";
 import GallerySidebar from "@/components/Gallery/GallerySidebar";
 import Sortby from "@/components/Gallery/Sortby";
 import globalMeta from "@/mixins/meta.js";
-import Comments from "@/components/Gallery/Comments";
-import CommentSubmit from "@/components/Gallery/CommentSubmit";
 export default {
   mixins: [globalMeta],
   middleware: ["checkSetting"],

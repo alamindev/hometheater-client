@@ -4,7 +4,13 @@
       <div class="flex flex-col lg:flex-row items-center">
         <div class="w-full lg:w-6/12 hidden lg:block">
           <div class="py-5 flex justify-center items-center">
-            <img src="/images/login.png" class="w-8/12" alt="login" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              src="/images/login.png"
+              class="w-8/12"
+              alt="login"
+            />
           </div>
         </div>
         <div class="w-full lg:w-6/12 lg:pr-20">
@@ -18,7 +24,13 @@
             <div
               class="py-5 flex justify-center items-center bg--color lg:hidden"
             >
-              <img src="/images/login.png" class="w-8/12" alt="login" />
+              <nuxt-img
+                quality="50"
+                loading="lazy"
+                src="/images/login.png"
+                class="w-8/12"
+                alt="login"
+              />
             </div>
             <ul class="flex py-5 text-xl">
               <li class="pr-3">
@@ -72,7 +84,9 @@
               <form @submit.prevent="login">
                 <div class="w-full pt-5">
                   <div class="flex items-center pb-8 relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/mail.svg"
                       alt="mail"
@@ -88,7 +102,9 @@
                     />
                   </div>
                   <div class="flex items-center relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/password.svg"
                       alt="password"
@@ -102,7 +118,9 @@
                       id="password"
                       class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                     />
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="-ml-12 z-30 cursor-pointer"
                       @click="showPass"
                       src="/images/eye.svg"
@@ -159,8 +177,8 @@
 
 <script>
 import Loader from "@/components/Loader/Loading-white";
-import globalMeta from "@/mixins/meta.js";
 import SocialLogin from "@/components/SocialLogin";
+import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta],
   middleware: "guest",

@@ -19,7 +19,9 @@
           :key="post.id"
         >
           <div class="flex items-start">
-            <img
+            <nuxt-img
+              quality="50"
+              loading="lazy"
               :class="image"
               class="rounded-lg object-cover"
               :src="imgurl + 'storage/' + post.photo"

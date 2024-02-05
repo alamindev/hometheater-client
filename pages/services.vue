@@ -35,13 +35,17 @@
             <div
               class="w-full flex items-center justify-end md:pl-20 pt-5 pb-10 md:pb-0 md:pt-0"
             >
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 v-if="header.image"
                 class="object-cover w-full px-20 sm:px-0"
                 :src="imgurl + 'storage' + header.image"
                 :alt="header.service_title"
               />
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 v-else
                 class="w-full"
                 src="/images/service-image-header.png"
@@ -80,7 +84,9 @@
                   class="text-2xl text-center text-gray-700"
                   :class="category.icon"
                 ></i>
-                <img
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
                   v-if="category.type == 1 && category.photo"
                   :src="imgurl + 'storage/' + category.photo"
                   alt="image"
@@ -119,9 +125,9 @@
 </template>
 
 <script>
-import Heading from "@/components/Heading";
-import Dot from "@/components/Dot";
 import Circles from "@/components/Circles";
+import Dot from "@/components/Dot";
+import Heading from "@/components/Heading";
 import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta],
@@ -151,11 +157,13 @@ export default {
     },
   },
   async fetch() {
-    await Promise.all([
-      this.$store.dispatch("service/fetchServiceHeader"),
-      this.$store.dispatch("service/fetchServiceCategory"),
-      this.$store.dispatch("meta/fetchMetaInfo", "service"),
-    ]);
+    if (this.$store.state.service.categories <= 0) {
+      await Promise.all([
+        this.$store.dispatch("service/fetchServiceHeader"),
+        this.$store.dispatch("service/fetchServiceCategory"),
+        this.$store.dispatch("meta/fetchMetaInfo", "service"),
+      ]);
+    }
   },
 };
 </script>

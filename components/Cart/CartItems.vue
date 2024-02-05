@@ -23,27 +23,12 @@
           <thead class="text-left">
             <tr>
               <th
-                class="
-                  text-gray-500
-                  font-medium
-                  w-72
-                  md:w-80
-                  lg:w-auto lg:px-2
-                  py-5
-                  border-b
-                "
+                class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-5 border-b"
               >
                 Service details
               </th>
               <th
-                class="
-                  text-gray-500
-                  font-medium
-                  w-28
-                  lg:w-32 lg:px-2
-                  py-5
-                  border-b
-                "
+                class="text-gray-500 font-medium w-28 lg:w-32 lg:px-2 py-5 border-b"
               >
                 Price
               </th>
@@ -60,33 +45,20 @@
               <td class="py-2">
                 <div class="flex pt-3">
                   <figure class="w-24">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="w-24 h-20 object-cover rounded-md"
                       :src="imgurl + 'storage' + cart.image"
                       :alt="cart.title"
                     />
                   </figure>
                   <div
-                    class="
-                      pl-4
-                      font-rubik
-                      flex flex-col
-                      justify-between
-                      items-start
-                    "
+                    class="pl-4 font-rubik flex flex-col justify-between items-start"
                   >
                     <nuxt-link
                       :to="`/booking/${cart.slug}`"
-                      class="
-                        w-40
-                        lg:w-auto
-                        inline-block
-                        font-medium
-                        text-sm
-                        sm:text-base
-                        overflow-ellipsis overflow-hidden
-                        pr-5
-                      "
+                      class="w-40 lg:w-auto inline-block font-medium text-sm sm:text-base overflow-ellipsis overflow-hidden pr-5"
                     >
                       {{ cart.title }}
                     </nuxt-link>
@@ -134,14 +106,7 @@
                     type="text"
                     v-model="cart.item"
                     readonly
-                    class="
-                      border-gray-300
-                      w-12
-                      text-center
-                      h-8
-                      rounded-sm
-                      focus:ring-0 focus:outline-none
-                    "
+                    class="border-gray-300 w-12 text-center h-8 rounded-sm focus:ring-0 focus:outline-none"
                   />
                   <button
                     type="button"
@@ -167,33 +132,20 @@
             <div class="flex justify-between">
               <div class="flex">
                 <figure class="w-24">
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="w-24 h-20 object-cover rounded-md"
                     :src="imgurl + 'storage' + cart.image"
                     :alt="cart.title"
                   />
                 </figure>
                 <div
-                  class="
-                    pl-4
-                    font-rubik
-                    flex flex-col
-                    justify-between
-                    items-start
-                  "
+                  class="pl-4 font-rubik flex flex-col justify-between items-start"
                 >
                   <nuxt-link
                     :to="`/booking/${cart.slug}`"
-                    class="
-                      w-40
-                      lg:w-auto
-                      font-medium
-                      text-sm
-                      sm:text-base
-                      pb-5
-                      overflow-ellipsis overflow-hidden
-                      pr-5
-                    "
+                    class="w-40 lg:w-auto font-medium text-sm sm:text-base pb-5 overflow-ellipsis overflow-hidden pr-5"
                   >
                     {{ cart.title }}
                   </nuxt-link>
@@ -223,14 +175,7 @@
                   type="text"
                   v-model="cart.item"
                   readonly
-                  class="
-                    border-gray-300
-                    w-12
-                    text-center
-                    h-8
-                    rounded-sm
-                    focus:ring-0 focus:outline-none
-                  "
+                  class="border-gray-300 w-12 text-center h-8 rounded-sm focus:ring-0 focus:outline-none"
                 />
                 <button
                   type="button"
@@ -262,8 +207,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import SuggestionCart from "@/components/SuggestionCart";
+import { mapGetters } from "vuex";
 export default {
   name: "CartItems",
   props: ["header"],

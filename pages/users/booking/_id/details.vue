@@ -11,58 +11,24 @@
         </h2>
         <nuxt-link
           to="/users/booking"
-          class="
-            border-0
-            py-1
-            px-5
-            bg-brand-color
-            hover:bg-brand-color-hover
-            rounded-sm
-            text-white
-          "
+          class="border-0 py-1 px-5 bg-brand-color hover:bg-brand-color-hover rounded-sm text-white"
         >
           Back
         </nuxt-link>
       </div>
       <div
-        class="
-          flex
-          items-center
-          justify-between
-          px-4
-          py-6
-          bg-white
-          rounded-md
-          shadow-sm
-        "
+        class="flex items-center justify-between px-4 py-6 bg-white rounded-md shadow-sm"
       >
         <div class="flex flex-wrap md:justify-between items-center w-full">
           <div class="flex items-center">
             <div class="flex" v-if="booking.status === 'pending'">
               <p
-                class="
-                  py-2
-                  px-4
-                  font-semibold
-                  text-xs
-                  rounded-full
-                  pending--btn
-                  mr-2
-                "
+                class="py-2 px-4 font-semibold text-xs rounded-full pending--btn mr-2"
               >
                 Pending
               </p>
               <button
-                class="
-                  py-2
-                  px-4
-                  bg-red-color
-                  text-white
-                  font-semibold
-                  text-xs
-                  rounded-full
-                  text-center
-                "
+                class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
                 @click="canceled"
               >
                 Cancel Booking
@@ -71,31 +37,13 @@
 
             <p
               v-if="booking.status === 'cancel'"
-              class="
-                py-2
-                px-4
-                bg-red-color
-                text-white
-                font-semibold
-                text-xs
-                rounded-full
-                text-center
-              "
+              class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
             >
               Canceled
             </p>
             <p
               v-if="booking.status === 'approved'"
-              class="
-                py-2
-                px-4
-                text-approve-color
-                border border-approve-color
-                font-semibold
-                text-xs
-                rounded-full
-                text-center
-              "
+              class="py-2 px-4 text-approve-color border border-approve-color font-semibold text-xs rounded-full text-center"
             >
               Approved
             </p>
@@ -104,35 +52,13 @@
               v-if="booking.status === 'complete'"
             >
               <p
-                class="
-                  text-center
-                  py-2
-                  px-4
-                  mr-2
-                  bg-gray-500
-                  text-white
-                  font-semibold
-                  text-xs
-                  rounded-full
-                  focus:outline-none
-                "
+                class="text-center py-2 px-4 mr-2 bg-gray-500 text-white font-semibold text-xs rounded-full focus:outline-none"
               >
                 Completed
               </p>
               <nuxt-link
                 :to="`/users/booking/${booking.id}/review`"
-                class="
-                  sm:block
-                  py-2
-                  px-3
-                  bg-review-color
-                  hover:bg-yellow-400
-                  text-white
-                  font-semibold
-                  text-xs
-                  rounded-full
-                  focus:outline-none
-                "
+                class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-full focus:outline-none"
               >
                 Leave a Review
               </nuxt-link>
@@ -181,7 +107,9 @@
               <div class="flex flex-wrap xl:w-6/12 items-center">
                 <div class="image pr-2">
                   <figure class="w-24">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="w-24 h-20 object-cover rounded-md"
                       :src="imgurl + 'storage' + service.image"
                       :alt="service.title"
@@ -273,7 +201,12 @@
             >
               <h3>Master Card</h3>
               <figure>
-                <img src="/images/master-card.png" alt="master-card.png" />
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
+                  src="/images/master-card.png"
+                  alt="master-card.png"
+                />
               </figure>
             </div>
           </div>
@@ -287,16 +220,7 @@
           <li v-for="que in booking.questions" :key="que.id">
             <div class="px-4 py-6 bg-white rounded-md shadow-sm mt-2">
               <h3
-                class="
-                  text-base
-                  font-medium
-                  text-dark-sm
-                  font-rubik
-                  text-center
-                  border-b
-                  pb-2
-                  service__title
-                "
+                class="text-base font-medium text-dark-sm font-rubik text-center border-b pb-2 service__title"
                 v-html="que.service_title"
               ></h3>
               <div class="pt-3">

@@ -1,17 +1,17 @@
 <template>
   <div>
     <main class="home--page" v-show="!loading">
-      <LazyHomeBanner/>
-      <LazyHomeService/>
-      <LazyHomeWhy/>
-      <LazyHomeClientSlider/>
-      <LazyHomeReview/>
-      </main>
-      <div class="min-h-screen flex items-center" v-show="loading">
-        <div class="loader-parent mt-16 mb-20">
-          <div class="loader"></div>
-        </div>
+      <LazyHomeBanner />
+      <LazyHomeService />
+      <LazyHomeWhy />
+      <LazyHomeClientSlider />
+      <LazyHomeReview />
+    </main>
+    <div class="min-h-screen flex items-center" v-show="loading">
+      <div class="loader-parent mt-16 mb-20">
+        <div class="loader"></div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -28,13 +28,14 @@ export default {
     },
   },
   async fetch() {
-    await Promise.all([
-      this.$store.dispatch("fetchHomePageData"),
-      this.$store.dispatch("meta/fetchMetaInfo", "home"),
-      this.$store.dispatch("fetchServices")
-    ]);
+    if (this.$store.state.services.length <= 0) {
+      await Promise.all([
+        this.$store.dispatch("fetchHomePageData"),
+        this.$store.dispatch("meta/fetchMetaInfo", "home"),
+        this.$store.dispatch("fetchServices"),
+      ]);
+    }
   },
-
 };
 </script>
 <style scoped>

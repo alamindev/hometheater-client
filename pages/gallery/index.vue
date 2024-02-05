@@ -5,16 +5,7 @@
         <div class="md:flex">
           <GallerySidebar />
           <div
-            class="
-              w-full
-              md:w-10/12
-              lg:w-9/12
-              shadow
-              p-3
-              rounded-md
-              bg-white
-              h-full
-            "
+            class="w-full md:w-10/12 lg:w-9/12 shadow p-3 rounded-md bg-white h-full"
           >
             <div class="" v-if="!loading">
               <h3 class="border-b pb-2 font-semibold text-2xl text-dark">
@@ -22,13 +13,7 @@
               </h3>
               <div
                 v-if="!errors.message"
-                class="
-                  grid grid-cols-2
-                  lg:grid-cols-4
-                  xl:grid-cols-5
-                  gap-5
-                  py-5
-                "
+                class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5 py-5"
               >
                 <div
                   class="relative rounded-lg overflow-hidden shadow-sm"
@@ -37,18 +22,8 @@
                 >
                   <nuxt-link :to="`/gallery/${album.slug}`">
                     <div
-                      class="
-                        absolute
-                        bg-brand-dark bg-opacity-20
-                        w-full
-                        h-full
-                        flex
-                        items-center
-                        justify-center
-                        flex-col
-                      "
+                      class="absolute bg-brand-dark bg-opacity-20 w-full h-full flex items-center justify-center flex-col"
                     >
-
                       <p class="pt-2 text-white font-medium">
                         {{ album.image_count }}
                         <span v-if="album.image_count > 1">Photos</span
@@ -62,7 +37,9 @@
                           v-for="gallery in album.images"
                           :key="gallery.id"
                         >
-                          <img
+                          <nuxt-img
+                            quality="50"
+                            loading="lazy"
                             class="w-full h-24 object-cover"
                             :data-src="imgurl + 'storage/' + gallery.src"
                             alt="gellary-img"
@@ -76,7 +53,9 @@
                           v-for="gallery in album.images"
                           :key="gallery.id"
                         >
-                          <img
+                          <nuxt-img
+                            quality="50"
+                            loading="lazy"
                             class="w-full h-48 object-cover"
                             :src="imgurl + 'storage/' + gallery.src"
                             alt="gellary-img"
@@ -84,7 +63,9 @@
                         </div>
                       </template>
                       <template v-else>
-                        <img
+                        <nuxt-img
+                          quality="50"
+                          loading="lazy"
                           class="w-full h-48 object-cover"
                           :src="imgurl + 'storage/uploads/no-image.png'"
                           alt="gellary-img"

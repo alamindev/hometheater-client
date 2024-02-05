@@ -1,6 +1,11 @@
 <template>
   <div class="absolute" :class="position">
-    <img src="/images/dot-blog.svg" alt="dot" />
+    <nuxt-img
+      quality="50"
+      loading="lazy"
+      src="/images/dot-blog.svg"
+      alt="dot"
+    />
   </div>
 </template>
 

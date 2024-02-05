@@ -1,30 +1,10 @@
 <template>
   <div class="w-full md:w-2/12 lg:w-3/12 md:pr-8">
     <ul
-      class="
-        bg-white
-        rounded-md
-        shadow
-        pl-5
-        xl:pl-10
-        pt-12
-        pr-5
-        pb-5
-        hidden
-        md:block
-        sticky
-        top-16
-      "
+      class="bg-white rounded-md shadow pl-5 xl:pl-10 pt-12 pr-5 pb-5 hidden md:block sticky top-16"
     >
       <li
-        class="
-          pb-6
-          cursor-pointer
-          flex
-          items-center
-          justify-center
-          lg:justify-start
-        "
+        class="pb-6 cursor-pointer flex items-center justify-center lg:justify-start"
         v-for="cate in categories"
         :key="cate.id"
         @click="ChangeCategory(cate.slug)"
@@ -39,7 +19,9 @@
                 : 'text-gray-500 ' + cate.icon
             "
           ></i>
-          <img
+          <nuxt-img
+            quality="50"
+            loading="lazy"
             v-if="cate.type == 1"
             :src="imgurl + 'storage/' + cate.image"
             alt="image"
@@ -84,14 +66,7 @@
             :key="i"
             @click="sortChange(sort.slug)"
             :class="sort.slug == sortby ? 'text-brand-color' : 'text-gray-700'"
-            class="
-              cursor-pointer
-              py-2
-              px-2
-              font-semibold
-              border-b
-              hover:text-brand-color-hover
-            "
+            class="cursor-pointer py-2 px-2 font-semibold border-b hover:text-brand-color-hover"
           >
             {{ sort.name }}
           </li>

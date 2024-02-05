@@ -4,7 +4,13 @@
       <div class="flex flex-col lg:flex-row items-center">
         <div class="w-full lg:w-6/12 hidden lg:block">
           <div class="py-5 flex justify-center items-center">
-            <img src="/images/login.png" class="w-8/12" alt="login" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              src="/images/login.png"
+              class="w-8/12"
+              alt="login"
+            />
           </div>
         </div>
         <div class="w-full lg:w-6/12 lg:pr-20">
@@ -22,7 +28,13 @@
             <div
               class="py-5 flex justify-center items-center bg--color lg:hidden"
             >
-              <img src="/images/login.png" class="w-8/12" alt="login" />
+              <nuxt-img
+                quality="50"
+                loading="lazy"
+                src="/images/login.png"
+                class="w-8/12"
+                alt="login"
+              />
             </div>
             <div class="w-full pt-5">
               <div
@@ -49,7 +61,9 @@
               <form @submit.prevent="forgotPass" v-if="!sended">
                 <div class="w-full pt-5">
                   <div class="flex items-center pb-8 relative">
-                    <img
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/mail.svg"
                       alt="mail"
@@ -169,7 +183,7 @@
 
 <script>
 import Loader from "@/components/Loader/Loading-white";
-import { deleteCookie, setCookie, getCookie } from "@/Utils/Cookie";
+import { deleteCookie, getCookie, setCookie } from "@/Utils/Cookie";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 export default {
   middleware: "guest",

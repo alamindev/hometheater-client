@@ -14,7 +14,9 @@
         >
           <nuxt-link :to="`${activity.link}`" class="flex py-3" target="_blank">
             <div class="">
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 class="w-16 h-12 object-cover rounded-lg"
                 :src="imgurl + activity.photo"
                 :alt="activity.username"
@@ -68,7 +70,12 @@
       </div>
       <div v-else class="w-full pt-10">
         <div class="flex w-full justify-center">
-          <img src="/images/no-result.png" alt="no resutl" />
+          <nuxt-img
+            quality="50"
+            loading="lazy"
+            src="/images/no-result.png"
+            alt="no resutl"
+          />
         </div>
         <h1 class="text-center py-10 text-xl text-gray-800 font-medium">
           Recent Activities not found!

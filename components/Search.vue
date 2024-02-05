@@ -7,23 +7,11 @@
         autocomplete="off"
         v-on:keyup="getResults"
         placeholder="Search"
-        class="
-          border-2
-          w-full
-          focus:ring-0
-          lg:w-72
-          xl:w-98
-          border-gray-200
-          py-3
-          md:py-3
-          pl-5
-          pr-10
-          rounded-lg
-          focus:outline-none focus:border-0
-          text-gray-600
-        "
+        class="border-2 w-full focus:ring-0 lg:w-72 xl:w-98 border-gray-200 py-3 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none focus:border-0 text-gray-600"
       />
-      <img
+      <nuxt-img
+        quality="50"
+        loading="lazy"
         class="absolute right-2 top-3"
         src="/images/search.svg"
         alt="search icon"
@@ -46,7 +34,9 @@
               <nuxt-link
                 class="flex gap-2 items-center"
                 :to="`/booking/${data.slug}`"
-                ><img
+                ><nuxt-img
+                  quality="50"
+                  loading="lazy"
                   :src="imgurl + 'storage' + data.image"
                   class="w-8 h-8 rounded-full flex-shrink-0"
                   alt=""
@@ -62,14 +52,7 @@
         </li>
         <li
           @click="SearchBlog('blog')"
-          class="
-            py-3
-            text-gray-500
-            cursor-pointer
-            px-3
-            hover:bg-gray-100
-            font-medium
-          "
+          class="py-3 text-gray-500 cursor-pointer px-3 hover:bg-gray-100 font-medium"
         >
           <i class="fas fa-file-alt pr-2"></i>I am searching for blog
         </li>

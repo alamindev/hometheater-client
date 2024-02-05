@@ -4,7 +4,13 @@
       <div class="flex flex-col lg:flex-row items-center">
         <div class="w-full lg:w-6/12 hidden lg:block">
           <div class="py-5 flex justify-center items-center">
-            <img src="/images/register.png" class="w-8/12" alt="login" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              src="/images/register.png"
+              class="w-8/12"
+              alt="login"
+            />
           </div>
         </div>
         <div class="w-full lg:w-6/12 lg:pr-20">
@@ -20,7 +26,13 @@
             <div
               class="py-5 flex justify-center items-center bg--color lg:hidden"
             >
-              <img src="/images/register.png" class="w-8/12" alt="login" />
+              <nuxt-img
+                quality="50"
+                loading="lazy"
+                src="/images/register.png"
+                class="w-8/12"
+                alt="login"
+              />
             </div>
             <ul class="flex py-5 text-xl">
               <li class="pr-3">
@@ -69,7 +81,9 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5">
                     <div class="pb-2 sm:pb-6">
                       <div class="flex items-center relative">
-                        <img
+                        <nuxt-img
+                          quality="50"
+                          loading="lazy"
                           class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                           src="/images/user.svg"
                           alt="mail"
@@ -92,7 +106,9 @@
                     </div>
                     <div class="pb-4 sm:pb-6">
                       <div class="flex items-center relative">
-                        <img
+                        <nuxt-img
+                          quality="50"
+                          loading="lazy"
                           class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                           src="/images/user.svg"
                           alt="mail"
@@ -117,7 +133,9 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5">
                     <div class="pb-2 sm:pb-6">
                       <div class="flex items-center relative">
-                        <img
+                        <nuxt-img
+                          quality="50"
+                          loading="lazy"
                           class="absolute left-0 top-0 mt-6 ml-5"
                           src="/images/mail.svg"
                           alt="mail"
@@ -276,7 +294,9 @@
 
                   <div class="w-full pb-4 sm:pb-6">
                     <div class="flex items-center relative">
-                      <img
+                      <nuxt-img
+                        quality="50"
+                        loading="lazy"
                         class="absolute left-0 top-0 mt-6 ml-5"
                         src="/images/password.svg"
                         alt="password"
@@ -292,7 +312,9 @@
                         autocomplete="off"
                         class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                       />
-                      <img
+                      <nuxt-img
+                        quality="50"
+                        loading="lazy"
                         class="-ml-12 z-30 cursor-pointer"
                         @click="showPass"
                         src="/images/eye.svg"
@@ -305,7 +327,9 @@
                   </div>
                   <div class="w-full">
                     <div class="flex items-center relative">
-                      <img
+                      <nuxt-img
+                        quality="50"
+                        loading="lazy"
                         class="absolute left-0 top-0 mt-6 ml-5"
                         src="/images/password.svg"
                         alt="password"
@@ -321,7 +345,9 @@
                         autocomplete="off"
                         class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                       />
-                      <img
+                      <nuxt-img
+                        quality="50"
+                        loading="lazy"
                         class="-ml-12 z-30 cursor-pointer"
                         @click="showConfirmPass"
                         src="/images/eye.svg"
@@ -365,8 +391,8 @@
 
 <script>
 import SocialLogin from "@/components/SocialLogin";
-import globalMeta from "@/mixins/meta.js";
 import googleMapApi from "@/mixins/googleMapApi";
+import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta, googleMapApi],
   name: "register",

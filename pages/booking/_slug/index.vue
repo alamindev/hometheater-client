@@ -10,47 +10,27 @@
                 class="flex flex-col-reverse xl:flex-row"
               >
                 <div
-                  class="
-                    xl:pr-3
-                    flex flex-row flex-wrap
-                    xl:flex-col
-                    flex-2
-                    pt-5
-                  "
+                  class="xl:pr-3 flex flex-row flex-wrap xl:flex-col flex-2 pt-5"
                 >
                   <figure
-                    class="
-                      cursor-pointer
-                      h-24
-                      w-28
-                      sm:h-20 sm:w
-                      -24
-                      xl:h-24 xl:w-28
-                      mb-4
-                      mr-3
-                      xl:mr-0
-                    "
+                    class="cursor-pointer h-24 w-28 sm:h-20 sm:w -24 xl:h-24 xl:w-28 mb-4 mr-3 xl:mr-0"
                     v-for="image in service.images"
                     @click="ChangeImage(imgurl + 'storage' + image.url)"
                     :key="image.id"
                   >
-                    <img
-                      class="
-                        h-24
-                        sm:w-28 sm:h-20
-                        w-24
-                        xl:h-24 xl:w-28
-                        object-cover
-                        rounded-md
-                        shadow-md
-                      "
+                    <nuxt-img
+                      quality="50"
+                      loading="lazy"
+                      class="h-24 sm:w-28 sm:h-20 w-24 xl:h-24 xl:w-28 object-cover rounded-md shadow-md"
                       :src="imgurl + 'storage' + image.url"
                       :alt="service.title"
                     />
                   </figure>
                 </div>
                 <figure class="pt-5 flex-1 xl:pl-2">
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="w-full effect-change-img rounded-md shadow-md"
                     :src="imgurl + 'storage' + service.image"
                     :alt="service.title"
@@ -61,40 +41,25 @@
             <div class="lg:w-5/12 pt-6 lg:pt-0">
               <div class="w-full lg:pt-5">
                 <h1
-                  class="
-                    font-rubik
-                    text-xl
-                    sm:text-2xl
-                    lg:text-3xl
-                    font-medium
-                    text-dark-sm
-                  "
+                  class="font-rubik text-xl sm:text-2xl lg:text-3xl font-medium text-dark-sm"
                 >
                   {{ service.title }}
                 </h1>
                 <div
-                  class="
-                    font-rubik
-                    flex
-                    items-center
-                    flex-col
-                    sm:flex-row
-                    pt-3
-                    pb-10
-                  "
+                  class="font-rubik flex items-center flex-col sm:flex-row pt-3 pb-10"
                   v-if="service.rating != ''"
                 >
                   <div class="pr-1">
-                     <client-only>
-                    <star-rating
-                      v-bind:max-rating="5"
-                      v-bind:star-size="20"
-                      v-bind:increment="0.5"
-                      :show-rating="false"
-                      :rating="Number(service.rating)"
-                      read-only
-                    >
-                    </star-rating>
+                    <client-only>
+                      <star-rating
+                        v-bind:max-rating="5"
+                        v-bind:star-size="20"
+                        v-bind:increment="0.5"
+                        :show-rating="false"
+                        :rating="Number(service.rating)"
+                        read-only
+                      >
+                      </star-rating>
                     </client-only>
                   </div>
                   <div class="flex pt-2">
@@ -106,13 +71,7 @@
                     <button
                       @click="tab = 'review'"
                       v-scroll-to="'#element'"
-                      class="
-                        underline
-                        text-sm
-                        xl:text-lg
-                        font-medium
-                        text-gray-700
-                      "
+                      class="underline text-sm xl:text-lg font-medium text-gray-700"
                     >
                       Reviews {{ service.review_count }}
                     </button>
@@ -120,14 +79,7 @@
                 </div>
                 <p
                   v-else
-                  class="
-                    text-brand-sub-header
-                    font-rubik
-                    text-dark-sm
-                    pt-6
-                    pb-5
-                    font-medium
-                  "
+                  class="text-brand-sub-header font-rubik text-dark-sm pt-6 pb-5 font-medium"
                 >
                   No reviews yet!
                 </p>
@@ -151,45 +103,18 @@
                   </li>
                 </ul>
                 <div
-                  class="
-                    flex flex-col
-                    sm:flex-row
-                    lg:flex-col
-                    xl:flex-row
-                    py-8
-                    sm:justify-between sm:items-start
-                  "
+                  class="flex flex-col sm:flex-row lg:flex-col xl:flex-row py-8 sm:justify-between sm:items-start"
                 >
                   <div class="flex items-center">
                     <span
-                      class="
-                        inline-block
-                        text-xl text-dark-sm
-                        font-medium font-rubik
-                        pb-2
-                        pr-5
-                      "
+                      class="inline-block text-xl text-dark-sm font-medium font-rubik pb-2 pr-5"
                     >
                       Quantity
                     </span>
                     <div class="relative border-none shadow-md rounded-md">
                       <select
                         v-model="item"
-                        class="
-                          bg-light-5
-                          w-20
-                          text-brand-gray
-                          cursor-pointer
-                          appearance-none
-                          border-none
-                          inline-block
-                          py-3
-                          pl-3
-                          pr-8
-                          rounded
-                          leading-tight
-                          focus:ring-0
-                        "
+                        class="bg-light-5 w-20 text-brand-gray cursor-pointer appearance-none border-none inline-block py-3 pl-3 pr-8 rounded leading-tight focus:ring-0"
                       >
                         <option>1</option>
                         <option>2</option>
@@ -203,42 +128,14 @@
                       <button
                         v-if="getDatas.includes(service.id)"
                         @click="addToCart(service)"
-                        class="
-                          w-full
-                          rounded-md
-                          py-3
-                          px-5
-                          lg:px-2
-                          xl:px-10
-                          bg-brand-color
-                          hover:bg-brand-color-hover
-                          focus:outline-none
-                          text-white
-                          transition-all
-                          duration-200
-                          ease-in-out
-                        "
+                        class="w-full rounded-md py-3 px-5 lg:px-2 xl:px-10 bg-brand-color hover:bg-brand-color-hover focus:outline-none text-white transition-all duration-200 ease-in-out"
                       >
                         Added to Cart
                       </button>
                       <button
                         @click="addToCart(service)"
                         v-else
-                        class="
-                          w-full
-                          rounded-md
-                          py-3
-                          px-5
-                          lg:px-2
-                          xl:px-10
-                          bg-brand-color
-                          hover:bg-brand-color-hover
-                          focus:outline-none
-                          text-white
-                          transition-all
-                          duration-200
-                          ease-in-out
-                        "
+                        class="w-full rounded-md py-3 px-5 lg:px-2 xl:px-10 bg-brand-color hover:bg-brand-color-hover focus:outline-none text-white transition-all duration-200 ease-in-out"
                       >
                         Add to Cart
                       </button>
@@ -253,26 +150,14 @@
               <li
                 @click="toggleTab('description')"
                 :class="tab == 'description' ? 'active' : ''"
-                class="
-                  cursor-pointer
-                  px-10
-                  py-5
-                  font-semibold
-                  text-lg text-gray-600
-                "
+                class="cursor-pointer px-10 py-5 font-semibold text-lg text-gray-600"
               >
                 Description
               </li>
               <li
                 :class="tab == 'review' ? 'active' : ''"
                 @click="toggleTab('review')"
-                class="
-                  cursor-pointer
-                  px-10
-                  py-5
-                  font-semibold
-                  text-lg text-gray-600
-                "
+                class="cursor-pointer px-10 py-5 font-semibold text-lg text-gray-600"
               >
                 Reviews
               </li>
@@ -281,9 +166,8 @@
               class="py-6 border-b"
               :class="tab == 'description' ? 'block' : 'hidden'"
             >
-
               <div
-                class="prose !max-w-full font-rubik prose-dark prose-strong:font-semibold prose-b:font-semibold prose-a:font-bold prose-h1:text-brand-dark prose-h2:text-brand-dark prose-h3:text-brand-dark prose-strong:text-brand-dark prose-b:text-brand-dark prose-h4:text-brand-dark prose-h5:text-brand-dark prose-h6:text-brand-dark prose-h1:text-[2rem] prose-h2:text-[1.5rem] prose-h3:text-[1.3rem] prose-h4:text-[1rem] prose-h5:text-[0.8rem] prose-h6:text-[0.7rem]  prose-a:text-brand-color prose-a:no-underline hover:prose-a:underline hover:prose-a:text-brand-color-hover pt-5"
+                class="prose !max-w-full font-rubik prose-dark prose-strong:font-semibold prose-b:font-semibold prose-a:font-bold prose-h1:text-brand-dark prose-h2:text-brand-dark prose-h3:text-brand-dark prose-strong:text-brand-dark prose-b:text-brand-dark prose-h4:text-brand-dark prose-h5:text-brand-dark prose-h6:text-brand-dark prose-h1:text-[2rem] prose-h2:text-[1.5rem] prose-h3:text-[1.3rem] prose-h4:text-[1rem] prose-h5:text-[0.8rem] prose-h6:text-[0.7rem] prose-a:text-brand-color prose-a:no-underline hover:prose-a:underline hover:prose-a:text-brand-color-hover pt-5"
                 v-html="service.details"
               ></div>
             </div>
@@ -309,7 +193,9 @@
                         target="_blank"
                         :to="`/users/${review.user.id}/profile`"
                       >
-                        <img
+                        <nuxt-img
+                          quality="50"
+                          loading="lazy"
                           :alt="review.user.username"
                           :src="
                             review.user.photo.includes('http')
@@ -322,27 +208,20 @@
                     </div>
                     <div class="pl-5">
                       <h3
-                        class="
-                          flex
-                          items-center
-                          text-lg
-                          pb-1
-                          font-medium
-                          text-dark-sm
-                        "
+                        class="flex items-center text-lg pb-1 font-medium text-dark-sm"
                       >
                         {{ review.user.username }}
                         <div class="pl-2">
                           <client-only>
-                          <star-rating
-                            v-bind:max-rating="5"
-                            :rating="Number(review.rating)"
-                            read-only
-                            :show-rating="false"
-                            v-bind:star-size="20"
-                            v-bind:increment="0.5"
-                          >
-                          </star-rating>
+                            <star-rating
+                              v-bind:max-rating="5"
+                              :rating="Number(review.rating)"
+                              read-only
+                              :show-rating="false"
+                              v-bind:star-size="20"
+                              v-bind:increment="0.5"
+                            >
+                            </star-rating>
                           </client-only>
                         </div>
                       </h3>
@@ -362,7 +241,9 @@
                               @click="ViewImage(image.id, review.id)"
                               class="cursor-pointer"
                             >
-                              <img
+                              <nuxt-img
+                                quality="50"
+                                loading="lazy"
                                 class="w-20 h-20 object-cover rounded-md"
                                 :src="image.src"
                                 :alt="image.title"
@@ -425,7 +306,13 @@
       </div>
       <div class="w-full">
         <figure class="w-full">
-          <img :src="image.src" class="w-full" :alt="image.title" />
+          <nuxt-img
+            quality="50"
+            loading="lazy"
+            :src="image.src"
+            class="w-full"
+            :alt="image.title"
+          />
         </figure>
         <div class="w-full sm:flex">
           <div class="w-full sm:w-6/12 md:w-8/12">
@@ -443,7 +330,9 @@
                   class="py-2 cursor-pointer"
                   @click="ViewImage(img.id, img.review_id)"
                 >
-                  <img
+                  <nuxt-img
+                    quality="50"
+                    loading="lazy"
                     class="w-16 h-16 object-cover rounded-md"
                     :src="img.src"
                     :alt="img.title"
@@ -459,9 +348,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import globalMeta from "@/mixins/ServiceMeta.js";
 import Suggestion from "@/components/Suggestion";
+import globalMeta from "@/mixins/ServiceMeta.js";
+import { mapGetters } from "vuex";
 export default {
   mixins: [globalMeta],
   middleware: ["checkSetting"],
@@ -489,17 +378,17 @@ export default {
       allreviews = this.$store.state.booking.allreviews.map((el) => {
         return {
           "@type": "Review",
-          "reviewRating": {
+          reviewRating: {
             "@type": "Rating",
-            "ratingValue": el.rating,
-            "bestRating": "5",
-            "datePublished": "2011-04-01",
-          "reviewBody": el.details,
+            ratingValue: el.rating,
+            bestRating: "5",
+            datePublished: "2011-04-01",
+            reviewBody: el.details,
           },
-          "author": {
+          author: {
             "@type": "Person",
-            "name": el.user.first_name + " " + el.user.last_name,
-          }
+            name: el.user.first_name + " " + el.user.last_name,
+          },
         };
       });
       if (service) {
@@ -629,7 +518,7 @@ export default {
       });
     }
   },
-  async fetch({ store, route, error, params }) {
+  async fetch({ store, route, error, params, watchQuery }) {
     await store.dispatch("booking/fetchService", params.slug).catch((e) => {
       error({ statusCode: 404, message: "Service not found!" });
     });

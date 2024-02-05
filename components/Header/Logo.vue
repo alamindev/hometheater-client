@@ -4,11 +4,19 @@
   >
     <div class="flex-1 flex justify-start items-center">
       <figure class="hidden md:block">
-        <img src="/images/bar-header.svg" class="pr-6" alt="header-bar" />
+        <nuxt-img
+          quality="50"
+          loading="lazy"
+          src="/images/bar-header.svg"
+          class="pr-6"
+          alt="header-bar"
+        />
       </figure>
       <nuxt-link to="/" class="text-xl flex items-center">
         <figure class="pr-2">
-          <img
+          <nuxt-img
+            quality="50"
+            loading="lazy"
             class="h-8 w-8"
             v-if="setting.site_logo"
             :src="imgurl + 'storage' + setting.site_logo"

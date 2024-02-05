@@ -42,7 +42,9 @@
               </button>
             </div>
 
-            <img
+            <nuxt-img
+              quality="50"
+              loading="lazy"
               @click="index = imageIndex"
               class="w-full object-cover rounded-md"
               :src="image.src"

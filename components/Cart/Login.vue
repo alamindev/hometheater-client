@@ -28,7 +28,9 @@
         <form @submit.prevent="login">
           <div class="w-full pt-5">
             <div class="flex items-center pb-5 relative">
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                 src="/images/mail.svg"
                 alt="mail"
@@ -43,7 +45,9 @@
               />
             </div>
             <div class="flex items-center relative">
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 class="absolute left-0 top-0 mt-5 ml-5"
                 src="/images/password.svg"
                 alt="password"
@@ -56,7 +60,9 @@
                 :type="type == true ? 'text' : 'password'"
                 class="px-12 py-4 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
               />
-              <img
+              <nuxt-img
+                quality="50"
+                loading="lazy"
                 class="-ml-12 z-30 cursor-pointer"
                 @click="showPass"
                 src="/images/eye.svg"

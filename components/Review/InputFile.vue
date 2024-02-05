@@ -23,11 +23,19 @@
       </label>
     </div>
     <div class="py-5" v-if="photo">
-      <img :src="photo" alt="profile photo" class="w-28 h-24 object-cover" />
+      <nuxt-img
+        quality="50"
+        loading="lazy"
+        :src="photo"
+        alt="profile photo"
+        class="w-28 h-24 object-cover"
+      />
     </div>
 
     <div class="py-5" v-if="img_url && !photo">
-      <img
+      <nuxt-img
+        quality="50"
+        loading="lazy"
         :src="imgurl + img_url"
         alt="profile photo"
         class="w-28 h-24 object-cover"

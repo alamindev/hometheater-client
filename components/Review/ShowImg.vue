@@ -6,7 +6,9 @@
       :key="image.id"
     >
       <figure>
-        <img
+        <nuxt-img
+          quality="50"
+          loading="lazy"
           class="w-full object-cover rounded-md"
           :src="imgurl + image.image"
           alt="user image"

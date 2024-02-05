@@ -119,14 +119,7 @@
           </div>
           <nuxt-link
             to="users/dashboard"
-            class="
-              py-3
-              px-10
-              bg-brand-color
-              hover:bg-brand-color-hover
-              text-white
-              rounded-md
-            "
+            class="py-3 px-10 bg-brand-color hover:bg-brand-color-hover text-white rounded-md"
             >View Dashboard</nuxt-link
           >
         </div>
@@ -135,7 +128,9 @@
     <div class="flex justify-center" v-else>
       <div class="">
         <div class="flex justify-center">
-          <img
+          <nuxt-img
+            quality="50"
+            loading="lazy"
             class="w-8/12"
             src="images/cart-is-empty.svg"
             alt="cart-is-empty.svg"
@@ -151,17 +146,7 @@
         <div class="flex justify-center pt-3">
           <nuxt-link
             to="/booking"
-            class="
-              flex
-              items-center
-              px-5
-              text-white
-              py-2
-              bg-brand-color
-              hover:bg-brand-color-hover
-              rounded-md
-              shadow-md
-            "
+            class="flex items-center px-5 text-white py-2 bg-brand-color hover:bg-brand-color-hover rounded-md shadow-md"
           >
             <i class="fas fa-long-arrow-alt-left text-2xl pr-3"></i> Add
             Services to Cart
@@ -179,19 +164,7 @@
     >
       <div
         @click="hidemodal"
-        class="
-          cursor-pointer
-          ml-auto
-          mr-2
-          mt-2
-          w-6
-          h-6
-          bg-gray-300
-          rounded-full
-          flex
-          justify-center
-          items-center
-        "
+        class="cursor-pointer ml-auto mr-2 mt-2 w-6 h-6 bg-gray-300 rounded-full flex justify-center items-center"
       >
         <i class="fas fa-times"></i>
       </div>
@@ -200,7 +173,9 @@
       </h2>
       <div class="px-12 pt-3">
         <figure>
-          <img
+          <nuxt-img
+            quality="50"
+            loading="lazy"
             class="w-full"
             src="/images/credit-card-icons.png"
             alt="credit-card-icons.png"
@@ -221,46 +196,16 @@
     >
       <div
         @click="hidecryptoDialog"
-        class="
-          cursor-pointer
-          ml-auto
-          mr-2
-          mt-2
-          w-6
-          h-6
-          bg-gray-300
-          rounded-full
-          flex
-          justify-center
-          items-center
-        "
+        class="cursor-pointer ml-auto mr-2 mt-2 w-6 h-6 bg-gray-300 rounded-full flex justify-center items-center"
       >
         <i class="fas fa-times"></i>
       </div>
       <div
-        class="
-          w-full
-          flex
-          justify-center
-          items-center
-          flex-col
-          px-4
-          sm:px-12
-          pt-8
-          pb-16
-        "
+        class="w-full flex justify-center items-center flex-col px-4 sm:px-12 pt-8 pb-16"
       >
         <button
           id="btn"
-          class="
-            pay--with-crypto
-            py-2
-            px-5
-            bg-brand-color
-            hover:bg-brand-color-hover
-            text-white
-            rounded-md
-          "
+          class="pay--with-crypto py-2 px-5 bg-brand-color hover:bg-brand-color-hover text-white rounded-md"
         >
           Pay with crypto currency
         </button>
@@ -276,17 +221,17 @@
 </template>
 
 <script>
-import OrderSummery from "@/components/Cart/OrderSummery";
-import OrderMobileSummary from "@/components/Cart/OrderMobileSummary";
-import MobileFooter from "@/components/Cart/MobileFooter";
-import CartItems from "@/components/Cart/CartItems";
-import ZipCode from "@/components/Cart/ZipCode";
-import ZipCodeMobile from "@/components/Cart/ZipCodeMobile";
-import Questions from "@/components/Cart/Questions";
-import UploadImage from "@/components/Cart/UploadImage";
-import Calendar from "@/components/Cart/Calendar";
 import Breadcrum from "@/components/Cart/Breadcrum";
 import BreadcrumMobile from "@/components/Cart/BreadcrumMobile";
+import Calendar from "@/components/Cart/Calendar";
+import CartItems from "@/components/Cart/CartItems";
+import MobileFooter from "@/components/Cart/MobileFooter";
+import OrderMobileSummary from "@/components/Cart/OrderMobileSummary";
+import OrderSummery from "@/components/Cart/OrderSummery";
+import Questions from "@/components/Cart/Questions";
+import UploadImage from "@/components/Cart/UploadImage";
+import ZipCode from "@/components/Cart/ZipCode";
+import ZipCodeMobile from "@/components/Cart/ZipCodeMobile";
 import SquarePayment from "@/components/SquarePayment";
 
 export default {

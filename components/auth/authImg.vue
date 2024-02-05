@@ -3,14 +3,18 @@
     <h2 class="text-gray-700 text-base pr-2 hidden md:block">
       {{ user.name }}
     </h2>
-    <img
+    <nuxt-img
+      quality="50"
+      loading="lazy"
       v-if="user.photo === null"
       src="/images/dashboard-img-1.svg"
       width="35"
       height="35"
       alt="admin image"
     />
-    <img
+    <nuxt-img
+      quality="50"
+      loading="lazy"
       v-if="user.photo"
       :src="user.photo.includes('http') ? user.photo : imgurl + user.photo"
       class="rounded-full"
@@ -23,7 +27,7 @@
 
 <script>
 export default {
-  name: 'AuthImage',
+  name: "AuthImage",
   data() {
     return {
       imgurl: process.env.imgUrl,

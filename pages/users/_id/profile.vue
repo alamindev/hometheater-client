@@ -2,7 +2,9 @@
   <main>
     <section class="w-full relative profile--page">
       <div class="w-full">
-        <img
+        <nuxt-img
+          quality="50"
+          loading="lazy"
           class="w-full h-36 object-cover sm:h-auto"
           src="/images/users/profile.png"
           alt="profile"
@@ -11,7 +13,13 @@
       <div class="px-4 lg:px-16 py-6 bg-custom">
         <div class="container mx-auto relative">
           <div class="absolute -left-24 top-24">
-            <img class="w-56" src="/images/contact-circle.svg" alt="about" />
+            <nuxt-img
+              quality="50"
+              loading="lazy"
+              class="w-56"
+              src="/images/contact-circle.svg"
+              alt="about"
+            />
           </div>
           <div class="sm:flex relative">
             <div class="w-full sm:w-5/12 lg:w-4/12 xl:w-3/12">
@@ -31,8 +39,8 @@
 
 <script>
 import Divider from "@/components/Divider";
-import ProfileInfo from "@/components/Profile/ProfileInfo";
 import ProfileActivity from "@/components/Profile/ProfileActivity";
+import ProfileInfo from "@/components/Profile/ProfileInfo";
 import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta],

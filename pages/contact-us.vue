@@ -1,18 +1,7 @@
 <template>
   <section
     v-if="!loading"
-    class="
-      px-4
-      lg:px-16
-      pb-6
-      sm:pb-12
-      md:pb-24
-      pt-5
-      sm:pt-12
-      relative
-      bg-light-5
-      contact--page
-    "
+    class="px-4 lg:px-16 pb-6 sm:pb-12 md:pb-24 pt-5 sm:pt-12 relative bg-light-5 contact--page"
   >
     <div class="container mx-auto relative">
       <div class="shadow-lg rounded-lg overflow-hidden bg-light-10">
@@ -20,7 +9,9 @@
           <div class="w-full lg:w-7/12">
             <div class="pb-5 relative">
               <div class="flex items-center justify-center">
-                <img
+                <nuxt-img
+                  quality="50"
+                  loading="lazy"
                   class="w-full"
                   :src="imgurl + 'storage' + contact.image"
                   alt="client"
@@ -29,17 +20,7 @@
               <div class="pt-10 pb-3">
                 <div class="flex justify-center -mb-6">
                   <h2
-                    class="
-                      text-dark-sm text-xl
-                      px-5
-                      py-3
-                      custom-shadow-contact
-                      rounded-md
-                      text-center
-                      font-medium
-                      bg-white
-                      inline-block
-                    "
+                    class="text-dark-sm text-xl px-5 py-3 custom-shadow-contact rounded-md text-center font-medium bg-white inline-block"
                   >
                     Hours of Operation
                   </h2>
@@ -75,31 +56,18 @@
             <div class="px-6 md:px-4 xl:px-6 py-3 sm:py-10">
               <div class="mx-auto pb-4 sm:pb-10">
                 <h2
-                  class="
-                    text-xl
-                    sm:text-2xl
-                    lg:text-3xl
-                    font-medium
-                    text-left
-                    font-rubik
-                  "
+                  class="text-xl sm:text-2xl lg:text-3xl font-medium text-left font-rubik"
                 >
                   {{ contact.title }}
                 </h2>
               </div>
-              <form   @submit.prevent="ContactSubmit">
+              <form @submit.prevent="ContactSubmit">
                 <div class="flex flex-col lg:flex-row">
                   <div class="w-full">
                     <div class="pt-1">
                       <input
                         type="text"
-                        class="
-                          w-full
-                          border-0 border-b-2 border-brand-color
-                          py-3
-                          focus:ring-0
-                          focus:border-blue-400
-                        "
+                        class="w-full border-0 border-b-2 border-brand-color py-3 focus:ring-0 focus:border-blue-400"
                         placeholder="Full Name"
                         autocomplete="off"
                         v-model="data.name"
@@ -114,13 +82,7 @@
                     <div class="pt-1">
                       <input
                         type="text"
-                        class="
-                          w-full
-                          border-0 border-b-2 border-brand-color
-                          py-3
-                          focus:ring-0
-                          focus:border-blue-400
-                        "
+                        class="w-full border-0 border-b-2 border-brand-color py-3 focus:ring-0 focus:border-blue-400"
                         placeholder="Mobile Number"
                         v-model="data.phone"
                         :class="{ 'border-red-500': errors.phone }"
@@ -135,13 +97,7 @@
                   <div class="pt-1">
                     <input
                       type="email"
-                      class="
-                        w-full
-                        border-0 border-b-2 border-brand-color
-                        py-3
-                        focus:ring-0
-                        focus:border-blue-400
-                      "
+                      class="w-full border-0 border-b-2 border-brand-color py-3 focus:ring-0 focus:border-blue-400"
                       placeholder="Email"
                       v-model="data.email"
                       :class="{ 'border-red-500': errors.email }"
@@ -199,13 +155,7 @@
                     id=""
                     cols="30"
                     rows="5"
-                    class="
-                      w-full
-                      border-0 border-b-2 border-brand-color
-                      py-3
-                      focus:ring-0
-                      focus:border-blue-400
-                    "
+                    class="w-full border-0 border-b-2 border-brand-color py-3 focus:ring-0 focus:border-blue-400"
                     placeholder="Tell us how we can help"
                     v-model="data.details"
                     :class="{ 'border-red-500': errors.details }"
@@ -216,18 +166,7 @@
                 </div>
                 <div class="pt-6 w-full">
                   <button
-                    class="
-                      w-full
-                      flex
-                      justify-center
-                      rounded-md
-                      py-2
-                      px-6
-                      bg-brand-color
-                      hover:bg-brand-color-hover
-                      focus:outline-none
-                      text-white
-                    "
+                    class="w-full flex justify-center rounded-md py-2 px-6 bg-brand-color hover:bg-brand-color-hover focus:outline-none text-white"
                   >
                     <span v-if="!loader"> Submit</span>
                     <Loader v-if="loader" />
@@ -304,8 +243,8 @@
 
 <script>
 import Divider from "@/components/Divider";
-import globalMeta from "@/mixins/meta.js";
 import Loader from "@/components/Loader/Loading-white";
+import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta],
   middleware: ["checkSetting"],

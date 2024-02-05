@@ -7,7 +7,7 @@ export default {
   },
   head() {
     return {
-      title: this.meta ? this.meta.title + " | Home Theater Proz" : "",
+      title: this.meta.title ? this.meta.title + " | Home Theater Proz" : "Recent Blogs and Articles | Home Theater Proz",
       meta: [
         {
           hid: "description",

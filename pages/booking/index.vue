@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import Heading from "@/components/Heading";
-import Dot from "@/components/Dot";
 import Booking from "@/components/Booking/Booking";
+import Dot from "@/components/Dot";
+import Heading from "@/components/Heading";
 import globalMeta from "@/mixins/meta.js";
 
 export default {
@@ -66,10 +66,14 @@ export default {
   },
   methods: {},
   created() {
-    this.$store.dispatch("booking/fetchServices");
+    if (this.$store.state.booking.services <= 0) {
+      this.$store.dispatch("booking/fetchServices");
+    }
   },
   async fetch() {
-    await this.$store.dispatch("meta/fetchMetaInfo", "booking");
+    if (this.$store.state.booking.services <= 0) {
+      await this.$store.dispatch("meta/fetchMetaInfo", "booking");
+    }
   },
 };
 </script>

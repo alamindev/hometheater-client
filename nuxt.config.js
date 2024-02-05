@@ -107,6 +107,7 @@ export default {
     "@nuxtjs/pwa",
     "@nuxt/postcss8",
     "@nuxtjs/moment",
+    'nuxt-delay-hydration',
   ],
   optimizedImages: {
     optimizeImages: true,
@@ -134,6 +135,7 @@ export default {
   modules: [
     "@nuxtjs/axios",
     "@nuxtjs/auth",
+    '@nuxt/image',
     "nuxt-precompress",
     "vue-sweetalert2/nuxt",
     "vue-social-sharing/nuxt",
@@ -147,8 +149,17 @@ export default {
       },
     ],
     "@nuxtjs/amp",
-    "nuxt-compress",
+    "nuxt-compress", 
   ],
+  routeRules: {
+    '/': { prerender: true },
+  },
+  delayHydration: {
+    mode: 'manual'
+  },
+  image: {  
+    domains: ['admin.hometheaterproz.com', 'https://hometheaterproz.com']
+  },
   "nuxt-compress": {
     gzip: {
       threshold: 8192,

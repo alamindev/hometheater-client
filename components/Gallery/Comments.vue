@@ -9,7 +9,9 @@
           v-if="comment.user != null"
         >
           <div class="">
-            <img
+            <nuxt-img
+              quality="50"
+              loading="lazy"
               :alt="comment.user.username"
               :src="
                 comment.user.photo.includes('http')
@@ -36,13 +38,7 @@
           >
             <i
               @click="deleteComment(comment.id)"
-              class="
-                fas
-                fa-trash-alt
-                text-gray-300
-                hover:text-brand-color
-                cursor-pointer
-              "
+              class="fas fa-trash-alt text-gray-300 hover:text-brand-color cursor-pointer"
             ></i>
           </div>
         </div>
