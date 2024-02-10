@@ -128,8 +128,7 @@
     <div class="flex justify-center" v-else>
       <div class="">
         <div class="flex justify-center">
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             class="w-8/12"
             src="images/cart-is-empty.svg"
@@ -173,8 +172,7 @@
       </h2>
       <div class="px-12 pt-3">
         <figure>
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             class="w-full"
             src="/images/credit-card-icons.png"
@@ -323,7 +321,6 @@ export default {
     return {
       title: "Cart | Home Theater Proz",
       script: [
-        { src: process.env.square_script },
         {
           src: "https://commerce.coinbase.com/v1/checkout.js?version=201807",
           body: true,

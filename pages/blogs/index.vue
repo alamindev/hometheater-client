@@ -86,8 +86,7 @@
             </div>
             <div v-else class="w-full">
               <div class="flex w-full justify-center">
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   src="/images/no-result.png"
                   alt="no resutl"

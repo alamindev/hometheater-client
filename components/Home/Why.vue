@@ -8,12 +8,11 @@
         >
           {{ choose_us_header.title }}
         </h3>
-        <p
+        <article
           v-if="choose_us_header.details"
           class="font-rubik text-brand-sub-header text-left text-brand-gray leading-relaxed"
-        >
-          {{ choose_us_header.details }}
-        </p>
+          v-html="choose_us_header.details"
+        ></article>
       </div>
     </div>
     <div class="px-4 lg:px-16 py-16">
@@ -33,15 +32,17 @@
               {{ choose.title }}
             </h4>
             <div
-              class="xl:h-40 py-5 flex items-center justify-center"
+              class="xl:h-40 py-5 flex items-center text-center justify-center"
               v-if="choose.image"
             >
-              <nuxt-img
-                quality="20"
+              <img
+                v-lazy-load
                 loading="lazy"
                 class="xl:h-40 object-cover"
                 :src="imgurl + 'storage' + choose.image"
                 :alt="choose.title"
+                width="150"
+                height="150"
               />
             </div>
             <p

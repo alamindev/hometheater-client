@@ -20,12 +20,15 @@
         </div>
         <div class="w-full pt-4">
           <div v-show="step === 1">
-            <form @submit.prevent="nextStepRegister">
+            <form
+              @submit.prevent="nextStepRegister"
+              action-xhr="https://hometheaterproz.com/"
+              method="post"
+            >
               <div class="">
                 <div class="pb-4">
                   <div class="flex items-center relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                       src="/images/user.svg"
@@ -49,8 +52,7 @@
                 </div>
                 <div class="pb-4">
                   <div class="flex items-center relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                       src="/images/user.svg"
@@ -76,8 +78,7 @@
               <div class="">
                 <div class="pb-4">
                   <div class="flex items-center relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                       src="/images/mail.svg"
@@ -121,8 +122,7 @@
               </div>
               <div class="w-full pb-4">
                 <div class="flex items-center relative">
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="absolute left-0 top-0 mt-5 ml-5"
                     src="/images/password.svg"
@@ -139,8 +139,7 @@
                     autocomplete="off"
                     class="px-12 py-4 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                   />
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="-ml-12 z-30 cursor-pointer"
                     @click="showPass"
@@ -154,8 +153,7 @@
               </div>
               <div class="w-full">
                 <div class="flex items-center relative">
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="absolute left-0 top-0 mt-5 ml-5"
                     src="/images/password.svg"
@@ -172,8 +170,7 @@
                     autocomplete="off"
                     class="px-12 py-4 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                   />
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="-ml-12 z-30 cursor-pointer"
                     @click="showConfirmPass"
@@ -194,7 +191,11 @@
             </form>
           </div>
           <div v-show="step === 2">
-            <form @submit.prevent="registerFromCart">
+            <form
+              @submit.prevent="registerFromCart"
+              action-xhr="https://hometheaterproz.com/"
+              method="post"
+            >
               <div class="flex flex-col">
                 <div class="pb-4 flex-1">
                   <div class="flex items-center relative">

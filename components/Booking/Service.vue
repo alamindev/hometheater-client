@@ -38,8 +38,7 @@
                     <div
                       class="pb-1 sm:pb-3 flex justify-center items-center w-full"
                     >
-                      <nuxt-img
-                        quality="50"
+                      <img
                         loading="lazy"
                         class="w-full h-44 sm:h-72 lg:h-64 xl:h-72 object-cover"
                         :src="imgurl + 'storage' + service.thumbnail"

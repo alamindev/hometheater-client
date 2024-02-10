@@ -7,12 +7,10 @@
         autocomplete="off"
         v-on:keyup="getResults"
         placeholder="Search"
-        class="border-2 w-full focus:ring-0 lg:w-72 xl:w-98 border-gray-200 py-3 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none focus:border-0 text-gray-600"
+        class="border-2 w-full focus:ring-0 lg:w-72 xl:w-98 border-gray-200 py-2 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none text-gray-600"
       />
-      <nuxt-img
-        quality="50"
-        loading="lazy"
-        class="absolute right-2 top-3"
+      <img
+        class="absolute right-2 top-1/2 -translate-y-1/2"
         src="/images/search.svg"
         alt="search icon"
       />
@@ -34,8 +32,7 @@
               <nuxt-link
                 class="flex gap-2 items-center"
                 :to="`/booking/${data.slug}`"
-                ><nuxt-img
-                  quality="50"
+                ><img
                   loading="lazy"
                   :src="imgurl + 'storage' + data.image"
                   class="w-8 h-8 rounded-full flex-shrink-0"

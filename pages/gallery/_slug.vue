@@ -37,8 +37,7 @@
                     :key="img.id"
                     @click="ShowImages(img.slug)"
                   >
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="w-full h-48 md:h-56 lg:h-40 object-cover rounded-lg"
                       :data-src="imgurl + 'storage/' + img.url"
@@ -63,7 +62,7 @@
     </section>
     <modal
       name="showimage"
-      class="relative modal--showimg"
+      class="modal--showimg"
       :clickToClose="false"
       :scrollable="true"
       :adaptive="true"
@@ -99,8 +98,7 @@
               </button>
             </div>
             <figure class="w-full">
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 class="w-full h-4/5 max-height-custom object-contain"
                 :src="imgurl + 'storage/' + imgData.url"

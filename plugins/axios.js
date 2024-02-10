@@ -16,9 +16,10 @@ export default function({ $axios, store, redirect, $auth }) {
         return Promise.reject(error);
     });
 
-    $axios.onRequest(() => {
+    $axios.onRequest((c) => {
         store.dispatch("validation/clearErrors");
         store.dispatch("validation/clearSuccess");
+        c.headers.common['Cache-Control'] = `s-maxage=1000, stale-while-revalidate`;
     });
     $axios.setBaseURL(process.env.baseUrl);
     $axios.onResponse(res => {

@@ -19,8 +19,7 @@
                 : 'text-gray-500 ' + cate.icon
             "
           ></i>
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             v-if="cate.type == 1"
             :src="imgurl + 'storage/' + cate.image"

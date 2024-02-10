@@ -2,8 +2,7 @@
   <main>
     <section class="w-full relative profile--page">
       <div class="w-full">
-        <nuxt-img
-          quality="50"
+        <img
           loading="lazy"
           class="w-full h-36 object-cover sm:h-auto"
           src="/images/users/profile.png"
@@ -13,8 +12,7 @@
       <div class="px-4 lg:px-16 py-6 bg-custom">
         <div class="container mx-auto relative">
           <div class="absolute -left-24 top-24">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               class="w-56"
               src="/images/contact-circle.svg"

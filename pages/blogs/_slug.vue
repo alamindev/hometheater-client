@@ -14,8 +14,7 @@
                 <div class="flex justify-between">
                   <div class="flex">
                     <div class="pr-3">
-                      <nuxt-img
-                        quality="50"
+                      <img
                         loading="lazy"
                         class="w-12 h-12 object-cover rounded-full"
                         :src="imgurl + 'storage/' + post.user.photo"
@@ -39,8 +38,7 @@
                 </div>
               </div>
               <div class="py-10">
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   class="rounded-lg w-full object-cover"
                   :src="imgurl + 'storage/' + post.photo"

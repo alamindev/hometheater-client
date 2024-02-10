@@ -37,8 +37,7 @@
                           v-for="gallery in album.images"
                           :key="gallery.id"
                         >
-                          <nuxt-img
-                            quality="50"
+                          <img
                             loading="lazy"
                             class="w-full h-24 object-cover"
                             :data-src="imgurl + 'storage/' + gallery.src"
@@ -53,8 +52,7 @@
                           v-for="gallery in album.images"
                           :key="gallery.id"
                         >
-                          <nuxt-img
-                            quality="50"
+                          <img
                             loading="lazy"
                             class="w-full h-48 object-cover"
                             :src="imgurl + 'storage/' + gallery.src"
@@ -63,8 +61,7 @@
                         </div>
                       </template>
                       <template v-else>
-                        <nuxt-img
-                          quality="50"
+                        <img
                           loading="lazy"
                           class="w-full h-48 object-cover"
                           :src="imgurl + 'storage/uploads/no-image.png'"

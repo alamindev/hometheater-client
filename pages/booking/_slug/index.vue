@@ -18,8 +18,7 @@
                     @click="ChangeImage(imgurl + 'storage' + image.url)"
                     :key="image.id"
                   >
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="h-24 sm:w-28 sm:h-20 w-24 xl:h-24 xl:w-28 object-cover rounded-md shadow-md"
                       :src="imgurl + 'storage' + image.url"
@@ -28,8 +27,7 @@
                   </figure>
                 </div>
                 <figure class="pt-5 flex-1 xl:pl-2">
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="w-full effect-change-img rounded-md shadow-md"
                     :src="imgurl + 'storage' + service.image"
@@ -193,8 +191,7 @@
                         target="_blank"
                         :to="`/users/${review.user.id}/profile`"
                       >
-                        <nuxt-img
-                          quality="50"
+                        <img
                           loading="lazy"
                           :alt="review.user.username"
                           :src="
@@ -241,8 +238,7 @@
                               @click="ViewImage(image.id, review.id)"
                               class="cursor-pointer"
                             >
-                              <nuxt-img
-                                quality="50"
+                              <img
                                 loading="lazy"
                                 class="w-20 h-20 object-cover rounded-md"
                                 :src="image.src"
@@ -306,8 +302,7 @@
       </div>
       <div class="w-full">
         <figure class="w-full">
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             :src="image.src"
             class="w-full"
@@ -330,8 +325,7 @@
                   class="py-2 cursor-pointer"
                   @click="ViewImage(img.id, img.review_id)"
                 >
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="w-16 h-16 object-cover rounded-md"
                     :src="img.src"

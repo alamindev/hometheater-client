@@ -14,7 +14,11 @@
       </div>
       <client-only>
         <div class="pt-6" v-if="!loading">
-          <form @submit.prevent="submitRating()">
+          <form
+            @submit.prevent="submitRating()"
+            action-xhr="https://hometheaterproz.com/"
+            method="post"
+          >
             <div class="pt-6 pb-12">
               <div class="flex pb-4 items-center">
                 <h3 class="text-base pr-2">Rating:</h3>

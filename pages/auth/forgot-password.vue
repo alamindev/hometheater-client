@@ -4,8 +4,7 @@
       <div class="flex flex-col lg:flex-row items-center">
         <div class="w-full lg:w-6/12 hidden lg:block">
           <div class="py-5 flex justify-center items-center">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               src="/images/login.png"
               class="w-8/12"
@@ -28,8 +27,7 @@
             <div
               class="py-5 flex justify-center items-center bg--color lg:hidden"
             >
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 src="/images/login.png"
                 class="w-8/12"
@@ -58,11 +56,15 @@
                 <span class="font-bold text-dark-sm">Success! </span>
                 {{ success.email[0] }}
               </div>
-              <form @submit.prevent="forgotPass" v-if="!sended">
+              <form
+                @submit.prevent="forgotPass"
+                v-if="!sended"
+                action-xhr="https://hometheaterproz.com/"
+                method="post"
+              >
                 <div class="w-full pt-5">
                   <div class="flex items-center pb-8 relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/mail.svg"
@@ -92,7 +94,12 @@
                   </button>
                 </div>
               </form>
-              <form @submit.prevent="VerifyCode" v-if="sended">
+              <form
+                @submit.prevent="VerifyCode"
+                v-if="sended"
+                action-xhr="https://hometheaterproz.com/"
+                method="post"
+              >
                 <div class="w-full pt-5">
                   <div class="flex items-center pb-8 relative">
                     <input

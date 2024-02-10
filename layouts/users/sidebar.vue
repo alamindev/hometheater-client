@@ -6,8 +6,7 @@
     <div class="logo__area flex items-center justify-between pb-10 border-b">
       <nuxt-link to="/" exact class="logo px-5 pt-5 flex items-center">
         <figure class="pr-2">
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             class="h-10 w-10"
             v-if="setting.site_logo"

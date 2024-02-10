@@ -4,8 +4,7 @@
       <div class="flex flex-col-reverse md:flex-row items-center">
         <div class="w-full md:w-6/12">
           <div class="py-5 flex justify-center items-center">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               src="/images/login.png"
               class="w-8/12"
@@ -45,11 +44,14 @@
                 <span class="font-bold text-red-dark">Sorry! </span>
                 {{ errors.token[0] }}
               </div>
-              <form @submit.prevent="forgotPass">
+              <form
+                @submit.prevent="forgotPass"
+                action-xhr="https://hometheaterproz.com/"
+                method="post"
+              >
                 <div class="w-full pb-6">
                   <div class="flex items-center relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/password.svg"
@@ -66,8 +68,7 @@
                       autocomplete="off"
                       class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                     />
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="-ml-12 z-30 cursor-pointer"
                       @click="showPass"
@@ -81,8 +82,7 @@
                 </div>
                 <div class="w-full">
                   <div class="flex items-center relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/password.svg"
@@ -99,8 +99,7 @@
                       autocomplete="off"
                       class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                     />
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="-ml-12 z-30 cursor-pointer"
                       @click="showConfirmPass"

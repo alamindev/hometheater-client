@@ -61,11 +61,7 @@ export default {
         rel: "mask-icon",
         href: "/safari-pinned-tab.svg",
         color: "#5bbad5",
-      },
-      {
-        rel: "stylesheet",
-        href: "/css/all.min.css",
-      },
+      }, 
     ],
   },
   /*
@@ -106,36 +102,34 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     "@nuxtjs/pwa",
     "@nuxt/postcss8",
-    "@nuxtjs/moment",
-    'nuxt-delay-hydration',
+    "@nuxtjs/moment", 
   ],
   optimizedImages: {
     optimizeImages: true,
-  },
-  pwa: {
-    meta: {
-      title: "home theater proz",
-      author: "Me",
-    },
-    manifest: {
-      name: "home theater",
-      short_name: "TV Mounting & Home Theater Installation",
-      lang: "en",
-      orientation: "portrait-primary",
-      background_color: "#ffffff",
-      theme_color: "#010101",
-    },
-    workbox: {
-      dev: process.env.NODE_ENV !== "production",
-    },
-  },
+  }, 
+  // pwa: {
+  //   meta: {
+  //     title: "home theater proz",
+  //     author: "Me",
+  //   },
+  //   manifest: {
+  //     name: "home theater",
+  //     short_name: "TV Mounting & Home Theater Installation",
+  //     lang: "en",
+  //     orientation: "portrait-primary",
+  //     background_color: "#ffffff",
+  //     theme_color: "#010101",
+  //   },
+  //   workbox: {
+  //     dev: process.env.NODE_ENV !== "production", 
+  //   },
+  // },
   /*
    ** Nuxt.js modules
    */
   modules: [
     "@nuxtjs/axios",
-    "@nuxtjs/auth",
-    '@nuxt/image',
+    "@nuxtjs/auth", 
     "nuxt-precompress",
     "vue-sweetalert2/nuxt",
     "vue-social-sharing/nuxt",
@@ -150,15 +144,17 @@ export default {
     ],
     "@nuxtjs/amp",
     "nuxt-compress", 
-  ],
-  routeRules: {
-    '/': { prerender: true },
+    "nuxt-beastcss",
+  ],  
+  beastcss: {  
+    config: { 
+      fontFace: true,
+    },
   },
-  delayHydration: {
-    mode: 'manual'
-  },
-  image: {  
-    domains: ['admin.hometheaterproz.com', 'https://hometheaterproz.com']
+  optimization: {
+    splitChunks: {
+      maxSize: 300000
+    }
   },
   "nuxt-compress": {
     gzip: {
@@ -225,7 +221,7 @@ export default {
     port: 8080, // default: 3000
   },
   router: {
-    middleware: ["clearValidationErrors"],
+    middleware: ["clearValidationErrors" ],
     extendRoutes(routes, resolve) {
       routes.push({
         path: "/login",

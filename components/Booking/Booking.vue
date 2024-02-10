@@ -8,8 +8,7 @@
     >
       <div class="bg-white shadow-lg p-3 rounded-lg">
         <div class="pb-1 sm:pb-3">
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             :src="imgurl + 'storage' + service.image"
             class="w-full image--booking-custom h-48 md:h-64 lg:h-56 xl:h-72 2xl:h-80 object-cover rounded-lg"

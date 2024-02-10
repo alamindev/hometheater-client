@@ -95,12 +95,7 @@
           </div>
           <div v-else class="w-full pt-16">
             <div class="flex w-full justify-center">
-              <nuxt-img
-                quality="50"
-                loading="lazy"
-                src="/images/no-result.png"
-                alt="no resutl"
-              />
+              <img loading="lazy" src="/images/no-result.png" alt="no resutl" />
             </div>
             <h1 class="text-center py-10 text-xl text-gray-800 font-medium">
               Extra ADDON not found! Please go next

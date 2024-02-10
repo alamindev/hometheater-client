@@ -19,8 +19,7 @@
           :key="post.id"
         >
           <div class="flex items-start">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               :class="image"
               class="rounded-lg object-cover"

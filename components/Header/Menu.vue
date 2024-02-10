@@ -65,11 +65,7 @@
           >
             {{ count }}
           </div>
-          <nuxt-img
-            quality="50"
-            loading="lazy"
-            src="/images/cart.svg"
-            alt="cart icon"
+          <img loading="lazy" src="/images/cart.svg" alt="cart icon"
         /></nuxt-link>
       </div>
     </div>

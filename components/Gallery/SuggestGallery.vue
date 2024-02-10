@@ -6,9 +6,7 @@
       :key="img.id"
       @click="viewImage(img.slug)"
     >
-      <nuxt-img
-        quality="50"
-        loading="lazy"
+      <img
         class="w-full object-cover rounded-lg h-20"
         alt="gellary-img"
         :src="imgurl + 'storage/' + img.url"

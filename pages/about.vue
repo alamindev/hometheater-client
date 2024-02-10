@@ -65,8 +65,7 @@
       <div class="w-full lg:w-11/12 xl:w-9/12 mx-auto">
         <div class="flex flex-col md:flex-row gap-10 items-start">
           <div class="w-full md:w-5/12 lg:pr-12">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               class="w-full"
               :src="imgurl + 'storage' + information.image"
@@ -104,8 +103,7 @@
           :key="mem.id"
         >
           <div class="p-5 px-8 flex justify-center flex-col items-center">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               class="rounded-full w-24 h-24 object-cover"
               :src="imgurl + 'storage' + mem.image"
@@ -145,12 +143,7 @@
     </section>
     <section class="px-4 lg:px-16 pt-20 pb-16 relative">
       <div class="absolute left-0 top-0 mt-20 -ml-64">
-        <nuxt-img
-          quality="50"
-          loading="lazy"
-          src="images/about-circle.svg"
-          alt="about"
-        />
+        <img loading="lazy" src="images/about-circle.svg" alt="about" />
       </div>
       <div class="w-full md:w-11/12 lg:w-10/12 xl:w-8/12 mx-auto">
         <h2

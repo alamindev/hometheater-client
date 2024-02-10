@@ -3,8 +3,7 @@
     <h2 class="text-gray-700 text-base pr-2 hidden md:block">
       {{ user.name }}
     </h2>
-    <nuxt-img
-      quality="50"
+    <img
       loading="lazy"
       v-if="user.photo === null"
       src="/images/dashboard-img-1.svg"
@@ -12,8 +11,7 @@
       height="35"
       alt="admin image"
     />
-    <nuxt-img
-      quality="50"
+    <img
       loading="lazy"
       v-if="user.photo"
       :src="user.photo.includes('http') ? user.photo : imgurl + user.photo"

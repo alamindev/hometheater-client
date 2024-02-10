@@ -4,8 +4,7 @@
   >
     <div class="flex-1 flex justify-start items-center">
       <figure class="hidden md:block">
-        <nuxt-img
-          quality="50"
+        <img
           loading="lazy"
           src="/images/bar-header.svg"
           class="pr-6"
@@ -14,8 +13,7 @@
       </figure>
       <nuxt-link to="/" class="text-xl flex items-center">
         <figure class="pr-2">
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             class="h-8 w-8"
             v-if="setting.site_logo"
@@ -30,12 +28,12 @@
     </div>
     <div v-if="!authenticated" class="flex justify-start items-center">
       <nuxt-link
-        class="px-6 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 border-brand-color text-white bg-brand-color hover:bg-brand-color-hover"
+        class="px-4 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-xs sm:text-base border-brand-color text-white bg-brand-color hover:bg-brand-color-hover"
         to="/login"
         >Log in</nuxt-link
       >
       <nuxt-link
-        class="ml-3 sm:ml-5 px-6 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-brand-color border-brand-color hover:bg-brand-color hover:text-white"
+        class="ml-2 sm:ml-5 px-3 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-xs sm:text-base text-brand-color border-brand-color hover:bg-brand-color hover:text-white"
         to="/register"
         >Sign up</nuxt-link
       >

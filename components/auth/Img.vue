@@ -1,7 +1,6 @@
 <template>
   <div>
-    <nuxt-img
-      quality="50"
+    <img
       loading="lazy"
       v-if="user.photo === null"
       src="/images/dashboard-img-1.svg"
@@ -9,8 +8,7 @@
       class="object-cover"
       :class="styles"
     />
-    <nuxt-img
-      quality="50"
+    <img
       loading="lazy"
       v-if="user.photo"
       :src="user.photo.includes('http') ? user.photo : imgurl + user.photo"

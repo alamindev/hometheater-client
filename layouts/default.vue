@@ -8,31 +8,25 @@
       You are offline
     </div>
     <LazyDefaultHeader />
-    <delay-hydration>
-      <div>
-        <div class="sticky top-0 z-50">
-          <div class="flex items-center lg:hidden py-2 px-4 bg-white">
-            <Search classes="w-full" />
-            <div class="pl-3 flex-2 relative pr-2 lg:pr-0">
-              <nuxt-link to="/cart">
-                <div
-                  class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-8 h-8 bg-brand-color flex justify-center items-center text-white"
-                >
-                  {{ count }}
-                </div>
-                <nuxt-img
-                  quality="50"
-                  loading="lazy"
-                  src="/images/cart.svg"
-                  alt="cart icon"
-              /></nuxt-link>
-            </div>
+    <div>
+      <div class="sticky top-0 z-50">
+        <div class="flex items-center lg:hidden py-2 px-4 bg-white">
+          <Search classes="w-full" />
+          <div class="pl-3 flex-2 relative pr-2 lg:pr-0">
+            <nuxt-link to="/cart">
+              <div
+                class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-8 h-8 bg-brand-color flex justify-center items-center text-white"
+              >
+                {{ count }}
+              </div>
+              <img loading="lazy" src="/images/cart.svg" alt="cart icon"
+            /></nuxt-link>
           </div>
         </div>
-        <Nuxt />
-        <LazyDefaultFooter />
       </div>
-    </delay-hydration>
+      <Nuxt />
+      <LazyDefaultFooter />
+    </div>
   </div>
 </template>
 

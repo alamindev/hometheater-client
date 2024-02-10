@@ -45,8 +45,7 @@
               <td class="py-2">
                 <div class="flex pt-3">
                   <figure class="w-24">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="w-24 h-20 object-cover rounded-md"
                       :src="imgurl + 'storage' + cart.image"
@@ -132,8 +131,7 @@
             <div class="flex justify-between">
               <div class="flex">
                 <figure class="w-24">
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     class="w-24 h-20 object-cover rounded-md"
                     :src="imgurl + 'storage' + cart.image"

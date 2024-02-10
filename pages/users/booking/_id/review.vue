@@ -28,7 +28,11 @@
                 >(Leave a review for this service)</span
               >
             </h2>
-            <form @submit.prevent="submitRating(service.id)">
+            <form
+              @submit.prevent="submitRating(service.id)"
+              action-xhr="https://hometheaterproz.com/"
+              method="post"
+            >
               <div class="pt-6 pb-12">
                 <div class="flex pb-4 items-center">
                   <h3 class="text-base pr-2">Rating:</h3>
@@ -112,9 +116,9 @@
 </template>
 
 <script>
+import Loader from "@/components/Loader/Loading-white";
 import AddImage from "@/components/Review/AddImage";
 import ShowImg from "@/components/Review/ShowImg";
-import Loader from "@/components/Loader/Loading-white";
 export default {
   middleware: ["auth", "checkSetting"],
   layout: "users",

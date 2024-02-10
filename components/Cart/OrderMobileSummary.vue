@@ -43,7 +43,7 @@
           v-model="payment_option"
         >
           <option value="local">Local - Service Location</option>
-          <option value="online">Credit Card</option>
+          <!-- <option value="online">Credit Card</option> -->
         </select>
       </div>
       <div class="md:pt-10 md:pb-8 py-4">
@@ -55,15 +55,7 @@
         <div class="flex justify-between flex-col sm:flex-row">
           <div class="">
             <input
-              class="
-                border
-                w-full
-                text-gray-500
-                bg-white
-                border-gray-200
-                rounded-sm
-                disabled:bg-gray-200
-              "
+              class="border w-full text-gray-500 bg-white border-gray-200 rounded-sm disabled:bg-gray-200"
               name="promo"
               id="promo"
               type="text"
@@ -79,17 +71,7 @@
             type="button"
             @click="applyPromo"
             :disabled="isDisabled"
-            class="
-              bg-red-400
-              hover:bg-red-500
-              disabled:opacity-75
-              text-white text-base
-              px-12
-              py-2
-              rounded-md
-              mt-3
-              sm:mt-0
-            "
+            class="bg-red-400 hover:bg-red-500 disabled:opacity-75 text-white text-base px-12 py-2 rounded-md mt-3 sm:mt-0"
           >
             Apply
           </button>

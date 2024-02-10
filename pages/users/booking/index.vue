@@ -235,7 +235,7 @@
                 </div>
                 <nuxt-link
                   :to="`/users/booking/${booking.id}/details`"
-                  class="w-full sm:w-auto md:w-full lg:w-auto block text-center py-2 px-3 lg:mt-0 shadow-md bg-white border border-brand-color text-brand-color text-white font-semibold rounded-sm focus:outline-none text-xs"
+                  class="w-full sm:w-auto md:w-full lg:w-auto block text-center py-2 px-3 lg:mt-0 shadow-md bg-white border border-brand-color text-brand-color font-semibold rounded-sm focus:outline-none text-xs"
                 >
                   View
                 </nuxt-link>
@@ -252,12 +252,7 @@
         </div>
         <div v-else class="w-full pt-20">
           <div class="flex w-full justify-center">
-            <nuxt-img
-              quality="50"
-              loading="lazy"
-              src="/images/no-result.png"
-              alt="no resutl"
-            />
+            <img loading="lazy" src="/images/no-result.png" alt="no resutl" />
           </div>
           <h1 class="text-center pt-10 text-3xl text-gray-800 font-semibold">
             No booking here.

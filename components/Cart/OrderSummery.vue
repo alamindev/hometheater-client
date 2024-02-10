@@ -1,14 +1,7 @@
 <template>
   <div class="bg-light-blue-cart h-full px-5 py-12">
     <h2
-      class="
-        font-medium
-        custom--text-order-title
-        text-gray-700
-        border-b
-        pb-4
-        text-center
-      "
+      class="font-medium custom--text-order-title text-gray-700 border-b pb-4 text-center"
     >
       Order Summary
     </h2>
@@ -20,7 +13,7 @@
     <div class="pt-5">
       <label
         for="payment"
-        class="pb-2 inline-block upercase text-base font-medium"
+        class="pb-2 inline-block upercase text-base font-medium !text-dark"
         >Payment Option</label
       >
       <select
@@ -30,25 +23,17 @@
         v-model="payment_option"
       >
         <option value="local">Local- service location</option>
-        <option value="online">Credit Card</option>
+        <!-- <option value="online">Credit Card</option> -->
       </select>
     </div>
     <div class="pt-5 pb-8">
       <label
         for="promocode"
-        class="pb-2 inline-block upercase text-base font-medium rounded-sm"
+        class="pb-2 inline-block upercase text-base font-medium rounded-sm !text-dark"
         >PROMO CODE</label
       >
       <input
-        class="
-          border
-          w-full
-          text-gray-500
-          bg-white
-          border-gray-200
-          rounded-sm
-          disabled:bg-gray-200
-        "
+        class="border w-full text-gray-500 bg-white border-gray-200 rounded-sm disabled:bg-gray-200"
         name="promocode"
         id="promocode"
         type="text"
@@ -63,16 +48,7 @@
         type="button"
         @click="applyPromo"
         :disabled="isDisabled"
-        class="
-          bg-red-400
-          hover:bg-red-500
-          disabled:opacity-75
-          text-white text-base
-          px-6
-          py-3
-          mt-3
-          rounded-md
-        "
+        class="bg-red-400 hover:bg-red-500 disabled:opacity-75 text-white text-base px-6 py-3 mt-3 rounded-md"
       >
         Apply
       </button>
@@ -112,19 +88,7 @@
     </div>
     <button
       type="button"
-      class="
-        disabled:opacity-50
-        py-3
-        px-5
-        text-xl text-white
-        bg-brand-color
-        hover:bg-brand-color-hover
-        flex
-        items-center
-        justify-between
-        w-full
-        rounded-md
-      "
+      class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
       :disabled="isCheckout == true"
       @click="onClickNext"
       v-if="step === 1"
@@ -135,19 +99,7 @@
     </button>
     <button
       type="button"
-      class="
-        disabled:opacity-50
-        py-3
-        px-5
-        text-xl text-white
-        bg-brand-color
-        hover:bg-brand-color-hover
-        flex
-        items-center
-        justify-between
-        w-full
-        rounded-md
-      "
+      class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
       :disabled="is_next == false"
       @click="onClickNext"
       v-if="step === 2"
@@ -165,19 +117,7 @@
             @click="nextQuestion"
             type="button"
             :disabled="isQuestionCheck(activeStep)"
-            class="
-              disabled:opacity-50
-              py-3
-              px-5
-              text-xl text-white
-              bg-brand-color
-              hover:bg-brand-color-hover
-              flex
-              items-center
-              justify-between
-              w-full
-              rounded-md
-            "
+            class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
           >
             <p class="uppercase"></p>
             <p class="uppercase">Next</p>
@@ -186,19 +126,7 @@
           <button
             v-if="activeStep + 1 === question_main.length"
             type="button"
-            class="
-              disabled:opacity-50
-              py-3
-              px-5
-              text-xl text-white
-              bg-brand-color
-              hover:bg-brand-color-hover
-              flex
-              items-center
-              justify-between
-              w-full
-              rounded-md
-            "
+            class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
             @click="onClickNext"
             :disabled="isQuestionCheck(activeStep)"
           >
@@ -210,19 +138,7 @@
         <button
           v-else
           type="button"
-          class="
-            disabled:opacity-50
-            py-3
-            px-5
-            text-xl text-white
-            bg-brand-color
-            hover:bg-brand-color-hover
-            flex
-            items-center
-            justify-between
-            w-full
-            rounded-md
-          "
+          class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
           @click="onClickNext"
         >
           <p class="uppercase"></p>
@@ -234,19 +150,7 @@
         v-else
         type="button"
         :disabled="!is_auth"
-        class="
-          disabled:opacity-50
-          py-3
-          px-5
-          text-xl text-white
-          bg-brand-color
-          hover:bg-brand-color-hover
-          flex
-          items-center
-          justify-between
-          w-full
-          rounded-md
-        "
+        class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
       >
         <p class="uppercase"></p>
         <p class="uppercase">Next</p>
@@ -256,19 +160,7 @@
 
     <button
       type="button"
-      class="
-        disabled:opacity-50
-        py-3
-        px-5
-        text-xl text-white
-        bg-brand-color
-        hover:bg-brand-color-hover
-        flex
-        items-center
-        justify-between
-        w-full
-        rounded-md
-      "
+      class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
       @click="onClickNext"
       v-if="step === 4"
     >
@@ -278,19 +170,7 @@
     </button>
     <button
       type="button"
-      class="
-        disabled:opacity-50
-        py-3
-        px-5
-        text-xl text-white
-        bg-brand-color
-        hover:bg-brand-color-hover
-        flex
-        items-center
-        justify-center
-        w-full
-        rounded-md
-      "
+      class="disabled:opacity-50 py-3 px-5 text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
       @click="finishToCheckout"
       :disabled="is_finished == false"
       v-if="step === 5"
@@ -305,8 +185,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import Loader from "@/components/Loader/Loading-white";
+import { mapGetters } from "vuex";
 export default {
   props: ["isCheckout", "step"],
   name: "OrderSummery",

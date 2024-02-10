@@ -1,6 +1,11 @@
 <template>
   <div class="user--settings">
-    <form v-if="!loading" @submit.prevent="UpdateInfo">
+    <form
+      v-if="!loading"
+      @submit.prevent="UpdateInfo"
+      action-xhr="https://hometheaterproz.com/"
+      method="post"
+    >
       <div
         v-if="require_msg"
         class="mb-5 text-red-800 bg-red-200 rounded-md py-5 px-10"
@@ -36,8 +41,7 @@
                 accept="image/*"
               />
               <div class="rounded-full p-3 bg-white" v-if="!photo">
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   v-if="loaduser != null"
                   :src="
@@ -47,8 +51,7 @@
                   alt=""
                 />
                 <div class="w-24 h-24" v-if="loaduser == null">
-                  <nuxt-img
-                    quality="50"
+                  <img
                     loading="lazy"
                     src="/images/dashboard-img-1.svg"
                     class="w-24 h-24 object-cover rounded-full"
@@ -57,8 +60,7 @@
                 </div>
               </div>
               <div class="rounded-full p-3 bg-white" v-else>
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   v-if="photo"
                   :src="photo"

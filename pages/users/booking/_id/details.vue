@@ -107,8 +107,7 @@
               <div class="flex flex-wrap xl:w-6/12 items-center">
                 <div class="image pr-2">
                   <figure class="w-24">
-                    <nuxt-img
-                      quality="50"
+                    <img
                       loading="lazy"
                       class="w-24 h-20 object-cover rounded-md"
                       :src="imgurl + 'storage' + service.image"
@@ -201,8 +200,7 @@
             >
               <h3>Master Card</h3>
               <figure>
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   src="/images/master-card.png"
                   alt="master-card.png"

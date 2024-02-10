@@ -9,8 +9,7 @@
           v-if="comment.user != null"
         >
           <div class="">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               :alt="comment.user.username"
               :src="

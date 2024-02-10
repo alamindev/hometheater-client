@@ -19,8 +19,7 @@
           <div class="flex justify-center">
             <div class="">
               <div class="flex justify-center">
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   class="w-8/12"
                   src="/images/no-result-found.svg"

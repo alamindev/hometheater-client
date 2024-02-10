@@ -1,6 +1,6 @@
 <template>
   <div class="absolute" :class="position">
-    <nuxt-img quality="60" loading="lazy" src="/images/dot.svg" alt="dot" />
+    <img loading="lazy" src="/images/dot.svg" alt="dot" />
   </div>
 </template>
 

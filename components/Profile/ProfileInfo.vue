@@ -3,8 +3,7 @@
     <div class="flex justify-center border-b pb-3">
       <div class="-mt-36 sm:-mt-24 md:-mt-36">
         <div class="p-2 bg-white shadow-lg rounded-full">
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             class="w-40 h-40 object-cover rounded-full"
             :src="

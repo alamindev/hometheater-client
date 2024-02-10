@@ -11,8 +11,7 @@ export const mutations = {
     BOOKING_COUNT: (state, data) => (state.booking_count = data),
     REVIEW_COUNT: (state, data) => (state.review_count = data),
     TOTAL_SPAN: (state, data) => (state.total_span = data),
-    UPDATE_BOOKINGS: (state, id) =>
-        (state.recent_booking = state.recent_booking.filter(el => el.id !== id))
+    UPDATE_BOOKINGS: (state, id) =>   (state.recent_booking = state.recent_booking.filter(el => el.id !== id))
 };
 
 export const actions = {
@@ -30,7 +29,7 @@ export const actions = {
     async delete({ commit, state }, id) {
         const { data } = await this.$axios.post(`booking/delete`, { id: id });
         if (data.success == true) {
-            commit("UPDATE_BOOKINGS", { id: id });
+            commit("UPDATE_BOOKINGS",  id );
         }
     }
 };

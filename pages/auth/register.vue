@@ -4,8 +4,7 @@
       <div class="flex flex-col lg:flex-row items-center">
         <div class="w-full lg:w-6/12 hidden lg:block">
           <div class="py-5 flex justify-center items-center">
-            <nuxt-img
-              quality="50"
+            <img
               loading="lazy"
               src="/images/register.png"
               class="w-8/12"
@@ -26,8 +25,7 @@
             <div
               class="py-5 flex justify-center items-center bg--color lg:hidden"
             >
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 src="/images/register.png"
                 class="w-8/12"
@@ -76,13 +74,16 @@
               >
                 Your token appeared to be invalid. Please try again.
               </div>
-              <form @submit.prevent="register">
+              <form
+                @submit.prevent="register"
+                action-xhr="https://hometheaterproz.com/"
+                method="post"
+              >
                 <div class="w-full pt-4">
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5">
                     <div class="pb-2 sm:pb-6">
                       <div class="flex items-center relative">
-                        <nuxt-img
-                          quality="50"
+                        <img
                           loading="lazy"
                           class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                           src="/images/user.svg"
@@ -106,8 +107,7 @@
                     </div>
                     <div class="pb-4 sm:pb-6">
                       <div class="flex items-center relative">
-                        <nuxt-img
-                          quality="50"
+                        <img
                           loading="lazy"
                           class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                           src="/images/user.svg"
@@ -133,8 +133,7 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-5">
                     <div class="pb-2 sm:pb-6">
                       <div class="flex items-center relative">
-                        <nuxt-img
-                          quality="50"
+                        <img
                           loading="lazy"
                           class="absolute left-0 top-0 mt-6 ml-5"
                           src="/images/mail.svg"
@@ -294,8 +293,7 @@
 
                   <div class="w-full pb-4 sm:pb-6">
                     <div class="flex items-center relative">
-                      <nuxt-img
-                        quality="50"
+                      <img
                         loading="lazy"
                         class="absolute left-0 top-0 mt-6 ml-5"
                         src="/images/password.svg"
@@ -312,8 +310,7 @@
                         autocomplete="off"
                         class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                       />
-                      <nuxt-img
-                        quality="50"
+                      <img
                         loading="lazy"
                         class="-ml-12 z-30 cursor-pointer"
                         @click="showPass"
@@ -327,8 +324,7 @@
                   </div>
                   <div class="w-full">
                     <div class="flex items-center relative">
-                      <nuxt-img
-                        quality="50"
+                      <img
                         loading="lazy"
                         class="absolute left-0 top-0 mt-6 ml-5"
                         src="/images/password.svg"
@@ -345,8 +341,7 @@
                         autocomplete="off"
                         class="px-12 py-5 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
                       />
-                      <nuxt-img
-                        quality="50"
+                      <img
                         loading="lazy"
                         class="-ml-12 z-30 cursor-pointer"
                         @click="showConfirmPass"

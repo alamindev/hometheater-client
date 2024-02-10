@@ -4,8 +4,7 @@
       <div
         class="flex flex-col items-center rounded-lg shadow-md bookings pt-2 pb-1 lg:px-2 lg:py-4"
       >
-        <nuxt-img
-          quality="50"
+        <img
           loading="lazy"
           src="/images/users/date-range.svg"
           class="w-8 lg:w-10 pb-1 lg:pb-2 h-8 lg:h-10"
@@ -24,8 +23,7 @@
       <div
         class="flex flex-col items-center rounded-lg shadow-md reviews pt-2 lg:px-2 lg:py-4"
       >
-        <nuxt-img
-          quality="50"
+        <img
           loading="lazy"
           src="/images/users/rate-review.svg"
           class="w-8 lg:w-10 pb-1 lg:pb-2 h-8 lg:h-10"
@@ -44,8 +42,7 @@
       <div
         class="flex flex-col items-center rounded-lg shadow-md total_spent pt-2 lg:px-2 lg:py-4"
       >
-        <nuxt-img
-          quality="50"
+        <img
           loading="lazy"
           src="/images/users/money-bill-alt.svg"
           class="w-8 lg:w-10 pb-1 lg:pb-2 h-8 lg:h-10"

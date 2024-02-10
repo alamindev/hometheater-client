@@ -7,7 +7,11 @@
         </div>
         <div class="w-full pt-4">
           <div>
-            <form @submit.prevent="updateRequiredFields">
+            <form
+              @submit.prevent="updateRequiredFields"
+              action-xhr="https://hometheaterproz.com/"
+              method="post"
+            >
               <div class="pb-4">
                 <div class="flex items-center relative">
                   <input

@@ -9,8 +9,7 @@
           <div class="w-full lg:w-7/12">
             <div class="pb-5 relative">
               <div class="flex items-center justify-center">
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   class="w-full"
                   :src="imgurl + 'storage' + contact.image"
@@ -61,7 +60,11 @@
                   {{ contact.title }}
                 </h2>
               </div>
-              <form @submit.prevent="ContactSubmit">
+              <form
+                @submit.prevent="ContactSubmit"
+                action-xhr="https://hometheaterproz.com/"
+                method="post"
+              >
                 <div class="flex flex-col lg:flex-row">
                   <div class="w-full">
                     <div class="pt-1">

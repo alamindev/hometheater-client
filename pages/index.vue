@@ -4,8 +4,6 @@
       <LazyHomeBanner />
       <LazyHomeService />
       <LazyHomeWhy />
-      <LazyHomeClientSlider />
-      <LazyHomeReview />
     </main>
     <div class="min-h-screen flex items-center" v-show="loading">
       <div class="loader-parent mt-16 mb-20">

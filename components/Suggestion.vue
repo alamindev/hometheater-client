@@ -18,8 +18,7 @@
           class="fas fa-plus-circle text-brand-color absolute right-0 top-0 -mr-2 -mt-3 bg-white rounded-full text-2xl z-20"
         ></i>
         <figure>
-          <nuxt-img
-            quality="50"
+          <img
             loading="lazy"
             class="w-full rounded-md border border-brand-color h-48 sm:h-56 md:h-48 lg:h-56 object-cover"
             :src="imgurl + 'storage' + suggest.image"

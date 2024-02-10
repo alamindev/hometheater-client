@@ -35,16 +35,14 @@
             <div
               class="w-full flex items-center justify-end md:pl-20 pt-5 pb-10 md:pb-0 md:pt-0"
             >
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 v-if="header.image"
                 class="object-cover w-full px-20 sm:px-0"
                 :src="imgurl + 'storage' + header.image"
                 :alt="header.service_title"
               />
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 v-else
                 class="w-full"
@@ -84,8 +82,7 @@
                   class="text-2xl text-center text-gray-700"
                   :class="category.icon"
                 ></i>
-                <nuxt-img
-                  quality="50"
+                <img
                   loading="lazy"
                   v-if="category.type == 1 && category.photo"
                   :src="imgurl + 'storage/' + category.photo"

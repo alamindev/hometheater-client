@@ -25,11 +25,14 @@
         >
           {{ err }}
         </div>
-        <form @submit.prevent="login">
+        <form
+          @submit.prevent="login"
+          action-xhr="https://hometheaterproz.com/"
+          method="post"
+        >
           <div class="w-full pt-5">
             <div class="flex items-center pb-5 relative">
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 class="absolute left-0 top-0 mt-5 pt-1 ml-5"
                 src="/images/mail.svg"
@@ -45,8 +48,7 @@
               />
             </div>
             <div class="flex items-center relative">
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 class="absolute left-0 top-0 mt-5 ml-5"
                 src="/images/password.svg"
@@ -60,8 +62,7 @@
                 :type="type == true ? 'text' : 'password'"
                 class="px-12 py-4 border border-gray-200 shadow-md focus:outline-none text-gray-600 rounded-md w-full"
               />
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 class="-ml-12 z-30 cursor-pointer"
                 @click="showPass"

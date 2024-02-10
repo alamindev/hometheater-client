@@ -5,15 +5,13 @@
         <div class="sm:flex flex-wrap">
           <div class="w-full md:w-6/12 lg:w-4/12 md:pr-10 pb-5 sm:pb-0">
             <div class="flex items-center pb-1 sm:pb-5 md:pb-10 -mt-2">
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 v-if="setting.footer_logo"
                 :src="imgurl + 'storage' + setting.footer_logo"
                 alt="client-affiliation"
               />
-              <nuxt-img
-                quality="50"
+              <img
                 loading="lazy"
                 v-else
                 src="/images/logo-white-full.svg"
