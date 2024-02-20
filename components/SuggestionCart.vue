@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-12 pb-10 sm:pb-0" v-if="suggests.length > 0">
+  <div class="pt-12 pb-10 sm:pb-0 hidden lg:block" v-if="suggests.length > 0">
     <h3
       class="text-lg sm:text-xl lg:text-2xl pb-8 font-medium text-gray-800 font-rubik"
     >

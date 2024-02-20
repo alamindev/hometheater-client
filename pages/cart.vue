@@ -5,16 +5,15 @@
     v-if="!loading"
   >
     <div class="container mx-auto" v-if="carts.length || step === 6">
-      <div class="hidden lg:block"><Breadcrum :step="step" /></div>
-      <div class="block lg:hidden"><BreadcrumMobile :step="step" /></div>
-
       <div class="bg-white shadow-lg rounded-md">
         <!-- cart for desktop -->
         <div class="hidden lg:block" v-if="step !== 6">
-          <div class="flex">
+          <div class="flex items-start">
             <div class="w-9/12 px-10 py-12">
               <CartItems :header="true" v-if="step === 1" />
-              <ZipCode :header="true" v-if="step === 2" @prev="prev" />
+              <div v-if="!is_check_zipcode">
+                <ZipCode :header="true" v-if="step === 2" @prev="prev" />
+              </div>
               <Questions :header="true" v-show="step === 3" @prev="prev" />
               <UploadImage :header="true" v-show="step === 4" @prev="prev" />
               <Calendar
@@ -24,12 +23,11 @@
                 :err="calendarerr"
               />
             </div>
-            <div class="w-3/12 font-rubik">
+            <div class="w-3/12 font-rubik top-0 sticky h-full">
               <OrderSummery
                 @calendarErr="calendarErr"
                 @finishedCheckout="finishedCheckout"
                 @Checkout="Checkout"
-                @cryptoCheckout="cryptoCheckout"
                 :isCheckout="isDisabled"
                 @next="next"
                 :step="step"
@@ -39,12 +37,15 @@
           <div></div>
         </div>
         <!-- cart for mobile  -->
-        <div class="block lg:hidden px-4 sm:px-10 py-8" v-if="step !== 6">
+        <div
+          class="block lg:hidden px-4 sm:px-10 py-4 sm:py-8"
+          v-if="step !== 6"
+        >
           <div class="flex justify-between sm:mb-5 border-b sm:-mx-10 sm:px-10">
             <button
               :class="
                 current == 'shopping-cart'
-                  ? 'border-b-4 text-gray-800 font-bold'
+                  ? 'border-b-4 text-gray-800 font-bold  text-sm sm:text-base'
                   : 'text-gray-500'
               "
               type="button"
@@ -56,7 +57,7 @@
             <button
               type="button"
               @click="CartTab('order-summary')"
-              class="border-0 py-2 border-brand-color"
+              class="border-0 py-2 border-brand-color text-sm sm:text-base"
               :class="
                 current == 'order-summary'
                   ? 'border-b-4 text-gray-800 font-bold'
@@ -71,7 +72,9 @@
             :class="current == 'shopping-cart' ? 'block' : 'hidden'"
           >
             <CartItems :header="false" v-if="step === 1" />
-            <ZipCodeMobile :header="false" v-if="step === 2" @prev="prev" />
+            <div v-if="!is_check_zipcode">
+              <ZipCodeMobile :header="false" v-if="step === 2" @prev="prev" />
+            </div>
             <Questions :header="false" v-show="step === 3" @prev="prev" />
             <UploadImage :header="false" v-show="step === 4" @prev="prev" />
             <Calendar
@@ -89,7 +92,7 @@
               <OrderMobileSummary />
             </div>
           </div>
-          <div class="pt-10">
+          <div class="lg:pt-10">
             <MobileFooter
               @calendarErr="calendarErr"
               @finishedCheckout="finishedCheckout"
@@ -153,64 +156,6 @@
         </div>
       </div>
     </div>
-    <modal
-      name="dialog"
-      class="relative"
-      :clickToClose="false"
-      :scrollable="true"
-      :adaptive="true"
-      height="auto"
-    >
-      <div
-        @click="hidemodal"
-        class="cursor-pointer ml-auto mr-2 mt-2 w-6 h-6 bg-gray-300 rounded-full flex justify-center items-center"
-      >
-        <i class="fas fa-times"></i>
-      </div>
-      <h2 class="py-2 text-semibold text-dark-sm text-lg text-center">
-        Secure Checkout: Please enter your card info.
-      </h2>
-      <div class="px-12 pt-3">
-        <figure>
-          <img
-            loading="lazy"
-            class="w-full"
-            src="/images/credit-card-icons.png"
-            alt="credit-card-icons.png"
-          />
-        </figure>
-      </div>
-      <div class="w-full flex px-4 sm:px-12 pt-8 pb-16">
-        <SquarePayment @processPayment="processPayment" />
-      </div>
-    </modal>
-    <modal
-      name="cryptoDialog"
-      class="relative"
-      :clickToClose="false"
-      :scrollable="true"
-      :adaptive="true"
-      height="auto"
-    >
-      <div
-        @click="hidecryptoDialog"
-        class="cursor-pointer ml-auto mr-2 mt-2 w-6 h-6 bg-gray-300 rounded-full flex justify-center items-center"
-      >
-        <i class="fas fa-times"></i>
-      </div>
-      <div
-        class="w-full flex justify-center items-center flex-col px-4 sm:px-12 pt-8 pb-16"
-      >
-        <button
-          id="btn"
-          class="pay--with-crypto py-2 px-5 bg-brand-color hover:bg-brand-color-hover text-white rounded-md"
-        >
-          Pay with crypto currency
-        </button>
-
-        <p id="pay" class="pt-5"></p>
-      </div>
-    </modal>
   </section>
 
   <div v-else class="loader-parent mt-16 mb-20">
@@ -219,8 +164,7 @@
 </template>
 
 <script>
-import Breadcrum from "@/components/Cart/Breadcrum";
-import BreadcrumMobile from "@/components/Cart/BreadcrumMobile";
+import { getCookie } from "@/Utils/Cookie";
 import Calendar from "@/components/Cart/Calendar";
 import CartItems from "@/components/Cart/CartItems";
 import MobileFooter from "@/components/Cart/MobileFooter";
@@ -230,7 +174,6 @@ import Questions from "@/components/Cart/Questions";
 import UploadImage from "@/components/Cart/UploadImage";
 import ZipCode from "@/components/Cart/ZipCode";
 import ZipCodeMobile from "@/components/Cart/ZipCodeMobile";
-import SquarePayment from "@/components/SquarePayment";
 
 export default {
   name: "Cart",
@@ -243,10 +186,7 @@ export default {
     Questions,
     UploadImage,
     Calendar,
-    SquarePayment,
     ZipCodeMobile,
-    Breadcrum,
-    BreadcrumMobile,
   },
   data() {
     return {
@@ -256,6 +196,7 @@ export default {
       current: "shopping-cart",
       is_next: false,
       checkout: false,
+      is_check_zipcode: false,
     };
   },
   computed: {
@@ -320,17 +261,15 @@ export default {
   head() {
     return {
       title: "Cart | Home Theater Proz",
-      script: [
-        {
-          src: "https://commerce.coinbase.com/v1/checkout.js?version=201807",
-          body: true,
-        },
-      ],
     };
   },
   methods: {
     prev() {
-      this.step--;
+      if (this.is_check_zipcode && this.step === 3) {
+        this.step = 1;
+      } else {
+        this.step--;
+      }
       this.is_next = false;
       if (this.step === 3) {
         this.$store.commit("cart/STEP_3_ACTIVE", true);
@@ -338,12 +277,22 @@ export default {
         this.$store.commit("cart/STEP_3_ACTIVE", false);
       }
     },
+    checkZipcodeCookie() {
+      let is_zipcode = getCookie("is_zipcode_checked");
+      if (is_zipcode) {
+        this.is_check_zipcode = true;
+      }
+    },
     mobileNext() {
       if (this.step == 1 && this.is_next == false) {
         this.current = "order-summary";
         this.is_next = true;
       } else {
-        this.step++;
+        if (this.is_check_zipcode && this.step === 1) {
+          this.step = 3;
+        } else {
+          this.step++;
+        }
         this.current = "shopping-cart";
       }
       if (this.step === 3) {
@@ -351,23 +300,26 @@ export default {
       } else {
         this.$store.commit("cart/STEP_3_ACTIVE", false);
       }
+      document.documentElement.scrollTop = 0;
     },
     next() {
-      this.step++;
+      if (this.is_check_zipcode && this.step === 1) {
+        this.step = 3;
+      } else {
+        this.step++;
+      }
       if (this.step === 3) {
         this.$store.commit("cart/STEP_3_ACTIVE", true);
       } else {
         this.$store.commit("cart/STEP_3_ACTIVE", false);
       }
+      document.documentElement.scrollTop = 0;
     },
     calendarErr() {
       this.calendarerr = "Please choose date and time";
     },
     hidemodal() {
       this.$modal.hide("dialog");
-    },
-    hidecryptoDialog() {
-      this.$modal.hide("cryptoDialog");
     },
     Checkout() {
       if (!this.authenticated) {
@@ -376,37 +328,6 @@ export default {
       this.current = "shopping-cart";
       this.checkout = true;
       this.$modal.show("dialog");
-    },
-    cryptoCheckout() {
-      if (!this.authenticated) {
-        this.$router.push("login?redirect=cart?step=3");
-      }
-      this.current = "shopping-cart";
-      this.checkout = true;
-      this.$modal.show("cryptoDialog");
-      setTimeout(() => {
-        const btn = document.getElementById("btn");
-        const pay = document.getElementById("pay");
-
-        let obj = {
-          name: this.user_name,
-          description: this.cart_title,
-          amount: this.price,
-        };
-        btn.onclick = async () => {
-          const res = await this.$axios.post("crepto/createCharge", obj);
-          pay.innerHTML = `<a href="https://commerce.coinbase.com/checkout/${res.data}" class="buy-with-crypto px-5 py-2 bg-green-400 text-white rounded-md ">Pay Now!</a>`;
-        };
-      }, 1000);
-    },
-    processPayment(obj) {
-      this.$store.dispatch("cart/finishedCheckout", obj).then((res) => {
-        if (res == true) {
-          this.step = 6;
-          this.$modal.hide("dialog");
-          this.$store.commit("cart/IS_NEXT", false);
-        }
-      });
     },
     finishedCheckout() {
       if (!this.authenticated) {
@@ -450,19 +371,8 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      BuyWithCrypto.registerCallback("onSuccess", function (e) {
-        this.$store.dispatch("cart/finishedCheckout").then((res) => {
-          if (res == true) {
-            this.step = 6;
-            this.$modal.hide("cryptoDialog");
-            this.$store.commit("cart/IS_NEXT", false);
-          }
-        });
-      });
-    }, 5000);
-
     this.$store.dispatch("cart/suggestData");
+    this.checkZipcodeCookie();
   },
 };
 </script>

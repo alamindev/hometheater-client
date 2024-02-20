@@ -1,12 +1,12 @@
 <template>
-  <div class="">
+  <div class="relative">
     <div class="flex justify-between items-center border-b pb-3" v-if="header">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
         Check out
       </h1>
     </div>
     <div class="py-16">
-      <h1 class="pb-12 text-xl text-gray-700">
+      <h1 class="pb-12 text-xl text-gray-700 text-center">
         Feel free to upload images. That would help us a lot.
       </h1>
       <dropzone
@@ -20,10 +20,13 @@
         v-on:vdropzone-removed-file="removefile"
       ></dropzone>
     </div>
-    <div class="border-t pt-10">
-      <button class="flex items-center" @click="onClickPrevious">
+    <div class="border-t lg:pt-10">
+      <button
+        class="flex items-center absolute -bottom-8 lg:relative lg:bottom-0"
+        @click="onClickPrevious"
+      >
         <i class="fas fa-long-arrow-alt-left"></i>
-        <span class="pl-3 font-medium">Go Back</span>
+        <span class="pl-3 font-medium text-brand-color">Go Back</span>
       </button>
     </div>
   </div>

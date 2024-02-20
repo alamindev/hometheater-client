@@ -85,7 +85,7 @@
 
 <script>
 export default {
-  props: ["step"],
+  props: ["step", "is_check_zipcode"],
 };
 </script>
 

@@ -3,7 +3,7 @@
     class="flex flex-wrap items-center py-4 lg:px-16 px-5 border-b border-gray-200"
   >
     <div class="flex-1 flex justify-start items-center">
-      <figure class="hidden md:block">
+      <figure class="hidden lg:block">
         <img
           loading="lazy"
           src="/images/bar-header.svg"
@@ -11,6 +11,15 @@
           alt="header-bar"
         />
       </figure>
+      <div
+        class="button_container lg:hidden"
+        :class="active == true ? 'active' : ''"
+        @click="OpenMenu"
+      >
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </div>
       <nuxt-link to="/" class="text-xl flex items-center">
         <figure class="pr-2">
           <img
@@ -26,52 +35,54 @@
         }}</span>
       </nuxt-link>
     </div>
-    <div v-if="!authenticated" class="flex justify-start items-center">
-      <nuxt-link
-        class="px-4 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-xs sm:text-base border-brand-color text-white bg-brand-color hover:bg-brand-color-hover"
-        to="/login"
-        >Log in</nuxt-link
-      >
-      <nuxt-link
-        class="ml-2 sm:ml-5 px-3 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-xs sm:text-base text-brand-color border-brand-color hover:bg-brand-color hover:text-white"
-        to="/register"
-        >Sign up</nuxt-link
-      >
-    </div>
-    <div v-if="authenticated" class="flex items-center">
-      <div
-        class="admin-profie flex md:pl-5 items-center cursor-pointer relative"
-        @click="menuClick"
-        v-click-outside="hide"
-      >
-        <authImg />
-        <div
-          class="absolute top-0 right-0 sm:-right-6 mt-12 bg-white shadow rounded-lg z-100"
-          v-if="dropdown"
+    <div>
+      <div v-if="!authenticated" class="flex justify-start items-center">
+        <nuxt-link
+          class="px-4 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-xs sm:text-base border-brand-color text-white bg-brand-color hover:bg-brand-color-hover"
+          to="/login"
+          >Log in</nuxt-link
         >
-          <div class="w-48">
-            <nuxt-link
-              :to="`/users/${user.id}/profile`"
-              class="flex items-center hover:bg-gray-200 hover:text-brand-color text-gray-500 py-3 px-5"
-            >
-              <i class="far fa-user text-xl pr-2"></i>
-              <span class="">Profile</span>
-            </nuxt-link>
-            <nuxt-link
-              :to="`/users/dashboard`"
-              class="flex items-center hover:bg-gray-200 hover:text-brand-color text-gray-500 py-3 px-5"
-            >
-              <i class="fas fa-tachometer-alt text-xl pr-2"></i>
-              <span class="">Dashboard</span>
-            </nuxt-link>
-            <a
-              href="#"
-              @click.prevent="signOut"
-              class="flex items-center hover:bg-gray-200 hover:text-brand-color text-gray-500 py-3 px-5"
-            >
-              <i class="fas fa-sign-out-alt text-xl pr-2"></i>
-              <span class="">Logout</span>
-            </a>
+        <nuxt-link
+          class="ml-2 sm:ml-5 px-3 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 text-xs sm:text-base text-brand-color border-brand-color hover:bg-brand-color hover:text-white"
+          to="/register"
+          >Sign up</nuxt-link
+        >
+      </div>
+      <div v-if="authenticated" class="flex items-center">
+        <div
+          class="admin-profie flex md:pl-5 items-center cursor-pointer relative"
+          @click="menuClick"
+          v-click-outside="hide"
+        >
+          <authImg />
+          <div
+            class="absolute top-0 right-0 sm:-right-6 mt-12 bg-white shadow rounded-lg z-100"
+            v-if="dropdown"
+          >
+            <div class="w-48">
+              <nuxt-link
+                :to="`/users/${user.id}/profile`"
+                class="flex items-center hover:bg-gray-200 hover:text-brand-color text-gray-500 py-3 px-5"
+              >
+                <i class="far fa-user text-xl pr-2"></i>
+                <span class="">Profile</span>
+              </nuxt-link>
+              <nuxt-link
+                :to="`/users/dashboard`"
+                class="flex items-center hover:bg-gray-200 hover:text-brand-color text-gray-500 py-3 px-5"
+              >
+                <i class="fas fa-tachometer-alt text-xl pr-2"></i>
+                <span class="">Dashboard</span>
+              </nuxt-link>
+              <a
+                href="#"
+                @click.prevent="signOut"
+                class="flex items-center hover:bg-gray-200 hover:text-brand-color text-gray-500 py-3 px-5"
+              >
+                <i class="fas fa-sign-out-alt text-xl pr-2"></i>
+                <span class="">Logout</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -85,6 +96,7 @@ export default {
   components: {
     authImg,
   },
+  props: ["active"],
   data() {
     return {
       dropdown: false,
@@ -97,6 +109,9 @@ export default {
     },
   },
   methods: {
+    OpenMenu() {
+      this.$emit("openMenu");
+    },
     toggle() {
       this.$emit("clicked");
     },

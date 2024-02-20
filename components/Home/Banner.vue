@@ -2,7 +2,7 @@
   <section class="custom-gradient relative px-4 lg:px-24">
     <div class="container mx-auto">
       <div
-        class="flex flex-col-reverse md:flex-row pt-6 sm:pt-12 pb-12 items-center"
+        class="flex flex-col-reverse md:flex-row pt-4 sm:pt-12 pb-12 lg:py-20 md:items-center"
       >
         <div class="md:w-6/12 md:pr-8 xl:pl-16 xl:pr-24">
           <h1
@@ -35,7 +35,7 @@
           v-if="topheader"
         >
           <div
-            class="h-[280px] lg:h-[500px] max-w-full w-[600px] relative rounded-2xl sm:rounded-3xl overflow-hidden"
+            class="h-[280px] lg:h-[500px] w-full max-w-full sm:w-[600px] relative rounded-2xl sm:rounded-3xl overflow-hidden"
           >
             <img
               v-if="topheader.image"

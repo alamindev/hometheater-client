@@ -95,7 +95,7 @@ export default {
       } else {
         let data = {
           post_id,
-          user_id: this.$auth.user.id,
+          user_id: this.$auth.user?.id,
         };
         this.$store.dispatch("blog/submitLiked", data);
       }

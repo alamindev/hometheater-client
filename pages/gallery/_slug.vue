@@ -1,6 +1,6 @@
 <template>
   <main>
-    <section class="py-10 px-4 lg:px-16 custom-gradient gallery--page">
+    <section class="py-7 sm:py-10 px-4 lg:px-16 custom-gradient gallery--page">
       <div class="container mx-auto">
         <div class="md:flex">
           <GallerySidebar redirect="true" sortbyshow="true" />
@@ -39,7 +39,7 @@
                   >
                     <img
                       loading="lazy"
-                      class="w-full h-48 md:h-56 lg:h-40 object-cover rounded-lg"
+                      class="w-full h-32 sm:h-48 md:h-56 lg:h-40 object-cover rounded-lg"
                       :data-src="imgurl + 'storage/' + img.url"
                       alt="gellary-img"
                       v-lazy-load
@@ -69,7 +69,7 @@
       height="auto"
       width="98%"
     >
-      <div class="bg-white modal-sub relative">
+      <div class="bg-white modal-sub relative lg:max-w-[80%] mx-auto">
         <div class="pt-2 absolute right-2 z-20">
           <div
             @click="hidemodal"
@@ -219,7 +219,7 @@ export default {
 }
 @media screen and (min-width: 640px) {
   .max-height-custom {
-    max-height: 900px;
+    max-height: 700px;
   }
 }
 @media screen and (min-width: 809px) and (max-width: 814px) {

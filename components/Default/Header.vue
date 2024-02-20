@@ -1,19 +1,10 @@
 <template>
   <header class="custom-shadow" :class="$nuxt.isOffline ? 'mt-8' : ''">
-    <Logo />
+    <Logo @openMenu="openMenu" :active="active" />
     <Menu hidden="hidden lg:flex" />
     <div class="nav-mobile block lg:hidden">
-      <div
-        class="button_container"
-        :class="active == true ? 'active' : ''"
-        @click="OpenMenu"
-      >
-        <span class="top"></span>
-        <span class="middle"></span>
-        <span class="bottom"></span>
-      </div>
       <div class="overlay" :class="active == true ? 'open' : ''" id="overlay">
-        <Logo />
+        <Logo @openMenu="openMenu" :active="active" />
         <Menu />
       </div>
     </div>
@@ -38,12 +29,18 @@ export default {
   watch: {
     $route() {
       this.active = false;
+      document.body.classList.remove("overflow-hidden");
     },
   },
 
   methods: {
-    OpenMenu() {
+    openMenu() {
       this.active = !this.active;
+      if (this.active !== false) {
+        document.body.classList.add("overflow-hidden");
+      } else {
+        document.body.classList.remove("overflow-hidden");
+      }
     },
   },
   created() {

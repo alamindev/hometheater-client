@@ -4,7 +4,7 @@
       <div v-if="choose_us_header" class="mx-auto w-full md:w-9/12">
         <h3
           v-if="choose_us_header.title"
-          class="w-full font-semibold inline-block text-2xl sm:text-3xl md:text-4xl lg:text-brand-header text-center pb-5 text-brand-dark"
+          class="w-full font-semibold inline-block text-2xl sm:text-3xl md:text-4xl lg:text-brand-header text-center pb-2 sm:pb-5 text-brand-dark"
         >
           {{ choose_us_header.title }}
         </h3>

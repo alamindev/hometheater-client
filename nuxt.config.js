@@ -204,10 +204,8 @@ export default {
     imgUrl: "https://admin.hometheaterproz.com/",
     //https://admin.hometheaterproz.com/  http://localhost:8000/
     mainDomain: "https://hometheaterproz.com/",
-    url: "https://hometheaterproz.com",
-    square_script: "https://js.squareup.com/v2/paymentform",
-    MAP_API_KEY: "AIzaSyBjVRkL8MOLaVd-fjloQguTIQDLAAzA4w0",
-    // "https://js.squareup.com/v2/paymentform"
+    url: "https://hometheaterproz.com", 
+    MAP_API_KEY: "AIzaSyBjVRkL8MOLaVd-fjloQguTIQDLAAzA4w0", 
   },
   /*
    ** Axios module configuration

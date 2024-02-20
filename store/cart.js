@@ -438,7 +438,7 @@ export const actions = {
                 let { data } = await this.$axios.post("/check/zipcode", {
                     zipcode: state.zipcode,
                     amount: total
-                });
+                }); 
                 if (state.zipcode.length >= 5 && state.zipcode.length <= 5) {
                     if (data.success == true) {
                         commit("ZIPCODE_SUCCESS", data.message);

@@ -21,6 +21,7 @@
       </div>
     </div>
     <div
+      v-if="!is_check_zipcode"
       class="flex items-center xl:pr-3 2xl:pr-5 py-2 pl-1 lg:pl-2 flex-shrink-0"
       :class="step === 2 ? 'is--active' : ''"
     >
@@ -94,7 +95,7 @@
 
 <script>
 export default {
-  props: ["step"],
+  props: ["step", "is_check_zipcode"],
 };
 </script>
 

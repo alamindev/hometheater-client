@@ -243,7 +243,7 @@ export default {
     this.loading = false;
 
     let isToken = getCookie("token");
-    if (isToken === null || isToken === "" || isToken === undefined) {
+    if (!isToken) {
       this.$router.push(
         this.$route.query.redirect
           ? this.$route.query.redirect

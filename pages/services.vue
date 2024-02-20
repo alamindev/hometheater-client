@@ -1,6 +1,6 @@
 <template>
   <main class="service--page" v-if="!loading">
-    <section class="py-12 relative px-4 lg:px-16 custom-gradient">
+    <section class="py-8 sm:py-12 relative px-4 lg:px-16 custom-gradient">
       <div class="container mx-auto" v-if="header">
         <div
           class="flex flex-col-reverse md:flex-row items-center relative z-40"
@@ -76,7 +76,7 @@
             class="shadow-md rounded-md overflow-hidden bg-white"
           >
             <div class="py-4 px-8 flex items-center bg-light-20 font-rubik">
-              <div class="pr-5">
+              <div class="pr-2 sm:pr-5">
                 <i
                   v-if="category.type == 0"
                   class="text-2xl text-center text-gray-700"
@@ -90,7 +90,7 @@
                   class="w-10 h-10 lg:w-8 lg:h-8 object-cover rounded-md"
                 />
               </div>
-              <h2 class="font-medium text-2xl text-dark-sm">
+              <h2 class="font-medium text-xl sm:text-2xl text-dark-sm">
                 {{ category.name }}
               </h2>
             </div>

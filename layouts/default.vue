@@ -1,5 +1,6 @@
 <template>
-  <div class="font-custom">
+  <div class="font-custom scroll-smooth">
+    <LazyDefaultCheckZip v-if="is_popup" @setZipCode="setZipCode" />
     <div
       style="z-index: 9000"
       v-if="$nuxt.isOffline"
@@ -15,7 +16,7 @@
           <div class="pl-3 flex-2 relative pr-2 lg:pr-0">
             <nuxt-link to="/cart">
               <div
-                class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-8 h-8 bg-brand-color flex justify-center items-center text-white"
+                class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-6 sm:w-8 h-6 sm:h-8 bg-brand-color flex justify-center items-center text-white"
               >
                 {{ count }}
               </div>
@@ -31,10 +32,16 @@
 </template>
 
 <script>
+import { getCookie, setCookie } from "@/Utils/Cookie";
 import Search from "@/components/Search";
 import { mapGetters } from "vuex";
 export default {
   name: "Default",
+  data() {
+    return {
+      is_popup: false,
+    };
+  },
   components: {
     Search,
   },
@@ -62,6 +69,31 @@ export default {
     }),
     setting() {
       return this.$store.state.setting;
+    },
+  },
+  mounted() {
+    let is_zipcode = getCookie("is_zipcode");
+    if (is_zipcode === "" || is_zipcode === "false") {
+      setTimeout(() => {
+        this.is_popup = true;
+      }, 7000);
+    }
+  },
+  methods: {
+    setZipCode(type, zipcode, is_success) {
+      setCookie("is_zipcode", true, 1500);
+      if (type === "service") {
+        this.$router.push("/booking");
+      } else if (type === "home") {
+        this.$router.push("/");
+      } else if (type === "contact") {
+        this.$router.push("/contact-us");
+      }
+
+      if (is_success) {
+        setCookie("is_zipcode_checked", zipcode, 1500);
+      }
+      this.is_popup = false;
     },
   },
   async fetch() {

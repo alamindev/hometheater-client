@@ -288,7 +288,6 @@
     </div>
     <modal
       name="ImageModal"
-      class="relative"
       :clickToClose="true"
       :scrollable="true"
       height="auto"

@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="relative">
     <div v-if="header" class="flex justify-between items-center border-b pb-3">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
         Shopping Cart
@@ -23,19 +23,23 @@
           <thead class="text-left">
             <tr>
               <th
-                class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-5 border-b"
+                class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-2 md:py-5 border-b"
               >
                 Service details
               </th>
               <th
-                class="text-gray-500 font-medium w-28 lg:w-32 lg:px-2 py-5 border-b"
+                class="text-gray-500 font-medium w-28 lg:w-32 lg:px-2 py-2 md:py-5 border-b"
               >
                 Price
               </th>
-              <th class="text-gray-500 font-medium w-40 lg:px-2 py-5 border-b">
+              <th
+                class="text-gray-500 font-medium w-40 lg:px-2 py-2 md:py-5 border-b"
+              >
                 Quantity
               </th>
-              <th class="text-gray-500 font-medium w-16 lg:px-2 py-5 border-b">
+              <th
+                class="text-gray-500 font-medium w-16 lg:px-2 py-2 md:py-5 border-b"
+              >
                 Total
               </th>
             </tr>
@@ -81,7 +85,7 @@
                     </p>
                     <button
                       type="button"
-                      class="text-gray-500 text-sm"
+                      class="text-red-600 text-sm"
                       @click="Remove(cart.id)"
                     >
                       <i class="far fa-trash-alt"></i> Remove
@@ -149,7 +153,7 @@
                   </nuxt-link>
                   <button
                     type="button"
-                    class="text-gray-500 text-sm"
+                    class="text-red-600 text-sm"
                     @click="Remove(cart.id)"
                   >
                     <i class="far fa-trash-alt"></i> Remove
@@ -195,10 +199,13 @@
       </div>
     </client-only>
     <SuggestionCart />
-    <div class="pt-4 sm:pt-6 md:pt-10">
-      <nuxt-link to="/booking" class="flex items-center">
+    <div class="lg:pt-8 lg:mt-8 lg:border-t">
+      <nuxt-link
+        to="/booking"
+        class="flex items-center absolute -bottom-7 lg:relative lg:bottom-0"
+      >
         <i class="fas fa-long-arrow-alt-left"></i>
-        <span class="pl-3 font-medium">Continue Shopping</span>
+        <span class="pl-3 font-medium text-brand-color">Continue Shopping</span>
       </nuxt-link>
     </div>
   </div>

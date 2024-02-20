@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="relative">
     <div class="flex justify-between items-center border-b pb-3" v-if="header">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
         Check out
@@ -10,7 +10,7 @@
         <div class="flex justify-between flex-col h-full">
           <div class="" v-if="question_main.length > 0">
             <div
-              class="pt-10 question--step"
+              class="pt-4 md:pt-10 question--step"
               v-for="(que, main_index) in question_main"
               :key="que.id"
               :class="{ activestep: main_index === activeStep }"
@@ -19,78 +19,80 @@
                 class="text-center question--heading font-medium text-lg md:text-xl lg:text-2xl"
                 v-html="que.title"
               ></h2>
-              <ul class="cart--question pt-10 md:px-20">
-                <li
-                  class="pb-6"
-                  v-for="(question, index) in que.questions"
-                  :key="question.id"
-                >
-                  <div class="flex pb-2">
-                    {{ index + 1 }}.
-                    <p class="pl-1 font-medium" v-html="question.title"></p>
-                    <span class="text-red-600 pl-2 text-lg">*</span>
-                  </div>
-                  <ul class="pl-5 pt-1">
-                    <li
-                      class="pb-2 border-b last:border-0 pt-2"
-                      v-for="(option, index) in question.option"
-                      :key="option.id"
-                    >
-                      <div class="flex items-center">
-                        <input
-                          class="cursor-pointer"
-                          type="radio"
-                          :name="'answer_' + main_index + '_' + question.id"
-                          @change="
-                            radioClick(
-                              main_index + 1,
+              <div class=" ">
+                <ul class="cart--question pt-10 md:px-20">
+                  <li
+                    class="pb-6"
+                    v-for="(question, index) in que.questions"
+                    :key="question.id"
+                  >
+                    <div class="flex pb-2">
+                      {{ index + 1 }}.
+                      <p class="pl-1 font-medium" v-html="question.title"></p>
+                      <span class="text-red-600 pl-2 text-lg">*</span>
+                    </div>
+                    <ul class="pl-5 pt-1">
+                      <li
+                        class="pb-2 border-b last:border-0 pt-2"
+                        v-for="(option, index) in question.option"
+                        :key="option.id"
+                      >
+                        <div class="flex items-center">
+                          <input
+                            class="cursor-pointer"
+                            type="radio"
+                            :name="'answer_' + main_index + '_' + question.id"
+                            @change="
+                              radioClick(
+                                main_index + 1,
+                                option.price +
+                                  '-' +
+                                  question.service_id +
+                                  '-' +
+                                  question.id +
+                                  '-' +
+                                  option.id,
+                                que.title,
+                                que.id
+                              )
+                            "
+                            :id="
+                              'answer_' +
+                              index +
+                              '_' +
+                              main_index +
+                              '_' +
+                              question.id
+                            "
+                            :value="
                               option.price +
-                                '-' +
-                                question.service_id +
-                                '-' +
-                                question.id +
-                                '-' +
-                                option.id,
-                              que.title,
-                              que.id
-                            )
-                          "
-                          :id="
-                            'answer_' +
-                            index +
-                            '_' +
-                            main_index +
-                            '_' +
-                            question.id
-                          "
-                          :value="
-                            option.price +
-                            '-' +
-                            question.service_id +
-                            '-' +
-                            question.id +
-                            '-' +
-                            option.id
-                          "
-                        />
-                        <label
-                          class="pl-3 cursor-pointer"
-                          :for="
-                            'answer_' +
-                            index +
-                            '_' +
-                            main_index +
-                            '_' +
-                            question.id
-                          "
-                          v-html="option.title"
-                        >
-                        </label>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+                              '-' +
+                              question.service_id +
+                              '-' +
+                              question.id +
+                              '-' +
+                              option.id
+                            "
+                          />
+                          <label
+                            class="pl-3 cursor-pointer"
+                            :for="
+                              'answer_' +
+                              index +
+                              '_' +
+                              main_index +
+                              '_' +
+                              question.id
+                            "
+                            v-html="option.title"
+                          >
+                          </label>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div v-else class="w-full pt-16">
@@ -101,25 +103,29 @@
               Extra ADDON not found! Please go next
             </h1>
           </div>
-          <div class="border-t pt-10 mt-10">
-            <div v-if="question_main.length > 0">
-              <button
-                class="flex items-center"
-                v-if="activeStep == 0"
-                @click="onClickPrevious"
-              >
+          <div class="border-t sm:mt-10 lg:pt-6 w-full">
+            <div class="absolute -bottom-8 lg:relative lg:bottom-0">
+              <div v-if="question_main.length > 0">
+                <button
+                  class="flex items-center"
+                  v-if="activeStep == 0"
+                  @click="onClickPrevious"
+                >
+                  <i class="fas fa-long-arrow-alt-left"></i>
+                  <span class="pl-3 font-medium text-brand-color">Go Back</span>
+                </button>
+                <button class="flex items-center" v-else @click="prevQuestion">
+                  <i class="fas fa-long-arrow-alt-left"></i>
+                  <span class="pl-3 font-medium text-brand-color"
+                    >Go Back
+                  </span>
+                </button>
+              </div>
+              <button class="flex items-center" v-else @click="onClickPrevious">
                 <i class="fas fa-long-arrow-alt-left"></i>
-                <span class="pl-3 font-medium">Go Back</span>
-              </button>
-              <button class="flex items-center" v-else @click="prevQuestion">
-                <i class="fas fa-long-arrow-alt-left"></i>
-                <span class="pl-3 font-medium">Go Back </span>
+                <span class="pl-3 font-medium text-brand-color">Go Back </span>
               </button>
             </div>
-            <button class="flex items-center" v-else @click="onClickPrevious">
-              <i class="fas fa-long-arrow-alt-left"></i>
-              <span class="pl-3 font-medium">Go Back </span>
-            </button>
           </div>
         </div>
       </div>

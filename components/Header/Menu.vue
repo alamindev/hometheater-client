@@ -4,13 +4,13 @@
     :class="hidden"
     id="menu"
   >
-    <nav class="overlay-menu">
+    <nav class="overlay-menu w-full flex justify-start lg:w-auto lg:block">
       <ul
-        class="flex items-center justify-between flex-col md:flex-row text-base pt-4 md:pt-0"
+        class="flex items-center justify-between flex-col md:flex-row text-base pt-4 md:pt-0 !w-[150px] lg:!w-auto"
       >
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/"
             exact
             >Home</nuxt-link
@@ -18,7 +18,7 @@
         </li>
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             href="#"
             to="/services"
             >Services</nuxt-link
@@ -26,28 +26,28 @@
         </li>
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/booking"
             >Booking
           </nuxt-link>
         </li>
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/blogs"
             >Blogs</nuxt-link
           >
         </li>
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/gallery"
             >Gallery</nuxt-link
           >
         </li>
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/contact-us"
             >Contact us</nuxt-link
           >
@@ -61,7 +61,7 @@
       <div class="flex-2 relative pr-2 lg:pr-0">
         <nuxt-link to="/cart">
           <div
-            class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-8 h-8 bg-brand-color flex justify-center items-center text-white"
+            class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-6 sm:w-8 h-6 sm:h-8 bg-brand-color flex justify-center items-center text-white"
           >
             {{ count }}
           </div>

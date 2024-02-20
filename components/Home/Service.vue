@@ -7,7 +7,7 @@
       >
         <span
           v-if="header_service.home_title"
-          class="w-full font-semibold inline-block text-2xl sm:text-3xl md:text-4xl lg:text-brand-header text-center pb-5 text-brand-dark"
+          class="w-full font-semibold inline-block text-2xl sm:text-3xl md:text-4xl lg:text-brand-header text-center pb-2 sm:pb-5 text-brand-dark"
         >
           {{ header_service.home_title }}
         </span>
@@ -39,7 +39,7 @@
                     <img
                       v-lazy-load
                       loading="lazy"
-                      class="w-full h-44 sm:h-72 lg:h-64 xl:h-72 object-cover"
+                      class="w-full h-32 sm:h-72 lg:h-64 xl:h-72 object-cover"
                       :src="imgurl + 'storage' + service.thumbnail"
                       :alt="service.title"
                     />

@@ -1,14 +1,14 @@
 <template>
   <div class="h-full">
-    <div class="flex justify-between py-4 px-4 sm:px-10 border-b">
+    <div class="flex justify-between py-2 md:py-4 px-2 sm:px-10 border-b">
       <p class="text-base uppercase">ITEMS {{ count }}</p>
       <p class="text-base">${{ total }}</p>
     </div>
-    <div class="sm:px-10 pb-5 pt-2">
+    <div class="sm:px-10 pb-5 pt-2 px-2">
       <table class="w-full">
         <tbody>
           <tr v-for="(cart, index) in carts" :key="index">
-            <td class="w-5 sm:w-12 py-4">{{ index + 1 }}.</td>
+            <td class="w-5 sm:w-12 py-2">{{ index + 1 }}.</td>
             <td class="sm:w-64 md:w-auto">
               <h2 class="text-sm sm:text-base font-bold">{{ cart.title }}</h2>
             </td>
@@ -21,19 +21,17 @@
           </tr>
         </tbody>
       </table>
-      <div class="pt-2 sm:pt-5">
-        <h2
-          class="font-semibold text-right py-4 md:py-8 border px-5 rounded-md"
-        >
-          SubTotal: ${{ total }}
-        </h2>
+      <div class=" ">
+        <p class="text-right py-2 md:py-4 rounded-md">
+          SubTotal: <span class="font-semibold"> ${{ total }}</span>
+        </p>
       </div>
     </div>
-    <div class="bg-light-blue-cart px-4 sm:px-10">
-      <div class="pt-5">
+    <div class="bg-light-blue-cart px-3 sm:px-10">
+      <div class="pt-2 sm:pt-5">
         <label
           for="payment"
-          class="pb-2 inline-block upercase text-base font-bold"
+          class="pb-2 inline-block upercase text-sm sm:text-base font-semibold !text-dark"
           >Payment Option</label
         >
         <select
@@ -49,7 +47,7 @@
       <div class="md:pt-10 md:pb-8 py-4">
         <label
           for="promo"
-          class="pb-2 inline-block upercase text-base font-bold rounded-sm"
+          class="pb-2 inline-block upercase text-sm sm:text-base font-semibold !text-dark rounded-sm"
           >PROMO CODE</label
         >
         <div class="flex justify-between flex-col sm:flex-row">

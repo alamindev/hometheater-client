@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto" :class="column">
     <h2
-      class="text-2xl sm:text-3xl md:text-4xl lg:text-brand-header text-center pb-5 text-brand-dark"
+      class="text-2xl sm:text-3xl md:text-4xl lg:text-brand-header text-center pb-2 sm:pb-5 text-brand-dark"
       :class="h_class"
     >
       {{ title }}

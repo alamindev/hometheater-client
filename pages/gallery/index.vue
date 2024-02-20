@@ -1,6 +1,6 @@
 <template>
   <main>
-    <section class="py-10 px-4 lg:px-16 custom-gradient gallery--page">
+    <section class="py-7 sm:py-10 px-4 lg:px-16 custom-gradient gallery--page">
       <div class="container mx-auto">
         <div class="md:flex">
           <GallerySidebar />
@@ -33,7 +33,7 @@
                     <figure class="cursor-pointer">
                       <template v-if="album.images.length > 1">
                         <div
-                          class="h-24"
+                          class="h-16 sm:h-24"
                           v-for="gallery in album.images"
                           :key="gallery.id"
                         >
@@ -48,7 +48,7 @@
                       </template>
                       <template v-else-if="album.images.length == 1">
                         <div
-                          class="h-48"
+                          class="h-32 sm:h-48"
                           v-for="gallery in album.images"
                           :key="gallery.id"
                         >

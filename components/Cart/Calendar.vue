@@ -1,12 +1,12 @@
 <template>
-  <div class="">
+  <div class="relative">
     <div class="flex justify-between items-center border-b pb-3" v-if="header">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
         Check out
       </h1>
     </div>
-    <div class="py-10 flex flex-col items-center">
-      <h1 class="pb-12 text-lg text-gray-700">
+    <div class="py-6 md:py-10 flex flex-col items-center">
+      <h1 class="pb-6 md:pb-12 text-lg text-gray-700">
         Please choose date and time for your appointment
       </h1>
       <client-only>
@@ -32,17 +32,7 @@
                   :disabled="t.isbook || t.notAllow"
                   :class="t.isbook || t.notAllow ? 'is_time__active' : ''"
                   @click="dataTime(t.value, index)"
-                  class="
-                    w-full
-                    flex
-                    justify-center
-                    py-4
-                    px-6
-                    border
-                    rounded-md
-                    cursor-pointer
-                    hover:border-brand-color hover:text-brand-color
-                  "
+                  class="w-full flex justify-center py-4 px-6 border rounded-md cursor-pointer hover:border-brand-color hover:text-brand-color"
                 >
                   {{ t.value }}
                 </button>
@@ -57,19 +47,7 @@
         <button
           type="button"
           @click="resetDateTime"
-          class="
-            absolute
-            top-0
-            right-0
-            border border-red-600
-            text-red-600
-            rounded-md
-            py-1
-            text-sm
-            px-5
-            bg-white
-            hover:text-white hover:bg-red-600
-          "
+          class="absolute top-0 right-0 border border-red-600 text-red-600 rounded-md py-1 text-sm px-5 bg-white hover:text-white hover:bg-red-600"
         >
           Edit
         </button>
@@ -79,10 +57,13 @@
         </p>
       </div>
     </div>
-    <div class="border-t pt-10">
-      <button class="flex items-center" @click="onClickPrevious">
+    <div class="border-t lg:pt-10">
+      <button
+        class="flex items-center absolute -bottom-8 lg:relative lg:bottom-0"
+        @click="onClickPrevious"
+      >
         <i class="fas fa-long-arrow-alt-left"></i>
-        <span class="pl-3 font-medium">Go Back</span>
+        <span class="pl-3 font-medium text-brand-color">Go Back</span>
       </button>
     </div>
   </div>

@@ -24,7 +24,7 @@
             <h3 class="text-xs pb-1 font-semibold text-dark-sm">
               {{ comment.user.username }}
             </h3>
-            <p class="text-xs text-gray-400">
+            <p class="text-xs text-gray-600">
               {{ comment.comment }}
             </p>
             <div class="flex justify-start pt-1">
@@ -60,7 +60,7 @@ export default {
     },
     is_user() {
       return (id) => {
-        if (id == this.$auth.user.id) {
+        if (id == this.$auth.user?.id) {
           return true;
         }
         return false;

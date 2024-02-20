@@ -107,7 +107,7 @@ body {
 }
 
 .vm--overlay {
-  background: rgba(0, 0, 0, 0.5) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
 }
 
 .underline-custom::after {
@@ -558,11 +558,9 @@ button:focus {
 }
 
 .button_container {
-  position: fixed;
-  bottom: 1.5em;
-  right: 1em;
-  height: 50px;
-  width: 52px;
+  position: relative;
+  height: 46px;
+  width: 48px;
   cursor: pointer;
   z-index: 100;
   -webkit-transition: opacity 0.25s ease;
@@ -594,26 +592,27 @@ button:focus {
 }
 
 .button_container.active span {
-  left: 8px;
-  top: 12px;
+  left: 0px;
+  top: 8px;
 }
 
 .button_container span {
-  background: #292929;
+  background: #3d3d3d;
   border: none;
   height: 5px;
   width: 70%;
   position: absolute;
-  top: 10px;
-  left: 7px;
+  top: 12px;
+  left: 0;
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .button_container.active span:nth-of-type(3) {
-  top: 35px;
-  left: 8px;
+  top: 30px;
+  left: 0;
 }
 
 .button_container span:nth-of-type(2) {
@@ -621,7 +620,7 @@ button:focus {
 }
 
 .button_container span:nth-of-type(3) {
-  top: 36px;
+  top: 33px;
 }
 
 .overlay figure {
@@ -680,13 +679,12 @@ button:focus {
   position: absolute;
   font-size: 18px;
   text-align: left;
-  left: 2em;
+  left: 0;
   bottom: 10em;
 }
 
 @media (max-width: 600px) {
   .overlay nav {
-    left: 2em;
     bottom: 50%;
     transform: translateY(70%);
   }
@@ -1133,14 +1131,6 @@ strong {
 
 .cart--page #payment .input {
   text-transform: capitalize;
-}
-
-.cart--page .upercase {
-  animation: pulse 5s infinite !important;
-}
-
-.disabled\:opacity-50.py-3.px-5.text-xl.text-white.bg-brand-color.hover\:bg-brand-color-hover.flex.items-center.justify-between.w-full.rounded-md {
-  animation: pulse 3s infinite !important;
 }
 
 .home--page .custom-gradient-three {
@@ -2374,6 +2364,9 @@ table.table tr {
 }
 .fa-kiss-wink-heart:before {
   content: "\f598";
+}
+.fa-heart:before {
+  content: "\f004";
 }
 .fa-kiwi-bird:before {
   content: "\f535";
