@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
-    <div class="flex justify-between items-center border-b pb-3" v-if="header">
+    <div class="hidden lg:flex justify-between items-center border-b pb-3">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
-        Check out
+        Upload Images
       </h1>
     </div>
     <div class="py-16">
@@ -38,7 +38,6 @@ import "nuxt-dropzone/dropzone.css";
 
 export default {
   name: "UploadImage",
-  props: ["header"],
   components: {
     Dropzone,
   },

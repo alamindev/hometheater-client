@@ -2,13 +2,25 @@
   <header class="pt-5 pb-10 px-4 sm:px-0">
     <div class="flex justify-between items-center">
       <h1 class="text-gray-700 text-base flex items-center">
-        <span class="block md:hidden bars--click">
-          <i
-            @click="toggle"
-            class="fas fa-bars text-xl text-gray-700 cursor-pointer bars--click"
-          ></i>
-        </span>
-        <span class="leading-none text-lg flex capitalize font-bold pl-2 pr-5">
+        <button
+          class="block lg:hidden bars--click"
+          type="button"
+          @click="toggle"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            class="w-5 h-5 text-brand-gray"
+          >
+            <path
+              d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+            />
+          </svg>
+        </button>
+
+        <span
+          class="leading-none text-sm sm:text-lg flex capitalize font-bold sm:pl-2 pl-1 pr-3 sm:pr-5"
+        >
           {{ matchHeaderVal }}</span
         >
       </h1>
@@ -16,11 +28,18 @@
         <div class="right-area flex items-center">
           <Search />
         </div>
-        <div class="custom-click hidden">
-          <i
-            @click="toggleRightSidebar"
-            class="fas fa-bars text-xl text-gray-700 cursor-pointer bars--click"
-          ></i>
+        <div class="max-[1440px]:block hidden">
+          <button type="button" @click="toggleRightSidebar">
+            <svg
+              class="w-5 h-5 text-brand-gray"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM64 256c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>

@@ -10,22 +10,7 @@
       <p class="text-base uppercase" v-else>ITEMS {{ count }}</p>
       <p class="text-base">${{ total }}</p>
     </div>
-    <div class="pt-5">
-      <label
-        for="payment"
-        class="pb-2 inline-block upercase text-base font-medium !text-dark"
-        >Payment Option</label
-      >
-      <select
-        class="border w-full text-gray-500 bg-white border-gray-200"
-        name="payment"
-        id="payment"
-        v-model="payment_option"
-      >
-        <option value="local">Local- service location</option>
-        <!-- <option value="online">Credit Card</option> -->
-      </select>
-    </div>
+
     <div class="pt-5 pb-8">
       <label
         for="promocode"
@@ -56,8 +41,17 @@
     <div class="py-4 border-t">
       <div class="w-full">
         <div class="flex justify-between pb-2">
-          <h2 class="uppercase text-gray-500 text-base font-medium">Total</h2>
+          <h2 class="uppercase text-gray-500 text-base font-medium">
+            <span v-if="subTotal != ''">Sub Total</span>
+            <span v-else>Total</span>
+          </h2>
           <p class="text-gray-500 font-medium">${{ total }}</p>
+        </div>
+        <div class="flex justify-between pb-2" v-if="feature_price">
+          <h2 class="uppercase text-gray-500 text-base font-medium">
+            ADDON EXTRAS
+          </h2>
+          <p class="text-gray-500 font-medium">+ ${{ feature_price }}</p>
         </div>
         <div class="" v-if="is_promo">
           <div class="flex justify-between pb-2">
@@ -67,19 +61,11 @@
             <p class="text-gray-500 font-medium">- ${{ percentVal }}</p>
           </div>
         </div>
-        <div class="flex justify-between pb-2" v-if="feature_price">
-          <h2 class="uppercase text-gray-500 text-base font-medium">
-            ADDON EXTRAS
-          </h2>
-          <p class="text-gray-500 font-medium">+ ${{ feature_price }}</p>
-        </div>
       </div>
       <div class="" v-if="subTotal != ''">
         <hr />
         <div class="flex justify-between pb-6 pt-3">
-          <h2 class="uppercase text-gray-500 text-base font-medium">
-            Total Cost
-          </h2>
+          <h2 class="uppercase text-gray-500 text-base font-medium">Total</h2>
           <p class="text-gray-500 font-medium">${{ subTotal }}</p>
         </div>
       </div>
@@ -95,38 +81,50 @@
       <p class="uppercase">CHECKOUT</p>
       <i class="fas fa-arrow-right"></i>
     </button>
-    <button
-      type="button"
-      class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-      :disabled="is_next == false"
-      @click="onClickNext"
-      v-if="step === 2"
-    >
-      <p class="uppercase"></p>
-      <p class="uppercase">Next</p>
-      <i class="fas fa-arrow-right"></i>
-    </button>
 
-    <div class="" v-if="step === 3">
-      <div v-if="is_auth">
-        <div class="" v-if="question_main.length > 0">
+    <div v-if="Object.keys(cartdata.services).length !== 0">
+      <button
+        type="button"
+        class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+        :disabled="is_next == false"
+        @click="onClickNext"
+        v-if="step === 2"
+      >
+        <p class="uppercase"></p>
+        <p class="uppercase">Next</p>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      <div class="" v-if="step === 3">
+        <div v-if="is_auth">
+          <div class="" v-if="question_main.length > 0">
+            <button
+              v-if="activeStep + 1 < question_main.length"
+              @click="nextQuestion"
+              type="button"
+              :disabled="isQuestionCheck(activeStep)"
+              class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+            >
+              <p class="uppercase"></p>
+              <p class="uppercase">Next</p>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+            <button
+              v-if="activeStep + 1 === question_main.length"
+              type="button"
+              class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+              @click="onClickNext"
+              :disabled="isQuestionCheck(activeStep)"
+            >
+              <p class="uppercase"></p>
+              <p class="uppercase">Next</p>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
           <button
-            v-if="activeStep + 1 < question_main.length"
-            @click="nextQuestion"
-            type="button"
-            :disabled="isQuestionCheck(activeStep)"
-            class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-          >
-            <p class="uppercase"></p>
-            <p class="uppercase">Next</p>
-            <i class="fas fa-arrow-right"></i>
-          </button>
-          <button
-            v-if="activeStep + 1 === question_main.length"
+            v-else
             type="button"
             class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
             @click="onClickNext"
-            :disabled="isQuestionCheck(activeStep)"
           >
             <p class="uppercase"></p>
             <p class="uppercase">Next</p>
@@ -136,8 +134,8 @@
         <button
           v-else
           type="button"
+          :disabled="!is_auth"
           class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-          @click="onClickNext"
         >
           <p class="uppercase"></p>
           <p class="uppercase">Next</p>
@@ -145,40 +143,45 @@
         </button>
       </div>
       <button
-        v-else
         type="button"
-        :disabled="!is_auth"
         class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+        @click="onClickNext"
+        v-if="step === 4"
       >
         <p class="uppercase"></p>
         <p class="uppercase">Next</p>
         <i class="fas fa-arrow-right"></i>
       </button>
+      <button
+        type="button"
+        class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+        @click="onClickNext"
+        :disabled="is_finished == false"
+        v-if="step === 5"
+      >
+        <p class="uppercase"></p>
+        <p class="uppercase">Next</p>
+        <i class="fas fa-arrow-right"></i>
+      </button>
+      <button
+        type="button"
+        class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+        @click="PaymentForm"
+        v-if="step === 6"
+      >
+        Pay Now
+      </button>
     </div>
-
-    <button
-      type="button"
-      class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-      @click="onClickNext"
-      v-if="step === 4"
-    >
-      <p class="uppercase"></p>
-      <p class="uppercase">Next</p>
-      <i class="fas fa-arrow-right"></i>
-    </button>
-    <button
-      type="button"
-      class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
-      @click="finishToCheckout"
-      :disabled="is_finished == false"
-      v-if="step === 5"
-    >
-      <span v-if="payment !== 'online' || payment !== 'crypto'">
-        <span v-if="!finish_loading" class="uppercase"> Finish</span>
-        <Loader v-if="finish_loading" />
-      </span>
-      <span v-else class="uppercase"> Finish</span>
-    </button>
+    <div v-else>
+      <button
+        type="button"
+        class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+        @click="PaymentForm"
+        v-if="step === 2"
+      >
+        Pay Now
+      </button>
+    </div>
   </div>
 </template>
 
@@ -211,16 +214,12 @@ export default {
         this.$store.commit("cart/UPDATE_PROMOCODE", value);
       },
     },
-    payment_option: {
-      get() {
-        return this.$store.state.cart.payment;
-      },
-      set(value) {
-        this.$store.commit("cart/UPDATE_PAYMENT", value);
-      },
-    },
+
     carts() {
       return this.$store.state.cart.carts;
+    },
+    cartdata() {
+      return this.$store.state.cart.cartobj;
     },
     percent() {
       return this.$store.state.cart.percent;
@@ -302,20 +301,8 @@ export default {
     onClickNext() {
       this.$emit("next");
     },
-    finishToCheckout() {
-      if (this.datetime.length !== 0) {
-        this.$emit("finishedCheckout");
-      } else {
-        this.$emit("calendarErr");
-        this.$swal({
-          icon: "error",
-          title: `Please choose date and time`,
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 5000,
-        });
-      }
+    PaymentForm() {
+      this.$emit("PaymentForm");
     },
   },
 };

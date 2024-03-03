@@ -2,20 +2,20 @@
   <section class="custom-gradient relative px-4 lg:px-24">
     <div class="container mx-auto">
       <div
-        class="flex flex-col-reverse md:flex-row pt-4 sm:pt-12 pb-12 lg:py-20 md:items-center"
+        class="flex flex-col-reverse lg:flex-row pt-4 sm:pt-12 pb-12 lg:py-20 lg:items-center"
       >
-        <div class="md:w-6/12 md:pr-8 xl:pl-16 xl:pr-24">
+        <div class="lg:w-6/12 lg:pr-8 xl:pl-16 xl:pr-24">
           <h1
             v-if="topheader"
-            class="text-2xl sm:text-3xl lg:text-4xl xl:text-brand-header py-3 text-center md:text-left text-dark-sm leading-relaxed font-semibold"
+            class="text-2xl sm:text-3xl lg:text-4xl xl:text-brand-header py-3 text-center lg:text-left text-dark-sm leading-relaxed font-semibold"
             v-html="topheader.title"
           ></h1>
           <p
             v-if="topheader"
-            class="text-brand-sub-header font-rubik text-brand-gray py-3 text-center md:text-left leading-relaxed"
+            class="text-brand-sub-header font-rubik text-brand-gray py-3 text-center lg:text-left leading-relaxed"
             v-html="topheader.details"
           ></p>
-          <div class="flex justify-center md:block w-full" v-if="topheader">
+          <div class="flex justify-center lg:block w-full" v-if="topheader">
             <nuxt-link
               v-if="topheader.btn_text"
               :to="`/${topheader.btn_link}`"
@@ -31,19 +31,17 @@
           </div>
         </div>
         <div
-          class="md:w-6/12 py-5 h-full px-5 sm:px-0 md:py-0 lg:pl-8 xl:pl-12 flex justify-center md:justify-end"
+          class="lg:w-6/12 py-5 h-full px-5 sm:px-0 lg:py-0 lg:pl-8 xl:pl-12 flex justify-center lg:justify-end"
           v-if="topheader"
         >
           <div
-            class="h-[280px] lg:h-[500px] w-full max-w-full sm:w-[600px] relative rounded-2xl sm:rounded-3xl overflow-hidden"
+            class="h-[230px] md:h-[400px] lg:h-[500px] w-full max-w-full sm:w-[600px] relative rounded-2xl sm:rounded-3xl overflow-hidden"
           >
             <img
               v-if="topheader.image"
               :src="imgurl + 'storage' + topheader.image"
-              class="w-full md:absolute h-full object-cover inset-0"
+              class="w-full lg:absolute h-full object-center object-cover inset-0"
               :alt="topheader.title"
-              width="300"
-              height="300"
             />
           </div>
         </div>

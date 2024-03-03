@@ -100,6 +100,7 @@
                     {{ service_include }}
                   </li>
                 </ul>
+
                 <div
                   class="flex flex-col sm:flex-row lg:flex-col xl:flex-row py-8 sm:justify-between sm:items-start"
                 >
@@ -463,6 +464,7 @@ export default {
           item: this.item,
           totalHour: data.duration,
           ids: ids,
+          cart_title: "Services",
         };
         this.$store.dispatch("cart/setCartDatas", newData);
       } else {

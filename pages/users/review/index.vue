@@ -14,15 +14,19 @@
             <table class="table w-full">
               <thead>
                 <tr>
-                  <th class="text-sm text-gray-400 font-normal text-left pb-5">
+                  <th
+                    class="text-xs sm:text-sm text-gray-400 font-normal text-left pb-5"
+                  >
                     Order #
                   </th>
                   <th
-                    class="text-sm text-gray-400 font-normal text-left pb-5 w-56"
+                    class="text-xs sm:text-sm text-gray-400 font-normal text-left pb-5 w-56"
                   >
                     Service Type
                   </th>
-                  <th class="text-sm text-gray-400 font-normal text-left pb-5">
+                  <th
+                    class="text-xs sm:text-sm text-gray-400 font-normal text-left pb-5"
+                  >
                     Rating
                   </th>
                   <th
@@ -42,7 +46,7 @@
                   <td class="px-3 py-5">
                     <nuxt-link
                       :to="`/users/booking/${review.order_id}/details`"
-                      class="text-sm font-medium underline"
+                      class="text-xs sm:text-sm font-medium underline"
                       >#{{ review.order_id_show }}</nuxt-link
                     >
                   </td>
@@ -57,10 +61,12 @@
                     </div>
                   </td>
                   <td class="px-3 py-5">
-                    <p class="text-sm font-medium">{{ review.rating }}</p>
+                    <p class="text-xs sm:text-sm font-medium">
+                      {{ review.rating }}
+                    </p>
                   </td>
                   <td class="px-3 py-5">
-                    <p class="text-sm font-medium">
+                    <p class="text-xs sm:text-sm font-medium">
                       {{ review.date }}
                     </p>
                   </td>
@@ -86,16 +92,24 @@
           </div>
           <div class="pt-6 block sm:hidden md:block lg:hidden">
             <div class="flex justify-between">
-              <div class="text-sm text-gray-400 font-normal text-left lg:pl-5">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-left lg:pl-5"
+              >
                 Order ID #
               </div>
-              <div class="text-sm text-gray-400 font-normal text-left">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-left"
+              >
                 Service Type
               </div>
-              <div class="text-sm text-gray-400 font-normal text-left">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-left"
+              >
                 Rating
               </div>
-              <div class="text-sm text-gray-400 font-normal text-left pr-5">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-left pr-5"
+              >
                 Date
               </div>
             </div>
@@ -106,15 +120,17 @@
             >
               <div class="flex items-center justify-between">
                 <div
-                  class="lg:flex items-center font-medium text-sm md:text-base"
+                  class="lg:flex items-center font-medium text-xs sm:text-sm md:text-base"
                 >
                   <nuxt-link
                     :to="`/users/booking/${review.order_id}/details`"
-                    class="text-sm font-medium underline"
+                    class="text-xs sm:text-sm font-medium underline"
                     >#{{ review.order_id_show }}</nuxt-link
                   >
                 </div>
-                <div class="lg:flex items-center font-medium text-sm">
+                <div
+                  class="lg:flex items-center font-medium text-xs sm:text-sm"
+                >
                   <div class="">
                     <h2 class="text-sm md:text-base font-semibold">
                       {{ review.title }}
@@ -127,10 +143,12 @@
                   </div>
                 </div>
                 <div>
-                  <p class="text-sm font-medium">{{ review.rating }}</p>
+                  <p class="text-xs sm:text-sm font-medium">
+                    {{ review.rating }}
+                  </p>
                 </div>
                 <div>
-                  <p class="text-sm font-medium">
+                  <p class="text-xs sm:text-sm font-medium">
                     {{ review.date }}
                   </p>
                 </div>
@@ -236,7 +254,7 @@ export default {
     if (!this.authenticated) {
       this.$router.push("login?redirect=/users/booking/reviews");
     }
-    this.$store.dispatch("users/dashboard/fetchAllPayments");
+    this.$store.dispatch("users/dashboard/fetchAllRequiredDatas");
     let param = this.$router.history.current.query.page;
     if (typeof param !== "undefined") {
       this.loadedwithparam(param);

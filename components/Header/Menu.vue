@@ -34,6 +34,13 @@
         <li>
           <nuxt-link
             class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            to="/shop"
+            >Shop
+          </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link
+            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/blogs"
             >Blogs</nuxt-link
           >

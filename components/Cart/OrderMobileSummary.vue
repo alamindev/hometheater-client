@@ -1,10 +1,6 @@
 <template>
   <div class="h-full">
-    <div class="flex justify-between py-2 md:py-4 px-2 sm:px-10 border-b">
-      <p class="text-base uppercase">ITEMS {{ count }}</p>
-      <p class="text-base">${{ total }}</p>
-    </div>
-    <div class="sm:px-10 pb-5 pt-2 px-2">
+    <div class="sm:px-10 pt-2 px-2">
       <table class="w-full">
         <tbody>
           <tr v-for="(cart, index) in carts" :key="index">
@@ -21,29 +17,12 @@
           </tr>
         </tbody>
       </table>
-      <div class=" ">
-        <p class="text-right py-2 md:py-4 rounded-md">
-          SubTotal: <span class="font-semibold"> ${{ total }}</span>
-        </p>
-      </div>
+    </div>
+    <div class="flex justify-between pt-2 mb-4 pb-2 px-2 sm:px-10 border-t">
+      <p class="text-base uppercase">ITEMS {{ count }}</p>
+      <p class="text-base">${{ total }}</p>
     </div>
     <div class="bg-light-blue-cart px-3 sm:px-10">
-      <div class="pt-2 sm:pt-5">
-        <label
-          for="payment"
-          class="pb-2 inline-block upercase text-sm sm:text-base font-semibold !text-dark"
-          >Payment Option</label
-        >
-        <select
-          class="border w-full text-gray-500 bg-white border-gray-200"
-          name="payment"
-          id="payment"
-          v-model="payment_option"
-        >
-          <option value="local">Local - Service Location</option>
-          <!-- <option value="online">Credit Card</option> -->
-        </select>
-      </div>
       <div class="md:pt-10 md:pb-8 py-4">
         <label
           for="promo"
@@ -76,6 +55,39 @@
         </div>
       </div>
     </div>
+    <div class="w-full -mb-10">
+      <div class="pt-2">
+        <div class="flex justify-end gap-4 pb-2 sm:pb-3 px-2">
+          <h2 class="uppercase text-gray-500 text-sm sm:text-base font-medium">
+            <span v-if="subTotal != ''">Sub Total:</span>
+            <span v-else>Total:</span>
+          </h2>
+          <p class="text-gray-700 font-bold">${{ total }}</p>
+        </div>
+
+        <div class="flex justify-end gap-4 pb-2 px-2" v-if="feature_price">
+          <h2 class="uppercase text-gray-500 text-base font-medium">
+            ADDON EXTRAS
+          </h2>
+          <p class="text-gray-700 font-bold">+ ${{ feature_price }}</p>
+        </div>
+        <div class="" v-if="is_promo">
+          <div class="flex justify-end gap-4 pb-2 px-2">
+            <h2 class="uppercase text-gray-500 text-base font-medium">
+              {{ percent }}% Discount
+            </h2>
+            <p class="text-gray-700 font-bold">- ${{ percentVal }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-full pb-6 px-2" v-if="subTotal != ''">
+        <hr />
+        <div class="flex justify-end gap-4 pt-1">
+          <h2 class="uppercase text-gray-500 text-base font-medium">Total:</h2>
+          <p class="text-gray-700 font-bold">${{ subTotal }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -104,16 +116,20 @@ export default {
         this.$store.commit("cart/UPDATE_PROMOCODE", value);
       },
     },
-    payment_option: {
-      get() {
-        return this.$store.state.cart.payment;
-      },
-      set(value) {
-        this.$store.commit("cart/UPDATE_PAYMENT", value);
-      },
-    },
     carts() {
       return this.$store.state.cart.carts;
+    },
+    feature_price() {
+      return this.$store.state.cart.feature_price;
+    },
+    is_promo() {
+      return this.$store.state.cart.is_promo;
+    },
+    percent() {
+      return this.$store.state.cart.percent;
+    },
+    percentVal() {
+      return this.$store.state.cart.percent_val;
     },
     subTotal() {
       return this.$store.state.cart.sub_total;

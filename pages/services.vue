@@ -3,23 +3,23 @@
     <section class="py-8 sm:py-12 relative px-4 lg:px-16 custom-gradient">
       <div class="container mx-auto" v-if="header">
         <div
-          class="flex flex-col-reverse md:flex-row items-center relative z-40"
+          class="flex flex-col-reverse lg:flex-row items-center relative z-40"
         >
-          <div class="md:w-6/12 lg:w-6/12 md:pr-10 xl:pl-16 xl:pr-24">
+          <div class="lg:w-6/12 lg:pr-10 xl:pl-16 xl:pr-24">
             <div class="text-center sm:text-left">
               <h1
                 v-if="header.service_title"
-                class="text-2xl sm:text-3xl lg:text-4xl xl:text-brand-header py-3 text-center md:text-left text-dark-sm leading-relaxed font-semibold"
+                class="text-2xl sm:text-3xl lg:text-4xl xl:text-brand-header py-3 text-center lg:text-left text-dark-sm leading-relaxed font-semibold"
               >
                 {{ header.service_title }}
               </h1>
               <p
                 v-if="header.service_details"
-                class="text-brand-sub-header font-roboto text-brand-gray py-3 text-center md:text-left leading-relaxed"
+                class="text-brand-sub-header font-roboto text-brand-gray py-3 text-center lg:text-left leading-relaxed"
               >
                 {{ header.service_details }}
               </p>
-              <div class="flex justify-center md:justify-start pb-5">
+              <div class="flex justify-center lg:justify-start pb-5">
                 <nuxt-link
                   v-if="header.service_btn_text"
                   :to="`/${header.service_btn_link}`"
@@ -31,9 +31,9 @@
               </div>
             </div>
           </div>
-          <div class="md:w-6/12 lg:w-6/12">
+          <div class="lg:w-6/12">
             <div
-              class="w-full flex items-center justify-end md:pl-20 pt-5 pb-10 md:pb-0 md:pt-0"
+              class="w-full flex items-center justify-end lg:pl-20 pt-5 pb-10 lg:pb-0 lg:pt-0"
             >
               <img
                 loading="lazy"

@@ -311,14 +311,10 @@
 </template>
 
 <script>
-import SocialLogin from "@/components/SocialLogin";
 import googleMapApi from "@/mixins/googleMapApi";
 export default {
   name: "register",
   mixins: [googleMapApi],
-  components: {
-    SocialLogin,
-  },
   data: () => ({
     isShowPass: false,
     isShowConfirmPass: false,

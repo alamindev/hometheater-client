@@ -15,16 +15,23 @@ export const mutations = {
 };
 
 export const actions = {
-    async fetchAllPayments({ commit, dispatch }) {
+    async fetchAllRequiredDatas({ commit, dispatch }) {
         dispatch("loading/setLoading", null, { root: true });
         const { data } = await this.$axios.get(
             "users/dashboard/" + this.$auth.user.id
-        );
-        commit("RECENT_BOOKING", data.bookings);
+        ); 
         commit("BOOKING_COUNT", data.booking_count);
         commit("REVIEW_COUNT", data.reviews_count);
         commit("TOTAL_SPAN", data.total_span);
         dispatch("loading/clearLoading", null, { root: true });
+    },
+    
+    async fetchRecentBooking({ commit, dispatch }) { 
+        const { data } = await this.$axios.get(
+            "users/recent-orders/" + this.$auth.user.id
+        );
+        commit("RECENT_BOOKING", data.bookings);
+       
     },
     async delete({ commit, state }, id) {
         const { data } = await this.$axios.post(`booking/delete`, { id: id });

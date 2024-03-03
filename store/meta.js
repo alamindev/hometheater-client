@@ -7,7 +7,8 @@ export const state = () => ({
     contact: {},
     login: {},
     portfolio: {},
-    register: {}
+    register: {},
+    product: {}
 });
 export const mutations = {
     FETCH_HOME_DATA: (state, data) => (state.home = data),
@@ -18,7 +19,8 @@ export const mutations = {
     FETCH_CONTACT_DATA: (state, data) => (state.contact = data),
     FETCH_LOGIN_DATA: (state, data) => (state.login = data),
     FETCH_PORTFOLIO_DATA: (state, data) => (state.portfolio = data),
-    FETCH_REGISTER_DATA: (state, data) => (state.register = data)
+    FETCH_REGISTER_DATA: (state, data) => (state.register = data),
+    FETCH_PRODUCT_DATA: (state, data) => (state.product = data)
 };
 export const actions = {
     /**
@@ -46,7 +48,9 @@ export const actions = {
             } else if (data.type == "register") {
                 commit("FETCH_REGISTER_DATA", data.meta);
             } else if (data.type == "portfolio") {
-                commit("FETCH_PORTFOLIO_DATA", data.meta);
+                commit("FETCH_PORTFOLIO_DATA", data.meta); 
+            } else if (data.type == "product") {
+                commit("FETCH_PRODUCT_DATA", data.meta);
             }
         }
     }

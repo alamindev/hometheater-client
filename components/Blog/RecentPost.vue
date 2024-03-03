@@ -3,7 +3,7 @@
     <div class="" v-if="!loading_recent_post">
       <div class="pb-4">
         <h1
-          class="pt-5 md:pt-0 text-brand-dark-gray font-semibold"
+          class="pt-5 lg:pt-0 text-brand-dark-gray font-semibold"
           :class="heading"
         >
           Recent Blogs And Articles

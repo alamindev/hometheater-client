@@ -2,9 +2,9 @@
   <main>
     <section class="custom-gradient px-4 lg:px-16 pt-16 pb-2 mb-20 blog--page">
       <div class="container mx-auto relative">
-        <div class="md:flex">
-          <div class="w-full md:w-6/12" v-if="post">
-            <div class="lg:pl-5 pr-0 md:pr-10 xl:pr-24">
+        <div class="lg:flex">
+          <div class="w-full lg:w-6/12" v-if="post">
+            <div class="lg:pl-5 pr-0 lg:pr-10 xl:pr-24">
               <Blog v-if="!loading_post" isReadmore="false" :post="post" />
               <div v-else>
                 <div>
@@ -27,7 +27,7 @@
               </div>
             </div>
           </div>
-          <div class="w-full md:w-6/12">
+          <div class="w-full lg:w-6/12">
             <RecentPost
               heading="text-2xl lg:text-3xl xl:text-4xl"
               image="lg:w-40 lg:h-40 w-24 h-24"

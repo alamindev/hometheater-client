@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
-    <div class="flex justify-between items-center border-b pb-3" v-if="header">
+    <div class="hidden lg:flex justify-between items-center border-b pb-3">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
-        Check out
+        Booking Date & Time
       </h1>
     </div>
     <div class="py-6 md:py-10 flex flex-col items-center">
@@ -72,7 +72,7 @@
 <script>
 export default {
   name: "Calendar",
-  props: ["err", "header"],
+  props: ["err"],
   data() {
     return {
       time: [],
@@ -460,7 +460,7 @@ export default {
   },
   created() {
     this.$store.commit("cart/UPDATE_DATETIME", []);
-
+    this.$store.commit("cart/IS_FINISHED", false);
     this.$store.dispatch("cart/fetchAttributes").then((res) => {
       if (res.length > 0) {
         let attri = res.map((el) => {

@@ -109,11 +109,9 @@
 
 <script>
 import Loader from "@/components/Loader/Loading-white";
-import SocialLogin from "@/components/SocialLogin";
 export default {
   components: {
     Loader,
-    SocialLogin,
   },
   data() {
     return {
@@ -142,7 +140,7 @@ export default {
           data: this.form,
         });
         if (this.authenticated) {
-          this.$emit("showCart");
+          this.$store.dispatch("cart/showCart");
           this.$router.push("/cart");
         }
         this.loading = false;

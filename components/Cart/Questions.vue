@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
-    <div class="flex justify-between items-center border-b pb-3" v-if="header">
+    <div class="hidden lg:flex justify-between items-center border-b pb-3">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
-        Check out
+        Addons Extra
       </h1>
     </div>
     <div class="" v-show="!is_loading">
@@ -10,13 +10,13 @@
         <div class="flex justify-between flex-col h-full">
           <div class="" v-if="question_main.length > 0">
             <div
-              class="pt-4 md:pt-10 question--step"
+              class="pt-7 md:pt-10 question--step"
               v-for="(que, main_index) in question_main"
               :key="que.id"
               :class="{ activestep: main_index === activeStep }"
             >
               <h2
-                class="text-center question--heading font-medium text-lg md:text-xl lg:text-2xl"
+                class="text-center question--heading font-semibold text-lg sm:text-xl leading-[1.8] md:text-2xl"
                 v-html="que.title"
               ></h2>
               <div class=" ">
@@ -138,9 +138,8 @@
         <Login
           v-if="!is_register_form && !is_required_field"
           @showRegisterForm="showRegisterForm"
-          @showCart="showCart"
         />
-        <RequiredFields v-if="is_required_field" @showCart="showCart" />
+        <RequiredFields v-if="is_required_field" />
         <button class="flex items-center" v-else @click="onClickPrevious">
           <i class="fas fa-long-arrow-alt-left"></i>
           <span class="pl-3 font-medium">Go Back </span>
@@ -159,24 +158,27 @@
 import Login from "@/components/Cart/Login";
 import Register from "@/components/Cart/Register";
 import RequiredFields from "@/components/Cart/RequiredFields";
+
 export default {
   name: "Questions",
-  props: ["header"],
-  data() {
-    return {
-      is_loggedin: false,
-      is_register_form: false,
-      is_required_field: false,
-      is_loading: false,
-    };
-  },
   components: {
     Login,
     Register,
     RequiredFields,
   },
-
   computed: {
+    is_loading() {
+      return this.$store.state.cart.is_loading;
+    },
+    is_loggedin() {
+      return this.$store.state.cart.is_loggedin;
+    },
+    is_register_form() {
+      return this.$store.state.cart.is_register_form;
+    },
+    is_required_field() {
+      return this.$store.state.cart.is_required_field;
+    },
     question_main() {
       return this.$store.state.cart.questions;
     },
@@ -200,7 +202,7 @@ export default {
     step_active: function (val, newVal) {
       if (val === true) {
         if (!this.authenticated) {
-          this.is_loggedin = true;
+          this.$store.commit("cart/IS_LOGGEDIN", true);
           this.$store.commit("cart/IS_AUTH", false);
           this.$swal({
             icon: "error",
@@ -209,7 +211,7 @@ export default {
             timer: 6000,
           });
         } else {
-          this.showCart();
+          this.$store.dispatch("cart/showCart");
         }
       }
     },
@@ -235,42 +237,23 @@ export default {
       this.$store.commit("cart/UPDATE_STEP_PREV");
     },
     GotoLogin() {
-      this.is_register_form = false;
+      this.$store.commit("cart/IS_REGISTER_FORM", false);
     },
     showRegisterForm() {
-      this.is_register_form = true;
+      this.$store.commit("cart/IS_REGISTER_FORM", true);
     },
     showLoginForm() {
-      this.is_register_form = false;
-    },
-    async showCart() {
-      try {
-        this.is_loading = true;
-        let { data } = await this.$axios.get(
-          `/auth/check-fields/${this.$auth.user.id}`
-        );
-        if (data.success === true) {
-          this.is_required_field = false;
-          this.is_loggedin = false;
-          this.$store.commit("cart/IS_AUTH", true);
-        } else {
-          this.is_required_field = true;
-          this.$store.commit("cart/IS_AUTH", false);
-        }
-        this.is_loading = false;
-      } catch (e) {
-        return;
-      }
+      this.$store.commit("cart/IS_REGISTER_FORM", false);
     },
   },
   created() {
     this.$store.commit("cart/UPDATE_ACTIVE_STEP", 0);
     this.$store.dispatch("cart/fetchQuestions");
     if (!this.authenticated) {
-      this.is_loggedin = true;
+      this.$store.commit("cart/IS_LOGGEDIN", true);
       this.$store.commit("cart/IS_AUTH", false);
     } else {
-      this.showCart();
+      this.$store.dispatch("cart/showCart");
     }
   },
 };

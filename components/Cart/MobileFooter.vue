@@ -1,39 +1,6 @@
 <template>
   <div class="h-full py-2">
-    <div class="w-full">
-      <div class="">
-        <div class="flex justify-end gap-4 pb-2 sm:pb-3">
-          <h2 class="uppercase text-gray-500 text-sm sm:text-base font-medium">
-            Total:
-          </h2>
-          <p class="text-gray-700 font-bold">${{ total }}</p>
-        </div>
-        <div class="" v-if="is_promo">
-          <div class="flex justify-end gap-4 pb-2">
-            <h2 class="uppercase text-gray-500 text-base font-medium">
-              {{ percent }}% Discount
-            </h2>
-            <p class="text-gray-700 font-bold">- ${{ percentVal }}</p>
-          </div>
-        </div>
-        <div class="flex justify-end gap-4 pb-2" v-if="feature_price">
-          <h2 class="uppercase text-gray-500 text-base font-medium">
-            ADDON EXTRAS
-          </h2>
-          <p class="text-gray-700 font-bold">+ ${{ feature_price }}</p>
-        </div>
-      </div>
-      <div class="w-full pb-6" v-if="subTotal != ''">
-        <hr />
-        <div class="flex justify-end gap-4 pt-1">
-          <h2 class="uppercase text-gray-500 text-base font-medium">
-            Total Cost:
-          </h2>
-          <p class="text-gray-700 font-bold">${{ subTotal }}</p>
-        </div>
-      </div>
-    </div>
-    <div class="w-full">
+    <div class="w-full pt-8">
       <button
         type="button"
         class="disabled:opacity-50 py-3 px-5 text-center text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
@@ -52,36 +19,48 @@
       >
         <p class="uppercase text-center w-full">NEXT</p>
       </button>
-      <button
-        type="button"
-        class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-        :disabled="is_next == false"
-        @click="onClickNext"
-        v-if="step === 2"
-      >
-        <p class="uppercase"></p>
-        <p class="uppercase">Next</p>
-        <i class="fas fa-arrow-right"></i>
-      </button>
-      <div class="" v-if="step === 3">
-        <div v-if="is_auth">
-          <div class="" v-if="question_main.length > 0">
+      <div v-if="Object.keys(cartdata.services).length !== 0">
+        <button
+          type="button"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+          :disabled="is_next == false"
+          @click="onClickNext"
+          v-if="step === 2"
+        >
+          <p class="uppercase"></p>
+          <p class="uppercase">Next</p>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="" v-if="step === 3">
+          <div v-if="is_auth">
+            <div class="" v-if="question_main.length > 0">
+              <button
+                v-if="activeStep + 1 < question_main.length"
+                @click="nextQuestion"
+                type="button"
+                :disabled="isQuestionCheck(activeStep)"
+                class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+              >
+                <p class="uppercase"></p>
+                <p class="uppercase">Next</p>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+              <button
+                v-if="activeStep + 1 === question_main.length"
+                type="button"
+                class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+                @click="onClickNext"
+                :disabled="isQuestionCheck(activeStep)"
+              >
+                <p class="uppercase"></p>
+                <p class="uppercase">Next</p>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
             <button
-              v-if="activeStep + 1 < question_main.length"
-              @click="nextQuestion"
+              v-else
               type="button"
-              :disabled="isQuestionCheck(activeStep)"
-              class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-            >
-              <p class="uppercase"></p>
-              <p class="uppercase">Next</p>
-              <i class="fas fa-arrow-right"></i>
-            </button>
-            <button
-              v-if="activeStep + 1 === question_main.length"
-              type="button"
-              :disabled="isQuestionCheck(activeStep)"
-              class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+              class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
               @click="onClickNext"
             >
               <p class="uppercase"></p>
@@ -92,8 +71,8 @@
           <button
             v-else
             type="button"
-            class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-            @click="onClickNext"
+            :disabled="!is_auth"
+            class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
           >
             <p class="uppercase"></p>
             <p class="uppercase">Next</p>
@@ -101,34 +80,45 @@
           </button>
         </div>
         <button
-          v-else
           type="button"
-          :disabled="!is_auth"
-          class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+          @click="onClickNext"
+          v-if="step === 4"
         >
           <p class="uppercase"></p>
           <p class="uppercase">Next</p>
           <i class="fas fa-arrow-right"></i>
         </button>
+        <button
+          type="button"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+          @click="onClickNext"
+          :disabled="is_finished == false"
+          v-if="step === 5"
+        >
+          <p class="uppercase"></p>
+          <p class="uppercase">Next</p>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+        <button
+          type="button"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+          @click="PaymentForm"
+          v-if="step === 6"
+        >
+          Pay Now
+        </button>
       </div>
-      <button
-        type="button"
-        class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-        @click="onClickNext"
-        v-if="step === 4"
-      >
-        <p class="uppercase"></p>
-        <p class="uppercase">Next</p>
-        <i class="fas fa-arrow-right"></i>
-      </button>
-      <button
-        type="button"
-        class="disabled:opacity-50 py-3 px-5 text-base md:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
-        @click="finishToCheckout"
-        v-if="step === 5"
-      >
-        <p class="uppercase">Finish</p>
-      </button>
+      <div v-else>
+        <button
+          type="button"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+          @click="PaymentForm"
+          v-if="step === 2"
+        >
+          Pay Now
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -148,17 +138,11 @@ export default {
     ...mapGetters({
       total: "cart/getTotal",
     }),
-    percent() {
-      return this.$store.state.cart.percent;
+    is_finished() {
+      return this.$store.state.cart.is_finished;
     },
-    percentVal() {
-      return this.$store.state.cart.percent_val;
-    },
-    subTotal() {
-      return this.$store.state.cart.sub_total;
-    },
-    is_promo() {
-      return this.$store.state.cart.is_promo;
+    cartdata() {
+      return this.$store.state.cart.cartobj;
     },
     is_next() {
       return this.$store.state.cart.is_next;
@@ -166,9 +150,7 @@ export default {
     is_auth() {
       return this.$store.state.cart.is_auth;
     },
-    feature_price() {
-      return this.$store.state.cart.feature_price;
-    },
+
     isDisabled() {
       if (this.promoCode != "") return false;
       return true;
@@ -213,24 +195,8 @@ export default {
         this.$emit("next");
       }
     },
-    finishToCheckout() {
-      if (this.datetime != "") {
-        if (this.payment == "online") {
-          this.$emit("Checkout");
-        } else {
-          this.$emit("finishedCheckout");
-        }
-      } else {
-        this.$emit("calendarErr");
-        this.$swal({
-          icon: "error",
-          title: `Please choose date and time`,
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 5000,
-        });
-      }
+    PaymentForm() {
+      this.$emit("PaymentForm");
     },
   },
 };

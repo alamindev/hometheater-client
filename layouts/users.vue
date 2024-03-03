@@ -12,7 +12,7 @@
     >
       <Sidebar @hidden="hidden" :isshowing="isshowing" />
       <div
-        class="md:ml-64 xl:ml-80 mr-72 xl:mr-80 sm:px-5 main--parent"
+        class="lg:ml-64 2xl:ml-80 min-[1440px]:mr-80 sm:px-5 main--parent"
         :class="isshowing || isshowingright ? 'showing' : ''"
       >
         <Header @clicked="onClicked" @rightSideClicked="toggleRightSidebar" />
@@ -135,7 +135,7 @@ export default {
   margin-left: 250px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
   .main--parent.showing {
     margin-left: 0;
 

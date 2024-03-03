@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebar bg-blug-10 py-5 px-5 w-64 -ml-64 xl:w-80 md:ml-0 fixed top-0 bottom-0 left-0 sidebar--click"
+    class="sidebar bg-blug-10 py-5 px-5 w-64 -ml-64 2xl:w-80 lg:ml-0 fixed top-0 bottom-0 left-0 sidebar--click"
     :class="isshowing ? 'showing' : ''"
   >
     <div class="logo__area flex items-center justify-between pb-10 border-b">
@@ -14,11 +14,11 @@
             alt="client-affiliation"
           />
         </figure>
-        <span class="hidden md:block font-rubik text-gray-800 text-lg">{{
+        <span class="hidden lg:block font-rubik text-gray-800 text-lg">{{
           setting.site_title
         }}</span>
       </nuxt-link>
-      <div class="nav__hidebtn block md:hidden">
+      <div class="nav__hidebtn block lg:hidden">
         <i
           @click="hide"
           class="fas fa-times text-xl text-gray-700 cursor-pointer bars--click"
@@ -52,7 +52,19 @@
               >
                 <span class="text-gray-700 text-lg ml-2 font-roboto">
                   <i class="fab fa-first-order-alt text-lg pr-2"></i>
-                  Booking</span
+                  Bookings</span
+                >
+              </nuxt-link>
+            </li>
+            <li class="py-1">
+              <nuxt-link
+                to="/users/product"
+                exact
+                class="pl-10 py-3 pr-3 flex items-center rounded-tr-2xl rounded-br-lg"
+              >
+                <span class="text-gray-700 text-lg ml-2 font-roboto">
+                  <i class="fab fa-first-order-alt text-lg pr-2"></i>
+                  Products</span
                 >
               </nuxt-link>
             </li>

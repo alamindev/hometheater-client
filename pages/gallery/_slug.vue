@@ -28,7 +28,6 @@
               <Sortby class="pt-3" />
               <div v-if="!loading" class="pt-2">
                 <div
-                  v-if="!errors.message"
                   class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5 py-5"
                 >
                   <figure
@@ -45,11 +44,6 @@
                       v-lazy-load
                     />
                   </figure>
-                </div>
-                <div v-else class="w-full">
-                  <h1 class="text-center pt-24 pb-12 text-2xl text-red-600">
-                    {{ errors.message }}
-                  </h1>
                 </div>
               </div>
               <div v-else class="loader-parent mt-16 mb-10">

@@ -20,4 +20,4 @@ async function start() {
     console.log('Server listening on `localhost:' + port + '`.')
 }
 
-start()
+ start()

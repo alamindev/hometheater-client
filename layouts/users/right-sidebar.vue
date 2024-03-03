@@ -1,6 +1,6 @@
 <template>
   <div
-    class="custom-rightsidebar bg-blug-10 py-5 px-3 w-80 md:w-72 -ml-72 xl:w-80 xl:-ml-80 md:ml-0 fixed top-0 bottom-0 right-0"
+    class="custom-rightsidebar bg-blug-10 py-5 px-3 w-80 md:w-72 -ml-72 xl:w-80 xl:-ml-80 md:ml-0 max-[1440px]:shadow-2xl fixed top-0 bottom-0 right-0"
     :class="isshowingright ? 'showing' : ''"
   >
     <div class="relative">
@@ -155,7 +155,7 @@ export default {
   z-index: 999;
 }
 
-@media (max-width: 1170px) {
+@media (max-width: 1440px) {
   .custom-rightsidebar {
     transition: all 0.3s ease-in-out;
     transform: translateX(400px);

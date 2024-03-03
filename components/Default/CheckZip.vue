@@ -42,7 +42,7 @@
               class="py-3 px-6 bg-light-10 border-0 rounded-md w-full"
             />
             <div
-              class="text-brand-color text-sm font-medium pt-2 flex items-center"
+              class="text-brand-color text-xs sm:text-sm font-medium pt-2 flex items-center"
               v-if="success != '' && ajaxerr"
             >
               <i class="fas fa-check-circle text-lg block"></i> &nbsp;

@@ -1,10 +1,10 @@
 <template>
   <div class="relative">
-    <div class="flex justify-between items-center border-b pb-3" v-if="header">
+    <div class="hidden lg:flex justify-between items-center border-b pb-3">
       <h1
         class="text-xl font-bold font-rubik text-gray-600 custom--text-cart-title"
       >
-        Check out
+        Zipcode Checker
       </h1>
     </div>
     <div class="mb-24 mt-20 lg:h-64">
@@ -20,7 +20,7 @@
             class="py-3 px-6 bg-light-10 border-0 rounded-md w-full"
           />
           <div
-            class="text-brand-color text-sm font-medium pt-2 flex items-center"
+            class="text-brand-color text-xs sm:text-sm font-medium pt-2 flex items-center"
             v-if="success != '' && ajaxerr"
           >
             <i class="fas fa-check-circle text-lg block"></i> &nbsp;
@@ -57,9 +57,9 @@
 </template>
 
 <script>
+import { deleteCookie, setCookie } from "@/Utils/Cookie";
 export default {
   name: "ZipCode",
-  props: ["header"],
   computed: {
     zipcode: {
       get() {
@@ -90,6 +90,13 @@ export default {
     onClickPrevious() {
       this.$emit("prev");
     },
+  },
+  updated() {
+    if (this.success && this.ajaxerr) {
+      setCookie("is_zipcode_checked", this.zipcode, 1500);
+    } else {
+      deleteCookie("is_zipcode_checked");
+    }
   },
 
   async created() {

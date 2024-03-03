@@ -93,7 +93,7 @@
         <div class="border-b w-full">
           <ul class="flex w-full pb-3">
             <li class="w-6/12">Items Summary</li>
-            <li class="w-3/12 text-center">Per Item</li>
+            <li class="w-3/12 text-center">QTY</li>
             <li class="w-3/12 text-center">Item Total</li>
           </ul>
         </div>
@@ -123,16 +123,16 @@
                     <span class="pr-4 text-gray-400 text-sm"
                       >Order# {{ booking.order_id }}</span
                     >
-                    <span class="text-gray-400 text-sm"
-                      >QTY: {{ service.quantity }}</span
-                    >
                   </div>
                 </div>
               </div>
-              <div class="w-3/12 text-dark-sm font-normal pl-2 text-center">
-                ${{ service.sub_total }}
-              </div>
               <div class="w-3/12 text-dark-sm font-normal text-center">
+                {{ service.quantity }}
+              </div>
+              <div
+                v-if="service.total"
+                class="w-3/12 text-dark-sm font-normal text-center"
+              >
                 ${{ service.total }}
               </div>
             </li>
@@ -160,23 +160,60 @@
               </td>
             </tr>
             <tr>
-              <td class="py-1 font-medium text-gray-600">Sub total</td>
-              <td class="text-right">${{ booking.sub_total }}</td>
+              <td class="py-1 font-medium text-gray-600">Quantity</td>
+              <td class="text-right">{{ booking.quantity }}</td>
             </tr>
-            <tr v-if="booking.discount != null">
-              <td class="py-1 font-medium text-gray-600">Discount</td>
-              <td class="text-right text-red-500">
-                -${{ booking.discount_price }}
-              </td>
+            <tr v-if="booking.discount">
+              <td class="py-2 font-medium text-gray-600">Discount</td>
+              <td class="text-right text-red-500">{{ booking.discount }}%</td>
             </tr>
-            <tr v-if="booking.addon_price != null">
-              <td class="py-1 font-medium text-gray-600">Addon Extra</td>
+            <tr v-if="booking.addon_price">
+              <td class="py-2 font-medium text-gray-600">Addon Extra</td>
               <td class="text-right">${{ booking.addon_price }}</td>
             </tr>
             <tr>
-              <td class="pt-5 font-semibold text-gray-600 text-lg">Total</td>
-              <td class="text-right pt-5 font-semibold text-lg text-black">
-                ${{ booking.price }}
+              <td class="py-2 font-semibold text-gray-600 text-lg">Total</td>
+              <td
+                v-if="booking.discount"
+                class="text-right pt-5 font-semibold text-lg text-black"
+              >
+                <strong
+                  >${{
+                    (
+                      +booking.price +
+                      +booking.addon_price -
+                      +booking.discount_price
+                    ).toFixed(2)
+                  }}</strong
+                >
+                <sub>(Discount Includes) </sub>
+              </td>
+              <td
+                v-else
+                class="text-right py-2 font-semibold text-lg text-black"
+              >
+                <strong>${{ booking.price }}</strong>
+              </td>
+            </tr>
+            <tr v-if="booking.payment === 'online'">
+              <td class="py-2 font-semibold text-gray-600 text-lg">Taxes</td>
+              <td class="text-right py-2 font-semibold text-lg text-black">
+                <strong>{{ booking.taxes }}%</strong>
+              </td>
+            </tr>
+            <tr v-if="booking.payment === 'online'">
+              <td class="py-2 font-semibold text-gray-600 text-lg">
+                Total Price
+              </td>
+              <td class="text-right py-2 font-semibold text-lg text-black">
+                <strong>${{ totalWithTaxes }}</strong>
+                <sub
+                  v-if="booking.payment === 'online'"
+                  class="text-sm text-brand-color"
+                  >(Paid)</sub
+                >
+                <sub v-else class="text-sm text-red-500">(Not Paid)</sub>
+                <sub>(Texes Includes) </sub>
               </td>
             </tr>
           </table>
@@ -265,6 +302,18 @@ export default {
     };
   },
   computed: {
+    totalWithTaxes() {
+      let total;
+      if (this.booking.discount) {
+        total =
+          +this.booking.price +
+          +this.booking.addon_price -
+          +this.booking.discount_price;
+      } else {
+        total = +this.booking.price + +this.booking.addon_price;
+      }
+      return (total + total * (this.booking.taxes / 100)).toFixed(2);
+    },
     install_hour() {
       let booking = this.$store.state.users.booking.booking;
       if (booking) {

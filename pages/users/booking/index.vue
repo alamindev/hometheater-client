@@ -10,17 +10,23 @@
 
       <div v-if="!loading">
         <div class="pt-6" v-if="isBooking">
-          <div class="w-full pt-5 hidden sm:block md:hidden lg:block">
+          <div class="w-full pt-5 hidden md:block">
             <table class="table w-full">
               <thead>
                 <tr>
-                  <th class="text-sm text-gray-400 font-normal text-left pb-5">
+                  <th
+                    class="text-xs sm:text-sm text-gray-400 font-normal text-left pb-5"
+                  >
                     Order #
                   </th>
-                  <th class="text-sm text-gray-400 font-normal text-left pb-5">
+                  <th
+                    class="text-xs sm:text-sm text-gray-400 font-normal text-center pb-5"
+                  >
                     Code
                   </th>
-                  <th class="text-sm text-gray-400 font-normal text-left pb-5">
+                  <th
+                    class="text-xs sm:text-sm text-gray-400 font-normal text-center pb-5"
+                  >
                     Total Cost
                   </th>
                   <th
@@ -33,9 +39,7 @@
                   >
                     Status
                   </th>
-                  <th
-                    class="text-sm text-gray-400 font-normal text-center pb-5"
-                  >
+                  <th class="text-sm text-gray-400 font-normal text-right pb-5">
                     Options
                   </th>
                 </tr>
@@ -43,25 +47,29 @@
               <tbody>
                 <tr v-for="booking in bookings" :key="booking.id">
                   <td class="px-3 py-5">
-                    <p class="text-sm font-medium text-dark-sm">
+                    <p
+                      class="text-xs sm:text-sm font-medium text-dark-sm w-28 overflow-hidden text-ellipsis"
+                    >
                       #{{ booking.order_id }}
                     </p>
                   </td>
-                  <td class="px-3 py-5">
+                  <td class="px-3 py-5 text-center">
                     <div
                       v-for="(ser, index) in booking.service_type"
                       :key="index"
                     >
-                      <p class="text-sm font-medium text-dark-sm">{{ ser }}</p>
+                      <p class="text-xs sm:text-sm font-medium text-dark-sm">
+                        {{ ser }}
+                      </p>
                     </div>
                   </td>
-                  <td class="px-3 py-5">
-                    <p class="text-sm font-medium text-dark-sm">
+                  <td class="px-3 py-5 text-center">
+                    <p class="text-xs sm:text-sm font-medium text-dark-sm">
                       ${{ booking.total }}
                     </p>
                   </td>
-                  <td class="px-3 py-5">
-                    <p class="text-sm font-medium text-dark-sm">
+                  <td class="px-3 py-5 text-center">
+                    <p class="text-xs sm:text-sm font-medium text-dark-sm">
                       {{ booking.datetime }}
                     </p>
                   </td>
@@ -69,25 +77,25 @@
                     <div class="">
                       <p
                         v-if="booking.status === 'cancel'"
-                        class="py-2 px-2 bg-red-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-red-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                       >
                         Canceled
                       </p>
                       <p
                         v-if="booking.status === 'pending'"
-                        class="py-2 px-2 bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                       >
                         Pending Approval
                       </p>
                       <p
                         v-if="booking.status === 'approved'"
-                        class="py-2 px-2 bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                       >
                         Approved
                       </p>
                       <div class="" v-if="booking.status === 'complete'">
                         <p
-                          class="text-center py-2 px-2 w-full bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                          class="text-center py-2 px-2 mx-auto md:max-w-[200px] w-full bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
                         >
                           Completed
                         </p>
@@ -95,7 +103,7 @@
                     </div>
                   </td>
                   <td class="px-3 py-5">
-                    <div class="flex justify-center">
+                    <div class="flex justify-end">
                       <nuxt-link
                         v-if="
                           booking.status === 'pending' ||
@@ -136,18 +144,26 @@
               </tbody>
             </table>
           </div>
-          <div class="pt-6 block sm:hidden md:block lg:hidden">
+          <div class="pt-6 block md:hidden">
             <div class="flex justify-between">
-              <div class="text-sm text-gray-400 font-normal text-left lg:pl-5">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-left lg:pl-5"
+              >
                 Order #
               </div>
-              <div class="text-sm text-gray-400 font-normal text-left">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-center"
+              >
                 Code
               </div>
-              <div class="text-sm text-gray-400 font-normal text-left">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-center"
+              >
                 Total Cost
               </div>
-              <div class="text-sm text-gray-400 font-normal text-left pr-5">
+              <div
+                class="text-xs sm:text-sm text-gray-400 font-normal text-center pr-5"
+              >
                 Date
               </div>
             </div>
@@ -158,11 +174,13 @@
             >
               <div class="flex items-center justify-between">
                 <div
-                  class="lg:flex items-center font-medium text-sm md:text-base"
+                  class="lg:flex items-center font-medium text-xs sm:text-sm md:text-base w-28 overflow-hidden text-ellipsis"
                 >
                   #{{ booking.order_id }}
                 </div>
-                <div class="lg:flex items-center font-medium text-sm">
+                <div
+                  class="lg:flex items-center font-medium text-xs sm:text-sm"
+                >
                   <div
                     v-for="(ser, index) in booking.service_type"
                     :key="index"
@@ -171,32 +189,36 @@
                   </div>
                 </div>
                 <div>
-                  <p class="text-sm font-medium text-dark-sm">
+                  <p
+                    class="text-xs sm:text-sm font-medium text-center text-dark-sm"
+                  >
                     ${{ booking.total }}
                   </p>
                 </div>
                 <div>
-                  <p class="text-sm font-medium text-dark-sm">
+                  <p
+                    class="text-xs sm:text-sm font-medium text-center text-dark-sm"
+                  >
                     {{ booking.datetime }}
                   </p>
                 </div>
               </div>
-              <div class="pb-2 pt-5">
+              <div class="pb-2 pt-5 text-center">
                 <p
                   v-if="booking.status === 'cancel'"
-                  class="w-full bg-red-color sm:w-auto md:w-full lg:w-auto py-2 px-2 text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full bg-red-color sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] text-white font-semibold text-xs rounded-sm text-center shadow-md"
                 >
                   Status: Canceled
                 </p>
                 <p
                   v-if="booking.status === 'pending'"
-                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                 >
                   Status: Pending Approval
                 </p>
                 <p
                   v-if="booking.status === 'approved'"
-                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                 >
                   Status: Approved
                 </p>
@@ -205,7 +227,7 @@
                   v-if="booking.status === 'complete'"
                 >
                   <p
-                    class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                    class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
                   >
                     Status: Completed
                   </p>
@@ -344,7 +366,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("users/dashboard/fetchAllPayments");
+    this.$store.dispatch("users/dashboard/fetchAllRequiredDatas");
     let param = this.$router.history.current.query.page;
     if (typeof param !== "undefined") {
       this.loadedwithparam(param);

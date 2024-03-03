@@ -24,17 +24,7 @@
                   :disabled="t.isbook"
                   :class="t.isbook || t.notAllow ? 'is_time__active' : ''"
                   @click="dataTime(t.value, index)"
-                  class="
-                    w-full
-                    flex
-                    justify-center
-                    py-4
-                    px-6
-                    border
-                    rounded-md
-                    cursor-pointer
-                    hover:border-brand-color hover:text-brand-color
-                  "
+                  class="w-full flex justify-center py-4 px-6 border rounded-md cursor-pointer hover:border-brand-color hover:text-brand-color"
                 >
                   {{ t.value }}
                 </button>

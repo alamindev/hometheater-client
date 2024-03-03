@@ -1,10 +1,17 @@
 export const state = () => ({
     carts: [],
-    payment: "local",
+    cartobj: {
+        'services' : [],
+        'products' : []
+    },
+    rate: 9,
+    payment: "online",
     promocode: "",
     percent_val: "",
     percent: "",
     sub_total: "",
+    grand_total: "",
+    sub_total_with_addons: "",
     is_promo: false,
     zipcode: "",
     success: "",
@@ -23,8 +30,13 @@ export const state = () => ({
     ajaxerr: false,
     step_3_active: false,
     is_auth: false,
-  checkQuetions: [],
-  suggests: [],
+    is_loggedin: false,
+    is_register_form: false,
+    is_required_field: false,
+    is_loading: false, 
+    is_register_form: false, 
+    checkQuetions: [],
+    suggests: [],
          limited_duration: false
 });
 
@@ -41,12 +53,14 @@ export const getters = {
         return state.carts;
     },
     getTotal(state) {
-        let maps = state.carts.map(el => parseInt(el.price));
+        let maps = state.carts.map(el => parseFloat(el.price));
         if (maps.length > 0) {
-            return maps.reduce((a, b) => a + b);
+            let total = maps.reduce((a, b) => a + b); 
+            return total;
         }
         return 0;
     },
+      
     getPromoCode(state) {
         return state.promocode;
     }
@@ -55,21 +69,56 @@ export const getters = {
 export const mutations = {
     FETCH_SUGGEST_SERVICES: (state, datas) => (state.suggests = datas),
     LIMITED_DURATION: (state, data) => (state.limited_duration = data),
-    FETCH_DATA: (state, datas) => (state.carts = datas),
-    INCREMENT: (state, { id, install_time }) => {
-        if (state.is_item === false) {
+    FETCH_DATA: (state, datas) => {
+        if (datas.length > 0) { 
+            for (let i = 0; i < datas.length; i++) {
+              if (datas[i].type === 0) {
+                state.cartobj.services = datas.filter((el) => el.type === 0);
+              } else {
+                state.cartobj.products = datas.filter((el) => el.type === 1);
+              }
+            }  
+        } else {
+            state.cartobj = {
+                    'services' : [],
+                    'products' : []
+            };
+        } 
+        return;
+    },
+    FETCH_DATA_CARTS: (state, datas) => (state.carts = datas),
+    
+    INCREMENT: (state, { id, install_time, type }) => { 
+        if (type === 0) { 
+            if (state.is_item === false) {
+                const newcarts = state.carts.filter(cart => {
+                    if (cart.id === id) {
+                        if (cart.item >= 1 && cart.item <= 2) {
+                            cart.item++;
+                            cart.price = cart.price + cart.original_price;
+                            let ids = [];
+                            for (let i = 0; i < cart.item; i++) {
+                                ids.push(cart.id);
+                            }
+                            cart.ids = ids;
+                        }
+                        cart.totalHour = +cart.duration * +cart.item;
+                    }
+                    return cart;
+                });
+                localStorage.setItem("services", JSON.stringify(newcarts));
+                return newcarts;
+            }
+        } else {
             const newcarts = state.carts.filter(cart => {
-                if (cart.id === id) {
-                    if (cart.item >= 1 && cart.item <= 2) {
+                if (cart.id === id) { 
                         cart.item++;
                         cart.price = cart.price + cart.original_price;
                         let ids = [];
                         for (let i = 0; i < cart.item; i++) {
                             ids.push(cart.id);
                         }
-                        cart.ids = ids;
-                    }
-                    cart.totalHour = +cart.duration * +cart.item;
+                    cart.ids = ids;  
                 }
                 return cart;
             });
@@ -96,19 +145,35 @@ export const mutations = {
         localStorage.setItem("services", JSON.stringify(newcarts));
         return newcarts;
     },
-    SET_CART_DATAS: (state, cart) => state.carts.push(cart),
-    REMOVE_CART: (state, id) =>
-        (state.carts = state.carts.filter(cart => cart.id !== id)),
+    SET_CART_DATAS: (state, cart) => {
+        state.carts.push(cart); 
+        if (cart.type === 0) {
+            state.cartobj?.services.push(cart);
+        } else {
+            state.cartobj?.products.push(cart);
+        }
+        return;
+    },
+    REMOVE_CART: (state, id) => {
+        state.carts = state.carts.filter(cart => cart.id !== id);
+      
+        state.cartobj.services = state.cartobj?.services.filter(cart => cart.id !== id);
+    
+        state.cartobj.products = state.cartobj?.products.filter(cart => cart.id !== id);
+        return;
+    } ,
     UPDATE_PROMOCODE: (state, val) => (state.promocode = val),
     UPDATE_PAYMENT: (state, val) => (state.payment = val),
     PERCENT: (state, percent) => (state.percent = percent),
     PERCENT_VAL: (state, percent_val) => (state.percent_val = percent_val),
     SUB_TOTAL: (state, total) => (state.sub_total = total),
+    GRAND_TOTAL: (state, total) => (state.grand_total = total),
     IS_PROMO: (state, bool) => (state.is_promo = bool),
     UPDATE_ZIPCODE: (state, val) => (state.zipcode = val),
     ZIPCODE_SUCCESS: (state, val) => (state.success = val),
     IS_NEXT: (state, bool) => (state.is_next = bool),
     FETCH_QUESTIONS: (state, datas) => (state.questions = datas),
+    UPDATE_TAXES: (state, data) => (state.rate = data),
     CHECK_QUESTION: (state, datas) => (state.checkQuetions = datas),
     FINISH_STEP_LOADING: (state, bool) => (state.finish_loading = bool),
     STEP_3_ACTIVE: (state, bool) => (state.step_3_active = bool),
@@ -161,7 +226,12 @@ export const mutations = {
     IS_ITEM: (state, bool) => (state.is_item = bool),
     IS_FINISHED: (state, bool) => (state.is_finished = bool),
     IS_ZIPERR: (state, bool) => (state.ziperr = bool),
-    IS_AJAXERR: (state, bool) => (state.ajaxerr = bool)
+    IS_AJAXERR: (state, bool) => (state.ajaxerr = bool),
+    UPDATE_SUBTOTAL_WITH_ADDONS: (state, sub_total_with_addons) => (state.sub_total_with_addons = sub_total_with_addons),
+    IS_LOADING: (state, bool) => (state.is_loading = bool),
+    IS_LOGGEDIN: (state, bool) => (state.is_loggedin = bool),
+    IS_REQUIRED_FIELD: (state, bool) => (state.is_required_field = bool), 
+    IS_REGISTER_FORM: (state, bool) => (state.is_register_form = bool), 
 };
 
 export const actions = {
@@ -174,10 +244,11 @@ export const actions = {
             }
         }
         await commit("FETCH_DATA", services);
+        await commit("FETCH_DATA_CARTS", services);
         dispatch("loading/clearLoading", null, { root: true });
   },
 
-  async suggestData({ commit, state }) {
+    async suggestData({ commit, state }) {
     if(!state.limited_duration){
       if (process.browser) {
             if (localStorage.getItem("services")) {
@@ -193,6 +264,13 @@ export const actions = {
       }
       }
     },
+    async FetchTax({ commit, state }) {
+        const { data } = await this.$axios.get("/cart/taxes");
+        if (data.success == true) {
+          commit("UPDATE_TAXES", data.taxes);
+        }
+    },
+
     setCartDatas({ commit, state }, cartData) {
         let services = [];
 
@@ -204,11 +282,11 @@ export const actions = {
 
         if (!found) {
             //for durations limit
-            let cart_wrappers = state.carts.map(x => x.ids);
+            let cart_wrappers = state.cartobj?.services.map(x => x.ids);
             let allitems = [];
             for (let ids of cart_wrappers) {
                 for (let id of ids) {
-                    let filtered = state.carts.filter(el => el.id == id);
+                    let filtered = state.cartobj?.services.filter(el => el.id == id);
                     allitems.push(filtered);
                 }
             }
@@ -219,39 +297,25 @@ export const actions = {
             let another_time_check = duration + cartData.duration * +cartData.item;
 
             if (duration <= 8 && another_time_check <= 8) {
-                let item = state.carts.map(x => x.item).reduce((a, b) => a + b, 0);
-                let count = parseInt(item) + parseInt(cartData.item);
+                let item = state.cartobj?.services.map(x => x.item).reduce((a, b) => a + b, 0);
+                let count = parseFloat(item) + parseFloat(cartData.item);
                 if (item > 4 || count > 4) {
                     commit("IS_ITEM", true);
                 } else {
                     commit("IS_ITEM", false);
                 }
-                if (state.is_item === false) {
-                    if (services.length > 0) {
-                        services.push(cartData);
-                        localStorage.setItem("services", JSON.stringify(services));
-                        commit("SET_CART_DATAS", cartData);
-                        this.$swal({
-                            toast: true,
-                            position: "top-end",
-                            icon: "success",
-                            title: "Service Added to cart!",
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                    } else {
-                        services.push(cartData);
-                        localStorage.setItem("services", JSON.stringify(services));
-                        commit("SET_CART_DATAS", cartData);
-                        this.$swal({
-                            toast: true,
-                            position: "top-end",
-                            icon: "success",
-                            title: "Service Added to cart!",
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                    }
+                if (state.is_item === false) { 
+                    services.push(cartData);
+                    localStorage.setItem("services", JSON.stringify(services));
+                    commit("SET_CART_DATAS", cartData);
+                    this.$swal({
+                        toast: true,
+                        position: "top-end",
+                        icon: "success",
+                        title: "Service Added to cart!",
+                        showConfirmButton: false,
+                        timer: 3000
+                    }); 
                   this.$router.push(`/cart`);
                   commit("LIMITED_DURATION", false);
                 } else {
@@ -259,7 +323,7 @@ export const actions = {
                         toast: true,
                         position: "top-end",
                         icon: "error",
-                        title: "You can book up to 4 services max. Please checkout first and then add new service/s to cart.",
+                        title: "You can book up to 4 (count with quantity of items) services max. Please checkout first and then add new service/s to cart.",
                         showConfirmButton: false,
                         timer: 6000
                     });
@@ -286,17 +350,56 @@ export const actions = {
             });
         }
     },
+
+
+    setProductCartDatas({ commit, state }, cartData) {
+        let services = [];
+
+        if (localStorage.getItem("services")) {
+            services = JSON.parse(localStorage.getItem("services"));
+        }
+        let mapped = services.map(ele => ele.id);
+        let found = mapped.includes(cartData.id);
+     
+        if (!found) {   
+                services.push(cartData); 
+                localStorage.setItem("services", JSON.stringify(services));
+                commit("SET_CART_DATAS", cartData);
+                this.$swal({
+                    toast: true,
+                    position: "top-end",
+                    icon: "success",
+                    title: "Product Added to cart!",
+                    showConfirmButton: false,
+                    timer: 3000
+                }); 
+                this.$router.push(`/cart`);
+        } else {
+            this.$swal({
+                toast: true,
+                position: "top-end",
+                icon: "error",
+                title: "Item already added!",
+                showConfirmButton: false,
+                timer: 3000
+            });
+        }
+    },
+
     /**
      * increment item quantity
      * @param {*} param0
      * @param {*} id
      */
-    increment({ commit, state, getters, dispatch }, { id, install_time }) {
-        let cart_wrappers = state.carts.map(x => x.ids);
+    increment({ commit, state, getters, dispatch }, { id, install_time, type }) {
+       
+        if (type === 0) {
+            
+        let cart_wrappers = state.cartobj?.services.map(x => x.ids);
         let allitems = [];
         for (let ids of cart_wrappers) {
             for (let id of ids) {
-                let filtered = state.carts.filter(el => el.id == id);
+                let filtered = state.cartobj?.services.filter(el => el.id == id);
                 allitems.push(filtered);
             }
         }
@@ -306,22 +409,34 @@ export const actions = {
             .reduce((a, b) => a + b, 0);
         let another_time_check = duration + install_time;
         if (duration <= 8 && another_time_check <= 8) {
-            let item = state.carts.map(x => +x.item).reduce((a, b) => a + b, 0);
-            if (item === 3) {
+            let item = state.cartobj?.services.map(x => x.item).reduce((a, b) => a + b, 0);
+            
+            if (item > 3 ) {
                 commit("IS_ITEM", true);
-            }
+            } else {
+                commit("IS_ITEM", false);
+            } 
             if (state.is_item === false) {
-                commit("INCREMENT", { id, install_time });
-                dispatch("fetchQuestions");
-                commit(
-                    "PERCENT_VAL",
-                    ((state.percent / 100) * getters.getTotal).toFixed(2)
-                );
-                if (state.percent != "") {
-                    commit("SUB_TOTAL", getters.getTotal - state.percent_val);
-                }
+                commit("INCREMENT", { id, install_time, type });
+                dispatch("fetchQuestions"); 
                 commit("UPDATE_ANSWER", []);
+                let maps = state.carts.map(el => parseFloat(el.price));
+                if (maps.length > 0) {
+                    let total = maps.reduce((a, b) => a + b);  
+                    commit("UPDATE_SUBTOTAL_WITH_ADDONS", total);
+                    commit("SUB_TOTAL", total);
+                    dispatch("updatePromo");  
+                }
                 commit("FEATURE_PRICE", "");
+            } else {
+                this.$swal({
+                    toast: true,
+                    position: "top-end",
+                    icon: "error",
+                    title: "You can book up to 4 (count with quantity of items) services max. Please checkout first and then add new service/s to cart.",
+                    showConfirmButton: false,
+                    timer: 10000
+                });
             }
         } else {
             this.$swal({
@@ -332,6 +447,23 @@ export const actions = {
                 showConfirmButton: false,
                 timer: 10000
             });
+            }
+        } else { 
+            let item = state.cartobj?.products.map(x => x.item).reduce((a, b) => a + b, 0);
+             
+            if (item !== 5) {
+                commit("INCREMENT", { id, install_time, type });
+                dispatch("fetchQuestions");
+                commit("UPDATE_ANSWER", []);
+                let maps = state.carts.map(el => parseFloat(el.price));
+                if (maps.length > 0) {
+                    let total = maps.reduce((a, b) => a + b);
+                    commit("UPDATE_SUBTOTAL_WITH_ADDONS", total);
+                    commit("SUB_TOTAL", total);
+                    dispatch("updatePromo");
+                }
+                commit("FEATURE_PRICE", "");
+            }
         }
     },
     /**
@@ -340,18 +472,18 @@ export const actions = {
      * @param {*} id
      */
     decrement({ commit, state, getters, dispatch }, { id, install_time }) {
-        commit("DECREMENT", { id, install_time });
-        commit(
-            "PERCENT_VAL",
-            ((state.percent / 100) * getters.getTotal).toFixed(2)
-        );
-        if (state.percent != "") {
-            commit("SUB_TOTAL", getters.getTotal - state.percent_val);
-        }
+        commit("DECREMENT", { id, install_time }); 
         dispatch("fetchQuestions");
         commit("UPDATE_ANSWER", []);
         commit("FEATURE_PRICE", "");
         commit("IS_ITEM", false);
+        let maps = state.carts.map(el => parseFloat(el.price));
+        if (maps.length > 0) {
+            let total = maps.reduce((a, b) => a + b);  
+            commit("UPDATE_SUBTOTAL_WITH_ADDONS", total);
+            commit("SUB_TOTAL", total);
+            dispatch("updatePromo");
+        }
     },
 
     /**
@@ -380,12 +512,9 @@ export const actions = {
                 let services = JSON.parse(localStorage.getItem("services"));
                 services = services.filter(service => service.id !== id);
                 localStorage.setItem("services", JSON.stringify(services));
-                commit("REMOVE_CART", id);
-                commit(
-                    "PERCENT_VAL",
-                    ((state.percent / 100) * getters.getTotal).toFixed(2)
-                );
-                commit("SUB_TOTAL", getters.getTotal - state.percent_val);
+                commit("REMOVE_CART", id); 
+                commit("SUB_TOTAL", ""); 
+                dispatch("updatePromo");
                 if (!getters.getCartDatas.length > 0) {
                     commit("IS_PROMO", false);
                 }
@@ -400,27 +529,41 @@ export const actions = {
             }
         });
     },
-    async applyPromo({ commit, state, getters }) {
-        try {
+
+
+    async applyPromo({ commit, state, getters, dispatch }) {
+        try { 
             let { data } = await this.$axios.post("/promo/match", {
                 promocode: state.promocode
             });
             if (data.success == true) {
                 commit("PERCENT", data.percent);
-                commit(
-                    "PERCENT_VAL",
-                    ((data.percent / 100) * getters.getTotal).toFixed(2)
-                );
-                commit("SUB_TOTAL", getters.getTotal - state.percent_val);
-
+                dispatch("updatePromo");
                 commit("UPDATE_PROMOCODE", "");
                 commit("IS_PROMO", true);
             } else {
                 commit("IS_PROMO", false);
-            }
+            } 
         } catch (e) {
             commit("IS_PROMO", false);
             return;
+        }
+    },
+
+
+    updatePromo({ commit, state, getters }) {  
+        if (state.sub_total_with_addons) {
+            commit(
+                "PERCENT_VAL",
+                ((state.percent / 100) * state.sub_total_with_addons).toFixed(2)
+            );
+            commit("SUB_TOTAL", state.sub_total_with_addons - state.percent_val);
+        } else {
+            commit(
+                "PERCENT_VAL",
+                ((state.percent / 100) * getters.getTotal).toFixed(2)
+            );
+            commit("SUB_TOTAL", getters.getTotal - state.percent_val);
         }
     },
     /**
@@ -494,48 +637,69 @@ export const actions = {
      *  fetch questions
      * @param {services id} param1
      */
-    UpdateAnswer({ commit, state, getters }, obj) {
+    UpdateAnswer({ commit, state, getters,dispatch }, obj) {
         commit("UPDATE_ANSWER", obj);
-        let maps = state.answer.map(el => parseInt(el.price));
+        
+        let maps = state.answer.map(el => parseFloat(el.price));
         if (maps.length > 0) {
             commit(
                 "FEATURE_PRICE",
                 maps.reduce((a, b) => a + b)
-            );
-            commit(
+            ); 
+            if(state.feature_price > 0){
+                commit(
+                    "UPDATE_SUBTOTAL_WITH_ADDONS",
+                    getters.getTotal + state.feature_price
+                );
+                commit(
                 "SUB_TOTAL",
-                getters.getTotal - state.percent_val + state.feature_price
-            );
-        }
+                    getters.getTotal - state.percent_val + state.feature_price
+                ); 
+                dispatch("updatePromo");
+            } else {
+                commit(
+                    "SUB_TOTAL",
+                        ''
+                    ); 
+            }
+        }  
     },
     /**
      *  fetch questions
      * @param {services id} param1
      */
     async finishedCheckout({ commit, state, getters }, obj = null) {
-        commit("FINISH_STEP_LOADING", true);
-        let { data } = await this.$axios.post("/order/store", {
+     
+        const datas = {
             carts: state.carts,
-            total_price: state.sub_total,
-            sub_total: getters.getTotal,
+            cartdata: state.cartobj, 
             images: state.images,
             datetime: state.datetime,
-            payment: state.payment,
-            discount_price: state.percent_val,
+            payment: state.payment, 
             addon_price: state.feature_price,
             discount: state.percent,
             user_id: this.$auth.user.id,
             answer: state.answer,
-            nonce: obj ? obj.nonce : "",
-            location_id: obj ? obj.location_id : ""
-        });
+            grand_total: state.grand_total,
+            token: obj.token,
+            taxes: state.rate
+        };
+  
+        let { data } = await this.$axios.post("/order/store", datas ); 
+        
         if (data.success == true) {
             localStorage.removeItem("services");
+            commit("FETCH_DATA_CARTS", []);
             commit("FETCH_DATA", []);
             commit("UPDATE_ZIPCODE", "");
             commit("ZIPCODE_SUCCESS", "");
+            commit("SUB_TOTAL", "");
+            commit("GRAND_TOTAL", "");
             commit("FINISH_STEP_LOADING", false);
-            return true;
+            return {
+                success: data.success,
+                type: data.type
+            };
         } else {
             commit("FINISH_STEP_LOADING", false);
             this.$swal({
@@ -588,5 +752,25 @@ export const actions = {
         });
 
         commit("CHECK_QUESTION", maped);
-    }
+    }, 
+    async showCart({ commit, state, getters }) {
+        try { 
+            commit("IS_LOADING", true); 
+          let { data } = await this.$axios.get(
+            `/auth/check-fields/${this.$auth.user.id}`
+          );
+          if (data.success === true) {
+            commit("IS_REQUIRED_FIELD", false); 
+            commit("IS_LOGGEDIN", false);
+            commit("IS_AUTH", true);
+          } else { 
+             commit("IS_REQUIRED_FIELD", true);
+             commit("IS_AUTH", false);
+          }
+          commit("IS_LOADING", false); 
+        } catch (e) {
+          return;
+        }
+      }
+
 };
