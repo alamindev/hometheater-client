@@ -8,146 +8,148 @@
         Payment Process
       </h1>
     </div>
-    <div class="max-w-[480px] mx-auto space-y-6 pt-5 pb-2 md:pb-8">
-      <table
-        class="w-full text-sm sm:text-base"
-        v-if="Object.keys(cartdata.services).length !== 0"
-      >
-        <thead class="text-left">
-          <tr>
-            <th
-              class="text-gray-500 text-base sm:text-xl font-bold lg:px-2 py-2 md:py-3 border-b"
+    <div class="min-h-[450px] flex justify-center items-center">
+      <div class="w-[480px] max-w-full space-y-6 pt-5 pb-2 md:pb-8">
+        <table
+          class="w-full text-sm sm:text-base"
+          v-if="Object.keys(cartdata.services).length !== 0"
+        >
+          <thead class="text-left">
+            <tr>
+              <th
+                class="text-gray-500 text-base sm:text-xl font-bold lg:px-2 py-2 md:py-3 border-b"
+              >
+                Services
+              </th>
+              <th
+                class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b"
+              >
+                Payment Option
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="py-2 lg:px-2">
+                <h4 class="font-semibold text-sm sm:text-base">
+                  Total with Addons <br />
+                  ${{ servicesTotalWithAddons }}
+                </h4>
+              </td>
+              <td class="py-2 lg:px-2">
+                <ul class="space-y-3">
+                  <li class="text-right space-x-2">
+                    <label
+                      for="payone"
+                      class="cursor-pointer text-sm sm:text-base"
+                      >Pay Now</label
+                    >
+                    <input
+                      type="radio"
+                      value="online"
+                      v-model="service_payment"
+                      name="service_payment"
+                      id="payone"
+                    />
+                  </li>
+                  <li class="text-right space-x-2">
+                    <label
+                      for="payat"
+                      class="cursor-pointer text-sm sm:text-base font-bold"
+                      >Pay at appointment</label
+                    >
+                    <input
+                      type="radio"
+                      v-model="service_payment"
+                      value="local"
+                      name="service_payment"
+                      id="payat"
+                    />
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table
+          class="w-full text-sm sm:text-base"
+          v-if="Object.keys(cartdata.products).length !== 0"
+        >
+          <thead class="text-left">
+            <tr>
+              <th
+                class="text-gray-500 text-base sm:text-xl font-bold lg:px-2 py-2 md:py-3 border-b"
+              >
+                Products
+              </th>
+              <th
+                class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b"
+              >
+                Payment Option
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b">
+              <td class="py-2 lg:px-2">
+                <h4 class="font-semibold text-sm sm:text-base">
+                  Total: ${{ productsTotal }}
+                </h4>
+              </td>
+              <td class="py-2 lg:px-2">
+                <ul class="space-y-3">
+                  <li class="text-right space-x-2">
+                    <label
+                      for="payonline"
+                      class="cursor-pointer text-sm sm:text-base"
+                      >Pay Now</label
+                    >
+                    <input type="radio" checked name="product" id="payonline" />
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="w-full text-sm sm:text-base pt-3">
+          <tbody>
+            <tr class="">
+              <td class="py-2 lg:px-2">Total</td>
+              <td class="py-2 lg:px-2">
+                <h4 class="font-semibold text-right">
+                  ${{ serviceAndProductAddition }}
+                </h4>
+              </td>
+            </tr>
+            <tr
+              class=" "
+              v-if="
+                service_payment === 'local' &&
+                Object.keys(cartdata.services).length !== 0
+              "
             >
-              Services
-            </th>
-            <th
-              class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b"
-            >
-              Payment Option
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b">
-            <td class="py-2 lg:px-2">
-              <h4 class="font-semibold text-sm sm:text-base">
-                Total with Addons <br />
-                ${{ servicesTotalWithAddons }}
-              </h4>
-            </td>
-            <td class="py-2 lg:px-2">
-              <ul class="space-y-3">
-                <li class="text-right space-x-2">
-                  <label
-                    for="payone"
-                    class="cursor-pointer text-sm sm:text-base"
-                    >Pay Now</label
-                  >
-                  <input
-                    type="radio"
-                    value="online"
-                    v-model="service_payment"
-                    name="service_payment"
-                    id="payone"
-                  />
-                </li>
-                <li class="text-right space-x-2">
-                  <label
-                    for="payat"
-                    class="cursor-pointer text-sm sm:text-base font-bold"
-                    >Pay at appointment</label
-                  >
-                  <input
-                    type="radio"
-                    v-model="service_payment"
-                    value="local"
-                    name="service_payment"
-                    id="payat"
-                  />
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table
-        class="w-full text-sm sm:text-base"
-        v-if="Object.keys(cartdata.products).length !== 0"
-      >
-        <thead class="text-left">
-          <tr>
-            <th
-              class="text-gray-500 text-base sm:text-xl font-bold lg:px-2 py-2 md:py-3 border-b"
-            >
-              Products
-            </th>
-            <th
-              class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b"
-            >
-              Payment Option
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b">
-            <td class="py-2 lg:px-2">
-              <h4 class="font-semibold text-sm sm:text-base">
-                Total: ${{ productsTotal }}
-              </h4>
-            </td>
-            <td class="py-2 lg:px-2">
-              <ul class="space-y-3">
-                <li class="text-right space-x-2">
-                  <label
-                    for="payonline"
-                    class="cursor-pointer text-sm sm:text-base"
-                    >Pay Now</label
-                  >
-                  <input type="radio" checked name="product" id="payonline" />
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="w-full text-sm sm:text-base pt-3">
-        <tbody>
-          <tr class="">
-            <td class="py-2 lg:px-2">Total</td>
-            <td class="py-2 lg:px-2">
-              <h4 class="font-semibold text-right">
-                ${{ serviceAndProductAddition }}
-              </h4>
-            </td>
-          </tr>
-          <tr
-            class=" "
-            v-if="
-              service_payment === 'local' &&
-              Object.keys(cartdata.services).length !== 0
-            "
-          >
-            <td class="py-2 lg:px-2">Pay at appointment</td>
-            <td class="py-2 lg:px-2">
-              <h4 class="font-semibold text-right">
-                -${{ servicesTotalWithAddons }}
-              </h4>
-            </td>
-          </tr>
-          <tr class="border-b">
-            <td class="py-2 lg:px-2">Taxes</td>
-            <td class="py-2 lg:px-2">
-              <h4 class="font-semibold text-right">+{{ rate }}%</h4>
-            </td>
-          </tr>
-          <tr class="">
-            <td class="py-2 lg:px-2"><strong>Grand Total</strong></td>
-            <td class="py-2 lg:px-2">
-              <h4 class="font-semibold text-right">${{ grandTotal }}</h4>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <td class="py-2 lg:px-2">Pay at appointment</td>
+              <td class="py-2 lg:px-2">
+                <h4 class="font-semibold text-right">
+                  -${{ servicesTotalWithAddons }}
+                </h4>
+              </td>
+            </tr>
+            <tr class="border-b">
+              <td class="py-2 lg:px-2">Taxes</td>
+              <td class="py-2 lg:px-2">
+                <h4 class="font-semibold text-right">+{{ rate }}%</h4>
+              </td>
+            </tr>
+            <tr class="">
+              <td class="py-2 lg:px-2"><strong>Grand Total</strong></td>
+              <td class="py-2 lg:px-2">
+                <h4 class="font-semibold text-right">${{ grandTotal }}</h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="border-t lg:pt-10">
       <button

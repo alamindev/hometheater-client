@@ -71,15 +71,31 @@ export default {
       return this.$store.state.setting;
     },
   },
+  watch: {
+    $route(to, from) {
+      this.checkZip();
+      if (!this.authenticated) {
+        this.$store.commit("cart/STEP_3_ACTIVE", false);
+        this.$store.commit("cart/IS_LOGGEDIN", false);
+      }
+    },
+  },
   mounted() {
-    let is_zipcode = getCookie("is_zipcode");
-    if (is_zipcode === "" || is_zipcode === "false") {
-      setTimeout(() => {
-        this.is_popup = true;
-      }, 7000);
-    }
+    this.checkZip();
   },
   methods: {
+    checkZip() {
+      const datas = JSON.parse(localStorage.getItem("services"));
+      const services = datas.filter((el) => el.type === 0);
+      if (services.length > 0) {
+        let is_zipcode = getCookie("is_zipcode");
+        if (is_zipcode === "" || is_zipcode === "false") {
+          setTimeout(() => {
+            this.is_popup = true;
+          }, 7000);
+        }
+      }
+    },
     setZipCode(type, zipcode, is_success) {
       setCookie("is_zipcode", true, 1500);
       if (type === "service") {

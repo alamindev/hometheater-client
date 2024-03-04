@@ -96,17 +96,19 @@
             </div>
             <div class="p-5 bg-white">
               <ul>
-                <li
-                  class="pb-3 last:pb-0"
-                  v-for="service in category.services"
-                  :key="service.id"
-                >
-                  <nuxt-link
-                    :to="'booking/' + service.slug"
-                    class="text-lg text-gray-500 hover:text-brand-color"
-                    >{{ service.title }}</nuxt-link
+                <template v-for="service in category.services">
+                  <li
+                    class="pb-3 last:pb-0"
+                    v-if="service.type === 0"
+                    :key="service.id"
                   >
-                </li>
+                    <nuxt-link
+                      :to="'booking/' + service.slug"
+                      class="text-lg text-gray-500 hover:text-brand-color"
+                      >{{ service.title }}</nuxt-link
+                    >
+                  </li>
+                </template>
               </ul>
             </div>
           </div>

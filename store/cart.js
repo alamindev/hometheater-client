@@ -555,15 +555,15 @@ export const actions = {
         if (state.sub_total_with_addons) {
             commit(
                 "PERCENT_VAL",
-                ((state.percent / 100) * state.sub_total_with_addons).toFixed(2)
+                ((state.percent / 100) * +state.sub_total_with_addons).toFixed(2)
             );
-            commit("SUB_TOTAL", state.sub_total_with_addons - state.percent_val);
+            commit("SUB_TOTAL", +state.sub_total_with_addons - +state.percent_val);
         } else {
             commit(
                 "PERCENT_VAL",
                 ((state.percent / 100) * getters.getTotal).toFixed(2)
             );
-            commit("SUB_TOTAL", getters.getTotal - state.percent_val);
+            commit("SUB_TOTAL", +getters.getTotal - +state.percent_val);
         }
     },
     /**
@@ -644,16 +644,16 @@ export const actions = {
         if (maps.length > 0) {
             commit(
                 "FEATURE_PRICE",
-                maps.reduce((a, b) => a + b)
+                (maps.reduce((a, b) => a + b)).toFixed(2)
             ); 
             if(state.feature_price > 0){
                 commit(
                     "UPDATE_SUBTOTAL_WITH_ADDONS",
-                    getters.getTotal + state.feature_price
+                    +getters.getTotal + +state.feature_price
                 );
                 commit(
                 "SUB_TOTAL",
-                    getters.getTotal - state.percent_val + state.feature_price
+                    +getters.getTotal - +state.percent_val + +state.feature_price
                 ); 
                 dispatch("updatePromo");
             } else {

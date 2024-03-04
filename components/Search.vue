@@ -23,24 +23,25 @@
         <li class="pt-3 pb-2 text-gray-500 px-3 font-medium">
           <p><i class="fas fa-briefcase pr-2"></i>Services</p>
           <ul class="sm:pl-4 pt-2" v-if="!error">
-            <li
-              class="py-2 px-2 hover:bg-gray-100"
-              v-if="!searchLoading"
-              v-for="data in datas"
-              :key="data.id"
-            >
-              <nuxt-link
-                class="flex gap-2 items-center"
-                :to="`/booking/${data.slug}`"
-                ><img
-                  loading="lazy"
-                  :src="imgurl + 'storage' + data.image"
-                  class="w-8 h-8 rounded-full flex-shrink-0"
-                  alt=""
-                />
-                <p>{{ data.title }}, ${{ data.price }}</p>
-              </nuxt-link>
-            </li>
+            <template v-for="data in datas">
+              <li
+                class="py-2 px-2 hover:bg-gray-100"
+                v-if="!searchLoading"
+                :key="data.id"
+              >
+                <nuxt-link
+                  class="flex gap-2 items-center"
+                  :to="`/${data.type === 0 ? 'booking' : 'shop'}/${data.slug}`"
+                  ><img
+                    loading="lazy"
+                    :src="imgurl + 'storage' + data.image"
+                    class="w-8 h-8 rounded-full flex-shrink-0"
+                    alt=""
+                  />
+                  <p>{{ data.title }}, ${{ data.price }}</p>
+                </nuxt-link>
+              </li>
+            </template>
             <li v-if="searchLoading">Loading...</li>
           </ul>
           <p v-else class="pl-6 pt-2 text-center text-lg font-medium">

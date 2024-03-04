@@ -32,36 +32,24 @@
           <i class="fas fa-arrow-right"></i>
         </button>
         <div class="" v-if="step === 3">
-          <div v-if="is_auth">
-            <div class="" v-if="question_main.length > 0">
-              <button
-                v-if="activeStep + 1 < question_main.length"
-                @click="nextQuestion"
-                type="button"
-                :disabled="isQuestionCheck(activeStep)"
-                class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-              >
-                <p class="uppercase"></p>
-                <p class="uppercase">Next</p>
-                <i class="fas fa-arrow-right"></i>
-              </button>
-              <button
-                v-if="activeStep + 1 === question_main.length"
-                type="button"
-                class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
-                @click="onClickNext"
-                :disabled="isQuestionCheck(activeStep)"
-              >
-                <p class="uppercase"></p>
-                <p class="uppercase">Next</p>
-                <i class="fas fa-arrow-right"></i>
-              </button>
-            </div>
+          <div class="" v-if="question_main.length > 0">
             <button
-              v-else
+              v-if="activeStep + 1 < question_main.length"
+              @click="nextQuestion"
+              type="button"
+              :disabled="isQuestionCheck(activeStep)"
+              class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+            >
+              <p class="uppercase"></p>
+              <p class="uppercase">Next</p>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+            <button
+              v-if="activeStep + 1 === question_main.length"
               type="button"
               class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
               @click="onClickNext"
+              :disabled="isQuestionCheck(activeStep)"
             >
               <p class="uppercase"></p>
               <p class="uppercase">Next</p>
@@ -71,8 +59,8 @@
           <button
             v-else
             type="button"
-            :disabled="!is_auth"
             class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"
+            @click="onClickNext"
           >
             <p class="uppercase"></p>
             <p class="uppercase">Next</p>

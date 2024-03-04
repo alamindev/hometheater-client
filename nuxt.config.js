@@ -199,7 +199,7 @@ export default {
     lastmod: "2022-04-01",
   },
   env: {
-    baseUrl: process.env.BASE_URL || "http://localhost:8000/api/",
+    baseUrl: process.env.BASE_URL || "https://admin.hometheaterproz.com/api/",
     // https://admin.hometheaterproz.com/api/    http://localhost:8000/api/
     imgUrl: "https://admin.hometheaterproz.com/",
     //https://admin.hometheaterproz.com/  http://localhost:8000/

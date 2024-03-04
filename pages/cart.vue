@@ -9,158 +9,192 @@
       v-if="carts.length || is_success || step === 7"
     >
       <div class="bg-white shadow-lg rounded-md">
-        <!-- cart for desktop -->
-        <div v-if="!is_success && step !== 7">
-          <div class="flex flex-col lg:flex-row items-start">
-            <div class="w-full px-4 py-4 lg:w-9/12 lg:px-10 lg:py-12">
-              <div
-                class="lg:hidden flex justify-between lg:mb-5 border-b sm:-mx-4 sm:px-10"
-              >
-                <button
-                  :class="
-                    current == 'shopping-cart'
-                      ? 'border-b-4 text-gray-800 font-medium  text-sm sm:text-base'
-                      : 'text-gray-500'
-                  "
-                  type="button"
-                  @click="CartTab('shopping-cart')"
-                  class="border-0 py-2 border-brand-color"
-                >
-                  <span v-if="step === 1">Cart Items</span>
-                  <span
-                    v-if="
-                      step === 2 && Object.keys(cartdata.services).length === 0
-                    "
-                    >Payment Process</span
+        <div v-show="!is_loading">
+          <div v-if="!is_loggedin && !is_required_field">
+            <!-- cart for desktop -->
+            <div v-if="!is_success && step !== 7">
+              <div class="flex flex-col lg:flex-row items-start">
+                <div class="w-full px-4 py-4 lg:w-9/12 lg:px-10 lg:py-12">
+                  <div
+                    class="lg:hidden flex justify-between lg:mb-5 border-b sm:-mx-4 sm:px-10"
                   >
-                  <span
-                    v-if="
-                      step === 2 && Object.keys(cartdata.services).length !== 0
-                    "
-                    >Zipcode Checker</span
-                  >
-                  <span
-                    v-if="
-                      step === 3 && Object.keys(cartdata.services).length !== 0
-                    "
-                    >Extra Addons</span
-                  >
-                  <span
-                    v-if="
-                      step === 4 && Object.keys(cartdata.services).length !== 0
-                    "
-                    >Upload Images</span
-                  >
-                  <span
-                    v-if="
-                      step === 5 && Object.keys(cartdata.services).length !== 0
-                    "
-                    >Booking Date & Time</span
-                  >
-                  <span
-                    v-if="
-                      step === 6 && Object.keys(cartdata.services).length !== 0
-                    "
-                    >Payment process</span
-                  >
-                </button>
-                <button
-                  type="button"
-                  @click="CartTab('order-summary')"
-                  class="border-0 py-2 border-brand-color text-sm sm:text-base"
-                  :class="
-                    current == 'order-summary'
-                      ? 'border-b-4 text-gray-800 font-medium'
-                      : 'text-gray-500'
-                  "
-                >
-                  Order Summary
-                </button>
-              </div>
-
-              <div
-                class=""
-                :class="current == 'shopping-cart' ? 'block' : 'hidden'"
-              >
-                <CartItems v-if="step === 1" />
-                <div v-if="Object.keys(cartdata.services).length !== 0">
-                  <div v-if="!is_check_zipcode">
-                    <ZipCode v-if="step === 2" @prev="prev" />
+                    <button
+                      :class="
+                        current == 'shopping-cart'
+                          ? 'border-b-4 text-gray-800 font-medium  text-sm sm:text-base'
+                          : 'text-gray-500'
+                      "
+                      type="button"
+                      @click="CartTab('shopping-cart')"
+                      class="border-0 py-2 border-brand-color"
+                    >
+                      <span v-if="step === 1">Cart Items</span>
+                      <span
+                        v-if="
+                          step === 2 &&
+                          Object.keys(cartdata.services).length === 0
+                        "
+                        >Payment Process</span
+                      >
+                      <span
+                        v-if="
+                          step === 2 &&
+                          Object.keys(cartdata.services).length !== 0
+                        "
+                        >Zipcode Checker</span
+                      >
+                      <span
+                        v-if="
+                          step === 3 &&
+                          Object.keys(cartdata.services).length !== 0
+                        "
+                        >Extra Addons</span
+                      >
+                      <span
+                        v-if="
+                          step === 4 &&
+                          Object.keys(cartdata.services).length !== 0
+                        "
+                        >Upload Images</span
+                      >
+                      <span
+                        v-if="
+                          step === 5 &&
+                          Object.keys(cartdata.services).length !== 0
+                        "
+                        >Booking Date & Time</span
+                      >
+                      <span
+                        v-if="
+                          step === 6 &&
+                          Object.keys(cartdata.services).length !== 0
+                        "
+                        >Payment process</span
+                      >
+                    </button>
+                    <button
+                      type="button"
+                      @click="CartTab('order-summary')"
+                      class="border-0 py-2 border-brand-color text-sm sm:text-base"
+                      :class="
+                        current == 'order-summary'
+                          ? 'border-b-4 text-gray-800 font-medium'
+                          : 'text-gray-500'
+                      "
+                    >
+                      Order Summary
+                    </button>
                   </div>
-                  <Questions v-show="step === 3" @prev="prev" />
-                  <UploadImage v-show="step === 4" @prev="prev" />
-                  <Calendar v-if="step === 5" @prev="prev" :err="calendarerr" />
-                  <finalStep
-                    v-if="step === 6"
-                    @prev="prev"
-                    :is_confirmation="false"
+
+                  <div
+                    class=""
+                    :class="current == 'shopping-cart' ? 'block' : 'hidden'"
+                  >
+                    <CartItems v-if="step === 1" />
+                    <div v-if="Object.keys(cartdata.services).length !== 0">
+                      <div v-if="!is_check_zipcode">
+                        <ZipCode v-if="step === 2" @prev="prev" />
+                      </div>
+                      <Questions v-show="step === 3" @prev="prev" />
+                      <UploadImage v-show="step === 4" @prev="prev" />
+                      <Calendar
+                        v-if="step === 5"
+                        @prev="prev"
+                        :err="calendarerr"
+                      />
+                      <finalStep
+                        v-if="step === 6"
+                        @prev="prev"
+                        :is_confirmation="false"
+                      />
+                    </div>
+                    <div class="" v-else>
+                      <FinalStep v-if="step === 3" @prev="prev" />
+                    </div>
+                  </div>
+
+                  <div
+                    class="lg:hidden"
+                    :class="current == 'order-summary' ? 'block' : 'hidden'"
+                  >
+                    <div class="sm:-ml-4 sm:-mr-4">
+                      <OrderMobileSummary />
+                    </div>
+                  </div>
+                  <div class="lg:pt-10 lg:hidden">
+                    <MobileFooter
+                      @PaymentForm="PaymentForm"
+                      :isCheckout="isDisabled"
+                      @next="mobileNext"
+                      :step="step"
+                      :currentTab="current"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="hidden lg:block lg:w-3/12 font-rubik top-0 sticky h-full"
+                >
+                  <OrderSummery
+                    @PaymentForm="PaymentForm"
+                    :isCheckout="isDisabled"
+                    @next="next"
+                    :step="step"
                   />
                 </div>
-                <div class="" v-else>
-                  <Confirmation v-if="step === 2" @prev="prev" />
-                </div>
-              </div>
-
-              <div
-                class="lg:hidden"
-                :class="current == 'order-summary' ? 'block' : 'hidden'"
-              >
-                <div class="sm:-ml-4 sm:-mr-4">
-                  <OrderMobileSummary />
-                </div>
-              </div>
-              <div class="lg:pt-10 lg:hidden">
-                <MobileFooter
-                  @PaymentForm="PaymentForm"
-                  :isCheckout="isDisabled"
-                  @next="mobileNext"
-                  :step="step"
-                  :currentTab="current"
-                />
               </div>
             </div>
+            <!-- last cart for success  -->
             <div
-              class="hidden lg:block lg:w-3/12 font-rubik top-0 sticky h-full"
+              class="flex px-10 py-20 flex-col items-center font-rubik"
+              v-if="is_success || step === 7"
             >
-              <OrderSummery
-                @PaymentForm="PaymentForm"
-                :isCheckout="isDisabled"
-                @next="next"
-                :step="step"
-              />
+              <div class="flex flex-col justify-center items-center">
+                <i class="fas fa-check-circle text-2xl text-brand-color"></i>
+                <h3 class="text-brand-color text-3xl font-medium">Success!</h3>
+              </div>
+              <div v-if="!only_product">
+                <p class="text-gray-400 pt-8 pb-3">
+                  Your Product & Services Ordered successfully Completed!
+                </p>
+                <div class="pb-10">
+                  <h1 class="text-dark-sm text-xl pb-3">
+                    Appointement Date:
+                    <span class="font-bold"> {{ date }}</span>
+                  </h1>
+                </div>
+              </div>
+              <div v-else>
+                <p class="text-gray-400 pt-8 pb-3">
+                  Your Product Ordered successfully Completed!
+                </p>
+              </div>
+              <nuxt-link
+                to="users/dashboard"
+                class="py-3 px-10 bg-brand-color hover:bg-brand-color-hover text-white rounded-md"
+                >View Dashboard</nuxt-link
+              >
             </div>
+          </div>
+          <div v-else class="py-10">
+            <Register
+              v-if="is_register_form && !is_required_field"
+              @GotoLogin="GotoLogin"
+              @showLoginForm="showLoginForm"
+            />
+            <Login
+              v-if="!is_register_form && !is_required_field"
+              @showRegisterForm="showRegisterForm"
+            />
+            <RequiredFields v-if="is_required_field" />
           </div>
         </div>
-
-        <!-- last cart for success  -->
         <div
-          class="flex px-10 py-20 flex-col items-center font-rubik"
-          v-if="is_success || step === 7"
+          v-show="is_loading"
+          class="min-h-[400px] flex justify-center items-center"
         >
-          <div class="flex flex-col justify-center items-center">
-            <i class="fas fa-check-circle text-2xl text-brand-color"></i>
-            <h3 class="text-brand-color text-3xl font-medium">Success!</h3>
+          <div class="loader-parent mt-16 mb-20">
+            <div class="loader"></div>
           </div>
-          <div v-if="!only_product">
-            <p class="text-gray-400 pt-8 pb-3">
-              Your Product & Services Ordered successfully Completed!
-            </p>
-            <div class="pb-10">
-              <h1 class="text-dark-sm text-xl pb-3">
-                Appointement Date: <span class="font-bold"> {{ date }}</span>
-              </h1>
-            </div>
-          </div>
-          <div v-else>
-            <p class="text-gray-400 pt-8 pb-3">
-              Your Product Ordered successfully Completed!
-            </p>
-          </div>
-          <nuxt-link
-            to="users/dashboard"
-            class="py-3 px-10 bg-brand-color hover:bg-brand-color-hover text-white rounded-md"
-            >View Dashboard</nuxt-link
-          >
         </div>
       </div>
     </div>
@@ -197,6 +231,7 @@
         </div>
       </div>
     </div>
+
     <PaymentForm
       @finishedCheckout="finishedCheckout"
       @hideModal="hideModal"
@@ -214,14 +249,17 @@ import { getCookie } from "@/Utils/Cookie";
 import Calendar from "@/components/Cart/Calendar";
 import CartItems from "@/components/Cart/CartItems";
 import FinalStep from "@/components/Cart/FinalStep.vue";
+import Login from "@/components/Cart/Login";
 import MobileFooter from "@/components/Cart/MobileFooter";
 import OrderMobileSummary from "@/components/Cart/OrderMobileSummary";
 import OrderSummery from "@/components/Cart/OrderSummery";
 import Questions from "@/components/Cart/Questions";
+import Register from "@/components/Cart/Register";
+import RequiredFields from "@/components/Cart/RequiredFields";
 import UploadImage from "@/components/Cart/UploadImage";
 import ZipCode from "@/components/Cart/ZipCode";
-import Confirmation from "../components/Cart/Confirmation.vue";
 import PaymentForm from "../components/Cart/PaymentForm.vue";
+
 export default {
   name: "Cart",
   components: {
@@ -233,9 +271,11 @@ export default {
     Questions,
     UploadImage,
     Calendar,
-    Confirmation,
     FinalStep,
     PaymentForm,
+    Login,
+    Register,
+    RequiredFields,
   },
   data() {
     return {
@@ -254,6 +294,9 @@ export default {
     carts() {
       return this.$store.state.cart.carts;
     },
+    is_loading() {
+      return this.$store.state.cart.is_loading;
+    },
     cartdata() {
       return this.$store.state.cart.cartobj;
     },
@@ -266,6 +309,24 @@ export default {
     isDisabled() {
       if (this.carts.length > 0) return false;
       return true;
+    },
+    step_active() {
+      return this.$store.state.cart.step_3_active;
+    },
+    is_loggedin() {
+      if (this.step_active) {
+        return this.$store.state.cart.is_loggedin;
+      }
+      return false;
+    },
+    is_register_form() {
+      return this.$store.state.cart.is_register_form;
+    },
+    is_required_field() {
+      if (this.step_active) {
+        return this.$store.state.cart.is_required_field;
+      }
+      return false;
     },
     date() {
       let datetime = [...this.$store.state.cart.datetime];
@@ -312,7 +373,24 @@ export default {
       return this.$store.state.cart.sub_total;
     },
   },
-
+  watch: {
+    step_active: function (val, newVal) {
+      if (val === true) {
+        if (!this.authenticated) {
+          this.$store.commit("cart/IS_LOGGEDIN", true);
+          this.$store.commit("cart/IS_AUTH", false);
+          this.$swal({
+            icon: "error",
+            text: "Please login or register to continue.",
+            showConfirmButton: true,
+            timer: 6000,
+          });
+        } else {
+          this.$store.dispatch("cart/showCart");
+        }
+      }
+    },
+  },
   head() {
     return {
       title: "Cart | Home Theater Proz",
@@ -325,6 +403,15 @@ export default {
     };
   },
   methods: {
+    GotoLogin() {
+      this.$store.commit("cart/IS_REGISTER_FORM", false);
+    },
+    showRegisterForm() {
+      this.$store.commit("cart/IS_REGISTER_FORM", true);
+    },
+    showLoginForm() {
+      this.$store.commit("cart/IS_REGISTER_FORM", false);
+    },
     hideModal() {
       this.paymentModal = false;
       this.$store.commit("cart/FINISH_STEP_LOADING", false);
@@ -360,7 +447,11 @@ export default {
         ) {
           this.step = 3;
         } else {
-          this.step++;
+          if (Object.keys(this.cartdata.services).length === 0) {
+            this.step = 3;
+          } else {
+            this.step++;
+          }
         }
         this.current = "shopping-cart";
       }
@@ -379,7 +470,11 @@ export default {
       ) {
         this.step = 3;
       } else {
-        this.step++;
+        if (Object.keys(this.cartdata.services).length === 0) {
+          this.step = 3;
+        } else {
+          this.step++;
+        }
       }
       if (this.step === 3) {
         this.$store.commit("cart/STEP_3_ACTIVE", true);

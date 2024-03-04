@@ -264,12 +264,12 @@
             No product here.
           </h1>
           <p class="text-base text-center">
-            <nuxt-link to="/product" class="underline text-brand-color"
-              >Book a service</nuxt-link
+            <nuxt-link to="/shop" class="underline text-brand-color"
+              >Order products</nuxt-link
             >
             or go back to
-            <nuxt-link to="/cart" class="underline text-brand-color"
-              >cart</nuxt-link
+            <nuxt-link to="/" class="underline text-brand-color"
+              >home</nuxt-link
             >
           </p>
         </div>

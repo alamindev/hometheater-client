@@ -123,6 +123,9 @@ export default {
     },
     signOut() {
       this.$auth.logout();
+      if (!this.$store.state.auth.loggedIn) {
+        this.$router.push("/");
+      }
     },
   },
 };

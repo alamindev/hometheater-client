@@ -16,10 +16,14 @@
         <Dot position="right-0 top-0 z-30 hidden md:block" />
         <div v-if="!loading" class="relative z-40">
           <Product
+            v-if="products.length > 0"
             Rootclass="grid gap-3 sm:gap-x-5 xl:gap-x-8 sm:gap-y-10 lg:gap-y-16 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             :products="products"
             title="text-xs text-sm md:text-base"
           />
+          <div v-else>
+            <h3 class="text-center font-bold pt-10">Product not found!</h3>
+          </div>
         </div>
         <div v-else class="loader-parent mt-16">
           <div class="loader"></div>

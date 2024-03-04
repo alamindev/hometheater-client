@@ -1,9 +1,6 @@
 <template>
   <div class="md:w-10/12 lg:w-8/12 xl:w-6/12 mx-auto py-6">
     <div class="p-4 rounded-md">
-      <div class="py-3">
-        <social-login :is_cart="true" />
-      </div>
       <div class="w-full">
         <div
           class="py-2 px-5 bg-red-600 text-white mb-2 shadow-sm rounded"
