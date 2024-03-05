@@ -1,15 +1,12 @@
 <template>
   <div class="relative">
-    <div
-      v-if="is_confirmation"
-      class="hidden lg:flex justify-between items-center border-b pb-3"
-    >
+    <div class="hidden lg:flex justify-between items-center border-b pb-3">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
-        Payment Process
+        Checkout
       </h1>
     </div>
     <div class="min-h-[450px] flex justify-center items-center">
-      <div class="w-[480px] max-w-full space-y-6 pt-5 pb-2 md:pb-8">
+      <div class="w-[540px] max-w-full space-y-6 pt-5 pb-2 md:pb-8">
         <table
           class="w-full text-sm sm:text-base"
           v-if="Object.keys(cartdata.services).length !== 0"
@@ -29,6 +26,34 @@
             </tr>
           </thead>
           <tbody>
+            <tr class="border-b">
+              <td colspan="2" class="py-2 px-2">
+                <div class="grid gap-3">
+                  <div
+                    class=""
+                    :key="cart.id"
+                    v-for="cart in cartdata.services"
+                  >
+                    <div class="flex gap-3 items-start">
+                      <figure class="w-24">
+                        <img
+                          loading="lazy"
+                          class="w-24 h-20 shadow-md border object-cover rounded-md"
+                          :src="imgurl + 'storage' + cart.image"
+                          :alt="cart.title"
+                        />
+                      </figure>
+                      <div class="space-y-2">
+                        <h3 class="text-sm">{{ cart.title }}</h3>
+                        <p class="text-sm">
+                          QTY: <strong>{{ cart.item }}</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
             <tr class="border-b">
               <td class="py-2 lg:px-2">
                 <h4 class="font-semibold text-sm sm:text-base">
@@ -91,6 +116,34 @@
           </thead>
           <tbody>
             <tr class="border-b">
+              <td colspan="2" class="py-2 px-2">
+                <div class="grid gap-3">
+                  <div
+                    class=""
+                    :key="cart.id"
+                    v-for="cart in cartdata.products"
+                  >
+                    <div class="flex gap-3 items-start">
+                      <figure class="w-24">
+                        <img
+                          loading="lazy"
+                          class="w-24 h-20 shadow-md border object-cover rounded-md"
+                          :src="imgurl + 'storage' + cart.image"
+                          :alt="cart.title"
+                        />
+                      </figure>
+                      <div class="space-y-2">
+                        <h3 class="text-sm">{{ cart.title }}</h3>
+                        <p class="text-sm">
+                          QTY: <strong>{{ cart.item }}</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr class="border-b">
               <td class="py-2 lg:px-2">
                 <h4 class="font-semibold text-sm sm:text-base">
                   Total: ${{ productsTotal }}
@@ -135,8 +188,11 @@
                 </h4>
               </td>
             </tr>
-            <tr class="border-b">
-              <td class="py-2 lg:px-2">Taxes</td>
+            <tr
+              class="border-b"
+              v-if="Object.keys(cartdata.products).length !== 0"
+            >
+              <td class="py-2 lg:px-2">Taxes <sub>(Only for Products)</sub></td>
               <td class="py-2 lg:px-2">
                 <h4 class="font-semibold text-right">+{{ rate }}%</h4>
               </td>
@@ -167,7 +223,13 @@
 import { mapGetters } from "vuex";
 export default {
   name: "FinalStep",
+
   props: ["is_confirmation"],
+  data() {
+    return {
+      imgurl: process.env.imgUrl,
+    };
+  },
   computed: {
     ...mapGetters({
       total: "cart/getTotal",
@@ -183,7 +245,7 @@ export default {
     },
     servicesTotalWithAddons() {
       let services = this.$store.state.cart.cartobj?.services;
-      let maps = services.map((el) => parseInt(el.price));
+      let maps = services.map((el) => +el.price);
       if (maps.length > 0) {
         let total = maps.reduce((a, b) => a + b);
         let addons = this.$store.state.cart?.feature_price;
@@ -197,7 +259,7 @@ export default {
     },
     productsTotal() {
       let products = this.$store.state.cart.cartobj?.products;
-      let maps = products.map((el) => parseInt(el.price));
+      let maps = products.map((el) => +el.price);
       if (maps.length > 0) {
         let total = maps.reduce((a, b) => a + b);
         return total;
@@ -226,32 +288,24 @@ export default {
     rate() {
       return this.$store.state.cart.rate;
     },
-    calculateTaxes() {
-      const taxes = this.serviceAndProductAddition * (this.rate / 100);
-      return this.serviceAndProductAddition + taxes;
-    },
     grandTotal() {
       var total;
-      if (this.service_payment === "local") {
-        if (this.percent) {
-          let parcentVal =
-            this.productsTotal - this.productsTotal * (this.percent / 100);
-          total = parcentVal;
-        } else {
-          total = this.productsTotal;
-        }
+      if (this.percent) {
+        let parcentVal =
+          this.productsTotal - this.productsTotal * (this.percent / 100);
+        total = parcentVal;
       } else {
-        if (this.percent) {
-          let parcentVal =
-            this.productsTotal - this.productsTotal * (this.percent / 100);
-          total = parcentVal + this.servicesTotalWithAddons;
-        } else {
-          total = this.productsTotal + this.servicesTotalWithAddons;
-        }
+        total = this.productsTotal;
       }
       const taxes = total * (this.rate / 100);
-      let grandTotal = (total + taxes).toFixed(2);
-      this.$store.commit("cart/GRAND_TOTAL", grandTotal);
+      let SubgrandTotal;
+      if (this.service_payment === "local") {
+        SubgrandTotal = total;
+      } else {
+        SubgrandTotal = total + this.servicesTotalWithAddons;
+      }
+      let grandTotal = (SubgrandTotal + taxes).toFixed(2);
+      this.$store.commit("cart/GRAND_TOTAL", +grandTotal);
       return grandTotal;
     },
   },

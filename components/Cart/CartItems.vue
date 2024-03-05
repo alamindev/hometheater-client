@@ -403,7 +403,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      count: "cart/cartDataCount",
+      count: "cart/cartMainItem",
       total: "cart/getTotal",
     }),
     cartdata() {

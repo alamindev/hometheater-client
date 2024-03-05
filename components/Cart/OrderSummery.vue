@@ -42,7 +42,7 @@
       <div class="w-full">
         <div class="flex justify-between pb-2">
           <h2 class="uppercase text-gray-500 text-base font-medium">
-            <span v-if="subTotal != ''">Sub Total</span>
+            <span v-if="subTotal">Sub Total</span>
             <span v-else>Total</span>
           </h2>
           <p class="text-gray-500 font-medium">${{ total }}</p>
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="" v-if="subTotal != ''">
+      <div class="" v-if="subTotal">
         <hr />
         <div class="flex justify-between pb-6 pt-3">
           <h2 class="uppercase text-gray-500 text-base font-medium">Total</h2>
@@ -151,14 +151,36 @@
         <p class="uppercase">Next</p>
         <i class="fas fa-arrow-right"></i>
       </button>
-      <button
-        type="button"
-        class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
-        @click="PaymentForm"
-        v-if="step === 6"
-      >
-        Pay Now
-      </button>
+      <div v-if="Object.keys(cartdata.products).length !== 0">
+        <button
+          type="button"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+          @click="PaymentForm"
+          v-if="step === 6"
+        >
+          Pay Now
+        </button>
+      </div>
+      <div v-else>
+        <button
+          type="button"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+          @click="PaymentForm"
+          v-if="payment === 'online' && step === 6"
+        >
+          Pay Now
+        </button>
+        <button
+          type="button"
+          :disabled="finish_loading"
+          class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
+          @click="SubmitLocalPayment"
+          v-if="payment === 'local' && step === 6"
+        >
+          <span v-if="!finish_loading" class="uppercase"> Place Order</span>
+          <Loader v-if="finish_loading" />
+        </button>
+      </div>
     </div>
     <div v-else>
       <button
@@ -190,7 +212,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      count: "cart/cartDataCount",
+      count: "cart/cartMainItem",
       total: "cart/getTotal",
       promoCode: "cart/getPromoCode",
     }),
@@ -236,6 +258,9 @@ export default {
     feature_price() {
       return this.$store.state.cart.feature_price;
     },
+    payment() {
+      return this.$store.state.cart.payment;
+    },
     isDisabled() {
       if (this.promoCode != "") return false;
       return true;
@@ -280,6 +305,7 @@ export default {
     nextQuestion() {
       this.$store.commit("cart/UPDATE_STEP_NEXT");
     },
+
     async applyPromo() {
       if (!this.authenticated) {
         this.$router.push("login?redirect=cart");
@@ -291,6 +317,10 @@ export default {
     },
     PaymentForm() {
       this.$emit("PaymentForm");
+    },
+    SubmitLocalPayment() {
+      this.$store.commit("cart/FINISH_STEP_LOADING", true);
+      this.$emit("finishedCheckout", null);
     },
   },
 };

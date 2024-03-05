@@ -48,69 +48,63 @@
         />
         <Dot position="right-0 top-0 mt-10 z-40 hidden lg:block" />
       </div>
-      <client-only>
-        <div class="container mx-auto relative z-30">
-          <ul class="flex flex-wrap blog-category justify-center py-12 px-8">
-            <li
-              class="mb-3"
-              v-for="cate in categories"
-              :key="cate.id"
-              @click="ChangeCategory(cate.slug)"
-            >
-              <div
-                class="text-xl relative"
-                :class="
-                  cate.slug == selectedCategory
-                    ? 'text-brand-color border-b-2 border-brand-color'
-                    : 'text-brand-dark-gray'
-                "
-              >
-                {{ cate.name }}
-              </div>
-            </li>
-          </ul>
-          <div
-            v-if="!loading"
-            class="w-full lg:w-10/12 mx-auto pt-10 relative z-50"
+      <div class="container mx-auto relative z-30">
+        <ul class="flex flex-wrap blog-category justify-center py-12 px-8">
+          <li
+            class="mb-3"
+            v-for="cate in categories"
+            :key="cate.id"
+            @click="ChangeCategory(cate.slug)"
           >
             <div
-              v-if="!errors.message"
-              class="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:gap-32"
+              class="text-xl relative"
+              :class="
+                cate.slug == selectedCategory
+                  ? 'text-brand-color border-b-2 border-brand-color'
+                  : 'text-brand-dark-gray'
+              "
             >
-              <Blog
-                isReadmore="true"
-                v-for="post in posts"
-                :key="post.id"
-                :post="post"
-              />
+              {{ cate.name }}
             </div>
-            <div v-else class="w-full">
-              <div class="flex w-full justify-center">
-                <img
-                  loading="lazy"
-                  src="/images/no-result.png"
-                  alt="no resutl"
-                />
-              </div>
-              <h1 class="text-center py-10 text-xl text-gray-800 font-medium">
-                {{ errors.message }}
-              </h1>
+          </li>
+        </ul>
+        <div
+          v-if="!loading"
+          class="w-full lg:w-10/12 mx-auto pt-10 relative z-50"
+        >
+          <div
+            v-if="!errors.message"
+            class="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:gap-32"
+          >
+            <Blog
+              isReadmore="true"
+              v-for="post in posts"
+              :key="post.id"
+              :post="post"
+            />
+          </div>
+          <div v-else class="w-full">
+            <div class="flex w-full justify-center">
+              <img loading="lazy" src="/images/no-result.png" alt="no resutl" />
             </div>
+            <h1 class="text-center py-10 text-xl text-gray-800 font-medium">
+              {{ errors.message }}
+            </h1>
           </div>
-          <div v-else class="loader-parent mt-16">
-            <div class="loader"></div>
-          </div>
-          <div class="flex justify-center pt-10 relative">
-            <!-- <a
+        </div>
+        <div v-else class="loader-parent mt-16">
+          <div class="loader"></div>
+        </div>
+        <div class="flex justify-center pt-10 relative">
+          <!-- <a
               v-if="!errors.message"
               href="#"
               class="px-6 sm:px-10 py-1 sm:py-2 inline-block rounded-full border-2 border-brand-color text-white bg-brand-color hover:bg-brand-color-hover text-xl font-semibold"
               >View all</a
             > -->
-            <Dot position="right-0 top-0 mt-3 z-40 hidden lg:block" />
-          </div>
+          <Dot position="right-0 top-0 mt-3 z-40 hidden lg:block" />
         </div>
-      </client-only>
+      </div>
     </section>
   </main>
 </template>

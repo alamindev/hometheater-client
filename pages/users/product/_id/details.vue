@@ -62,8 +62,16 @@
               v-if="product.status === 'approved'"
               class="py-2 px-4 text-approve-color border border-approve-color font-semibold text-xs rounded-full text-center"
             >
-              Approved
+              Shipped
             </p>
+            <div v-if="product.status === 'approved'">
+              <a
+                :href="product.tracking_link"
+                target="_blank"
+                class="px-6 py-2 rounded-full bg-red-500 text-white ml-2"
+                >Track your Order</a
+              >
+            </div>
             <div
               class="flex flex-wrap md:flex-nowrap"
               v-if="product.status === 'complete'"
@@ -172,48 +180,37 @@
             </tr>
             <tr v-if="product.discount">
               <td class="py-2 font-medium text-gray-600">Discount</td>
-              <td class="text-right text-red-500">{{ product.discount }}%</td>
+              <td class="text-right text-red-500">-{{ product.discount }}%</td>
             </tr>
 
             <tr>
               <td class="py-2 font-semibold text-gray-600 text-lg">Total</td>
-              <td
-                v-if="product.discount"
-                class="text-right py-2 font-semibold text-lg text-black"
-              >
-                <strong
-                  >${{
-                    (+product.price - +product.discount_price).toFixed(2)
-                  }}</strong
-                >
-                <sub>(Discount Includes) </sub>
-              </td>
-              <td
-                v-else
-                class="text-right py-2 font-semibold text-lg text-black"
-              >
+
+              <td class="text-right py-2 font-semibold text-lg text-black">
                 <strong>${{ product.price }}</strong>
               </td>
             </tr>
-            <tr v-if="product.payment === 'online'">
+            <tr v-if="product.payment === 'online'" class="border-b">
               <td class="py-2 font-semibold text-gray-600 text-lg">Taxes</td>
               <td class="text-right py-2 font-semibold text-lg text-black">
-                <strong>{{ product.taxes }}%</strong>
+                <strong>+{{ product.taxes }}%</strong>
               </td>
             </tr>
             <tr v-if="product.payment === 'online'">
               <td class="py-2 font-semibold text-gray-600 text-lg">
-                Total Price
+                Grand Total
               </td>
               <td class="text-right py-2 font-semibold text-lg text-black">
-                <strong>${{ totalWithTaxes }}</strong>
                 <sub
                   v-if="product.payment === 'online'"
-                  class="text-sm text-brand-color"
+                  class="text-xs text-brand-color"
                   >(Paid)</sub
                 >
-                <sub v-else class="text-sm text-red-500">(Not Paid)</sub>
-                <sub>(Texes Includes) </sub>
+                <sub v-else class="text-xs font-normal text-red-500"
+                  >(Not Paid)</sub
+                >
+                <sub class="text-xs font-normal">(Texes Includes) </sub>
+                <strong>${{ totalWithTaxes }}</strong>
               </td>
             </tr>
           </table>
@@ -296,7 +293,7 @@ export default {
       show: "",
     };
   },
-  async asyncData({ store, error, route }) {
+  async fetch({ store, error, route }) {
     await store
       .dispatch("users/booking/fetchBookingDetails", route.params.id)
       .catch((e) => {

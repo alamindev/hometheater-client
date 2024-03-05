@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      count: "cart/cartDataCount",
+      count: "cart/cartMainItem",
     }),
     setting() {
       return this.$store.state.setting;
@@ -86,13 +86,15 @@ export default {
   methods: {
     checkZip() {
       const datas = JSON.parse(localStorage.getItem("services"));
-      const services = datas.filter((el) => el.type === 0);
-      if (services.length > 0) {
-        let is_zipcode = getCookie("is_zipcode");
-        if (is_zipcode === "" || is_zipcode === "false") {
-          setTimeout(() => {
-            this.is_popup = true;
-          }, 7000);
+      if (datas) {
+        const services = datas.filter((el) => el.type === 0);
+        if (services.length > 0) {
+          let is_zipcode = getCookie("is_zipcode");
+          if (is_zipcode === "" || is_zipcode === "false") {
+            setTimeout(() => {
+              this.is_popup = true;
+            }, 7000);
+          }
         }
       }
     },

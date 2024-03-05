@@ -1228,13 +1228,6 @@ table.table tr {
   }
 }
 
-@media (min-width: 768px) {
-  .w-full.effect-change-img.rounded-md.shadow-md {
-    max-height: 400px;
-    object-fit: cover;
-  }
-}
-
 @media (max-width: 968px) {
   .booking--details h1 {
     font-size: 2rem;

@@ -86,12 +86,36 @@
           >
             No reviews yet!
           </p>
-          <span class="inline-block text-4xl font-bold text-brand-color pb-2">
-            ${{ service.price }}
-          </span>
-          <span class="block text-xl text-dark-sm font-medium font-rubik pb-2">
+          <div class="pb-2">
+            <p
+              v-if="service.discount"
+              class="inline-block text-4xl font-bold text-brand-color"
+            >
+              ${{ service.discount_price }}
+            </p>
+            <p v-else class="inline-block text-4xl font-bold text-brand-color">
+              ${{ service.price }}
+            </p>
+            <div class="flex gap-3 items-center" v-if="service.discount">
+              <p class="text-xl text-gray-400 line-through">
+                ${{ service.price }}
+              </p>
+              <p class="text-lg">-{{ service.discount }}%</p>
+            </div>
+          </div>
+          <span
+            v-if="service.type === 0"
+            class="block text-xl text-dark-sm font-medium font-rubik pb-2"
+          >
             Service Includes
           </span>
+          <span
+            v-else
+            class="block text-xl text-dark-sm font-medium font-rubik pb-2"
+          >
+            Product Includes
+          </span>
+
           <ul class="custom_ul list-inside list-disc">
             <li
               class="py-1 text-brand-gray"
@@ -127,7 +151,10 @@
             class="pt-4 pb-5 flex justify-center items-center gap-3 sm:gap-3"
           >
             <nuxt-link
-              :to="`/booking/${service.slug}`"
+              target="_blank"
+              :to="`/${service.type === 0 ? 'booking' : 'shop'}/${
+                service.slug
+              }`"
               class="px-4 sm:px-8 py-2 text-white bg-brand-color hover:bg-brand-color-hover rounded-md w-48 max-w-full text-center"
               >Learn more</nuxt-link
             >

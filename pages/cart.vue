@@ -69,7 +69,7 @@
                           step === 6 &&
                           Object.keys(cartdata.services).length !== 0
                         "
-                        >Payment process</span
+                        >Checkout</span
                       >
                     </button>
                     <button
@@ -124,6 +124,7 @@
                   <div class="lg:pt-10 lg:hidden">
                     <MobileFooter
                       @PaymentForm="PaymentForm"
+                      @finishedCheckout="finishedCheckout"
                       :isCheckout="isDisabled"
                       @next="mobileNext"
                       :step="step"
@@ -136,6 +137,7 @@
                 >
                   <OrderSummery
                     @PaymentForm="PaymentForm"
+                    @finishedCheckout="finishedCheckout"
                     :isCheckout="isDisabled"
                     @next="next"
                     :step="step"
@@ -525,10 +527,10 @@ export default {
     this.step = 1;
     this.$store.commit("cart/UPDATE_DATETIME", []);
     this.$store.commit("cart/UPDATE_ANSWER", []);
-    this.$store.commit("cart/FEATURE_PRICE", "");
-    this.$store.commit("cart/SUB_TOTAL", "");
-    this.$store.commit("cart/PERCENT_VAL", "");
-    this.$store.commit("cart/PERCENT", "");
+    this.$store.commit("cart/FEATURE_PRICE", null);
+    this.$store.commit("cart/SUB_TOTAL", null);
+    this.$store.commit("cart/PERCENT_VAL", null);
+    this.$store.commit("cart/PERCENT", null);
     this.$store.commit("cart/IS_FINISHED", false);
     this.$store.commit("cart/IS_PROMO", false);
     this.$store.commit("cart/IS_ITEM", false);

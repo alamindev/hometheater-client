@@ -27,8 +27,8 @@ export const actions = {
     async fetchServices({ commit, dispatch }) {
         dispatch("loading/setLoading", null, { root: true });
         const { data } = await this.$axios.get("/services");
-        commit("FETCH_SERVICES", data.services);
-        commit("FETCH_SERVICE_HEADER", data.header);
+        await commit("FETCH_SERVICES", data.services);
+        await commit("FETCH_SERVICE_HEADER", data.header);
         dispatch("loading/clearLoading", null, { root: true });
     },
     /**

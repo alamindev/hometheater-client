@@ -1,6 +1,6 @@
 <template>
   <section class="px-4 sm:px-0">
-    <div class="grid grid-cols-3 gap-2 md:gap-6 pt-6">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-6 pt-3">
       <div
         class="flex flex-col items-center rounded-lg shadow-md bookings pt-2 pb-1 lg:px-2 lg:py-4"
       >
@@ -17,6 +17,25 @@
         </h2>
         <p class="text-center text-lg font-bold text-white">
           <span v-if="booking_count">{{ booking_count }}</span>
+          <span v-else>0</span>
+        </p>
+      </div>
+      <div
+        class="flex flex-col items-center rounded-lg shadow-md bookings pt-2 pb-1 lg:px-2 lg:py-4"
+      >
+        <img
+          loading="lazy"
+          src="/images/users/date-range.svg"
+          class="w-8 lg:w-10 pb-1 lg:pb-2 h-8 lg:h-10"
+          alt="date-range.svg"
+        />
+        <h2
+          class="text-center text-sm lg:text-2xl text-white font-bold pb-1 lg:pb-2"
+        >
+          Orders
+        </h2>
+        <p class="text-center text-lg font-bold text-white">
+          <span v-if="product_count">{{ product_count }}</span>
           <span v-else>0</span>
         </p>
       </div>
@@ -67,6 +86,9 @@ export default {
   computed: {
     booking_count() {
       return this.$store.state.users.dashboard.booking_count;
+    },
+    product_count() {
+      return this.$store.state.users.dashboard.product_count;
     },
     reviews_count() {
       return this.$store.state.users.dashboard.review_count;

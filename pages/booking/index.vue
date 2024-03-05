@@ -25,9 +25,6 @@
             :services="services"
             title="text-xs text-sm md:text-base"
           />
-          <div v-else>
-            <h3 class="text-center font-bold pt-10">Product not found!</h3>
-          </div>
         </div>
         <div v-else class="loader-parent mt-16">
           <div class="loader"></div>
@@ -71,14 +68,12 @@ export default {
     },
   },
   methods: {},
-  created() {
-    if (this.$store.state.booking.services <= 0) {
-      this.$store.dispatch("booking/fetchServices");
-    }
-  },
   async fetch() {
     if (this.$store.state.booking.services <= 0) {
-      await this.$store.dispatch("meta/fetchMetaInfo", "booking");
+      await Promise.all([
+        this.$store.dispatch("meta/fetchMetaInfo", "booking"),
+        this.$store.dispatch("booking/fetchServices"),
+      ]);
     }
   },
 };

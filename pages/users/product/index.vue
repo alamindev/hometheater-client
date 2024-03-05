@@ -89,13 +89,13 @@
                         v-if="product.status === 'pending'"
                         class="py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                       >
-                        Pending Approval
+                        Pending
                       </p>
                       <p
                         v-if="product.status === 'approved'"
                         class="py-2 px-2 md:max-w-[200px] mx-auto bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
                       >
-                        Approved
+                        Shipped
                       </p>
                       <div class="" v-if="product.status === 'complete'">
                         <p

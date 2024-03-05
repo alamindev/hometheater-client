@@ -55,9 +55,7 @@
                 </button>
               </li>
             </ul>
-            <div class="py-3">
-              <social-login />
-            </div>
+
             <div class="w-full">
               <div
                 class="py-2 px-5 bg-red-600 text-white mb-2 shadow-sm rounded"
@@ -176,7 +174,6 @@
 
 <script>
 import Loader from "@/components/Loader/Loading-white";
-import SocialLogin from "@/components/SocialLogin";
 import globalMeta from "@/mixins/meta.js";
 export default {
   mixins: [globalMeta],
@@ -184,7 +181,6 @@ export default {
   layout: "auth",
   components: {
     Loader,
-    SocialLogin,
   },
   data() {
     return {
