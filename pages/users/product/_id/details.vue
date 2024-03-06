@@ -28,24 +28,24 @@
               v-if="product.status === 'pending'"
             >
               <p
-                class="py-2 px-4 font-semibold text-xs rounded-full pending--btn mr-2"
+                class="py-2 px-6 font-medium text-sm sm:text-base rounded-full bg-pending-color text-black mr-2"
               >
                 Pending
               </p>
               <div v-if="product.payment === 'online'">
-                <small class="text-red-400"
+                <small class="text-brand-red-200"
                   >You made payment by online if need to cancel order please
                   <a
                     target="_blank"
                     class="text-brand-color underline"
                     href="/contact-us"
-                    >contact us</a
+                    >ccontact us / text</a
                   ></small
                 >
               </div>
               <button
                 v-else
-                class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+                class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
                 @click="canceled"
               >
                 Cancel Booking
@@ -54,13 +54,13 @@
 
             <p
               v-if="product.status === 'cancel'"
-              class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+              class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
             >
               Canceled
             </p>
             <p
               v-if="product.status === 'approved'"
-              class="py-2 px-4 text-approve-color border border-approve-color font-semibold text-xs rounded-full text-center"
+              class="py-2 px-6 text-approve-color border border-approve-color font-medium text-xs sm:text-base rounded-full text-center"
             >
               Shipped
             </p>
@@ -77,13 +77,13 @@
               v-if="product.status === 'complete'"
             >
               <p
-                class="text-center py-2 px-4 mr-2 bg-gray-500 text-white font-semibold text-xs rounded-full focus:outline-none"
+                class="text-center py-2 px-6 mr-2 bg-gray-500 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
               >
                 Completed
               </p>
               <nuxt-link
                 :to="`/users/product/${product.id}/review`"
-                class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-full focus:outline-none"
+                class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
               >
                 Leave a Review
               </nuxt-link>
@@ -142,7 +142,6 @@
                 v-if="service.varient"
                 class="w-3/12 text-dark-sm font-normal text-center"
               >
-                <p class="font-medium">Selected varient</p>
                 <p>
                   Name: <strong>{{ service?.varient?.name }}</strong>
                 </p>
@@ -306,9 +305,5 @@ export default {
 .service__title span {
   color: rgb(78, 129, 238);
   padding-left: 5px;
-}
-.pending--btn {
-  background: #cce1ff;
-  color: #024c9e;
 }
 </style>

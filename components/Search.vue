@@ -20,13 +20,16 @@
       class="w-full absolute bg-white rounded-md z-50 overflow-hidden shadow-md"
     >
       <ul>
-        <li class="pt-3 pb-2 text-gray-500 px-3 font-medium">
+        <li
+          v-if="!searchLoading && is_service"
+          class="pt-3 pb-2 text-gray-500 px-3 font-medium"
+        >
           <p><i class="fas fa-briefcase pr-2"></i>Services</p>
           <ul class="sm:pl-4 pt-2" v-if="!error">
             <template v-for="data in datas">
               <li
                 class="py-2 px-2 hover:bg-gray-100"
-                v-if="!searchLoading"
+                v-if="data.type === 0"
                 :key="data.id"
               >
                 <nuxt-link
@@ -42,12 +45,42 @@
                 </nuxt-link>
               </li>
             </template>
-            <li v-if="searchLoading">Loading...</li>
           </ul>
           <p v-else class="pl-6 pt-2 text-center text-lg font-medium">
             No Services Found!
           </p>
         </li>
+        <li
+          v-if="!searchLoading && is_product"
+          class="pt-3 pb-2 text-gray-500 px-3 font-medium"
+        >
+          <p><i class="fas fa-briefcase pr-2"></i>Products</p>
+          <ul class="sm:pl-4 pt-2" v-if="!error">
+            <template v-for="data in products">
+              <li
+                class="py-2 px-2 hover:bg-gray-100"
+                v-if="data.type === 1"
+                :key="data.id"
+              >
+                <nuxt-link
+                  class="flex gap-2 items-center"
+                  :to="`/${data.type === 0 ? 'booking' : 'shop'}/${data.slug}`"
+                  ><img
+                    loading="lazy"
+                    :src="imgurl + 'storage' + data.image"
+                    class="w-8 h-8 rounded-full flex-shrink-0"
+                    alt=""
+                  />
+                  <p>{{ data.title }}, ${{ data.price }}</p>
+                </nuxt-link>
+              </li>
+            </template>
+          </ul>
+          <p v-else class="pl-6 pt-2 text-center text-lg font-medium">
+            No Products Found!
+          </p>
+        </li>
+        <li v-if="searchLoading" class="px-4 py-2 text-center">Loading...</li>
         <li
           @click="SearchBlog('blog')"
           class="py-3 text-gray-500 cursor-pointer px-3 hover:bg-gray-100 font-medium"
@@ -68,8 +101,11 @@ export default {
       isShow: false,
       timer: null,
       datas: [],
+      products: [],
       error: false,
       searchLoading: true,
+      is_product: false,
+      is_service: false,
       imgurl: process.env.imgUrl,
     };
   },
@@ -101,14 +137,18 @@ export default {
       }
       this.timer = setTimeout(() => {
         this.$axios
-          .get("/livesearch", { params: { keyword: this.search } })
+          .get("/livesearch", { params: { keyword: vm.search } })
           .then((res) => {
             vm.datas = res.data.services;
+            vm.products = res.data.services;
             vm.searchLoading = false;
+            vm.is_service = res.data.services.some((el) => el.type === 0);
+            vm.is_product = res.data.services.some((el) => el.type === 1);
           })
           .catch((error) => {
             if (error.response.status === 404) {
               vm.error = true;
+              vm.searchLoading = false;
             }
           });
       }, 800);

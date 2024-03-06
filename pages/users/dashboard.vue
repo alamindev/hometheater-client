@@ -19,19 +19,19 @@
           class="sm:rounded-3xl w-full bg-white p-4 space-y-3 md:p-6 lg:px-12 lg:py-8"
         >
           <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="space-y-2">
+            <div class="space-y-1 sm:space-y-2">
               <h2 class="text-xl font-semibold">Home Service Details</h2>
 
               <div class="flex items-center pb-4 pt-2">
                 <h3 class="font-semibold text-dark-sm text-lg mr-3">Status:</h3>
                 <div class="flex" v-if="booking.status === 'pending'">
                   <p
-                    class="py-2 px-6 font-semibold text-xs rounded-full bg-brand-color-hover text-white mr-2"
+                    class="py-2 px-6 font-medium text-xs sm:text-base rounded-full bg-pending-color text-black mr-2"
                   >
                     Pending
                   </p>
                   <button
-                    class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+                    class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
                     @click="canceled"
                   >
                     Cancel Booking
@@ -39,13 +39,13 @@
                 </div>
                 <p
                   v-if="booking.status === 'cancel'"
-                  class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+                  class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
                 >
                   Canceled
                 </p>
                 <p
                   v-if="booking.status === 'approved'"
-                  class="py-2 px-4 text-approve-color border border-approve-color font-semibold text-xs rounded-full text-center"
+                  class="py-2 px-6 text-approve-color border border-approve-color font-medium text-xs sm:text-base rounded-full text-center"
                 >
                   Approved
                 </p>
@@ -54,31 +54,33 @@
                   v-if="booking.status === 'complete'"
                 >
                   <p
-                    class="text-center py-2 px-4 mr-2 bg-gray-500 text-white font-semibold text-xs rounded-full focus:outline-none"
+                    class="text-center py-2 px-6 mr-2 bg-gray-500 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
                   >
                     Completed
                   </p>
                   <nuxt-link
                     :to="`/users/booking/${booking.id}/review`"
-                    class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-full focus:outline-none"
+                    class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
                   >
                     Leave a Review
                   </nuxt-link>
                 </div>
               </div>
-              <div class="pb-6">
-                <h4 class="font-semibold text-lg text-dark">Service Address</h4>
+              <div class="pb-3 sm:pb-6">
+                <h4 class="font-semibold text-base sm:text-lg text-dark">
+                  Service Address
+                </h4>
                 <div class="border p-4 max-w-xs">
                   <address class="text-gray-500">
                     {{ booking.address }}
                   </address>
                 </div>
               </div>
-              <div class="space-y-2">
-                <h4 class="font-semibold text-lg text-dark">
+              <div class="space-y-1 sm:space-y-2">
+                <h4 class="font-semibold text-base sm:text-lg text-dark">
                   Appointments Date and time
                 </h4>
-                <p class="text-base text-gray-600 mr-2 font-bold">
+                <p class="text-sm sm:text-base text-gray-600 mr-2 font-bold">
                   <span v-if="booking.datetime.length > 0">{{
                     $moment(booking.datetime[0].date).format("MM/DD/y")
                   }}</span
@@ -89,7 +91,9 @@
                 </p>
               </div>
               <div class="py-4">
-                <h4 class="font-semibold text-lg text-dark">Payment Method</h4>
+                <h4 class="font-semibold text-base sm:text-lg text-dark">
+                  Payment Method
+                </h4>
                 <div
                   class="pt-2 font-semibold"
                   v-if="booking.payment === 'local'"
@@ -97,7 +101,7 @@
                   Local
                 </div>
                 <div
-                  class="flex justify-between pt-2 items-center"
+                  class="flex justify-between pt-2 items-center text-sm sm:text-base"
                   v-if="booking.payment === 'online'"
                 >
                   <span class="font-semibold text-brand-color">Online</span>
@@ -109,20 +113,24 @@
                 <h3 class="font-semibold text-lg">Service Summery</h3>
                 <div class="py-3">
                   <div class="border-b w-full">
-                    <ul class="flex w-full pb-2">
-                      <li class="w-8/12">Items Summary</li>
-                      <li class="w-2/12 text-center text-sm">QTY</li>
-                      <li class="w-2/12 text-center text-sm">Item Total</li>
+                    <ul class="flex max-sm:justify-between w-full pb-2">
+                      <li class="w-40 sm:w-8/12 text-sm">Items Summary</li>
+                      <li class="w-20 sm:w-2/12 text-center text-sm">QTY</li>
+                      <li class="w-20 sm:w-2/12 text-center text-sm">
+                        Item Total
+                      </li>
                     </ul>
                   </div>
                   <div class="">
                     <ul>
                       <li
-                        class="flex py-3 items-center"
+                        class="flex py-3 max-sm:justify-between items-center"
                         v-for="service in booking.services"
                         :key="service.id"
                       >
-                        <div class="flex w-8/12 items-center">
+                        <div
+                          class="flex max-sm:flex-col w-40 sm:w-8/12 sm:items-center"
+                        >
                           <div class="image pr-2">
                             <figure class="w-20">
                               <img
@@ -133,27 +141,28 @@
                               />
                             </figure>
                           </div>
-                          <div class="title">
+                          <div class="title max-sm:pt-2">
                             <h3
-                              class="text-dark-sm text-sm font-rubik font-medium"
+                              class="text-dark-sm text-xs sm:text-sm font-rubik font-medium"
                             >
                               {{ service.title }}
                             </h3>
-                            <div class="flex pt-1 flex-wrap">
-                              <span class="pr-4 text-gray-400 text-xs"
+                            <div class="flex flex-wrap">
+                              <span
+                                class="pr-4 text-gray-400 text-[10px] sm:text-xs"
                                 >Order# {{ booking.order_id }}</span
                               >
                             </div>
                           </div>
                         </div>
                         <div
-                          class="w-2/12 text-dark-sm font-normal text-center"
+                          class="sm:w-2/12 text-dark-sm max-sm:px-4 font-normal text-center"
                         >
                           {{ service.quantity }}
                         </div>
                         <div
                           v-if="service.total"
-                          class="w-2/12 text-dark-sm font-normal text-center"
+                          class="sm:w-2/12 text-dark-sm max-sm:px-4 font-normal text-center"
                         >
                           ${{ service.total }}
                         </div>
@@ -173,8 +182,12 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="pb-1 font-medium text-gray-600">Code</td>
-                    <td class="text-right pb-1">
+                    <td
+                      class="pb-1 font-medium text-gray-600 text-sm sm:text-base"
+                    >
+                      Code
+                    </td>
+                    <td class="text-right pb-1 text-sm sm:text-base">
                       <p
                         v-for="(code, index) in booking.service_type"
                         :key="index"
@@ -184,35 +197,49 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="py-1 font-medium text-gray-600">Quantity</td>
+                    <td
+                      class="py-1 font-medium text-gray-600 text-sm sm:text-base"
+                    >
+                      Quantity
+                    </td>
                     <td class="text-right">{{ booking.quantity }}</td>
                   </tr>
                   <tr v-if="booking.discount">
-                    <td class="py-1 font-medium text-gray-600">Discount</td>
-                    <td class="text-right text-red-500">
+                    <td
+                      class="py-1 font-medium text-gray-600 text-sm sm:text-base"
+                    >
+                      Discount
+                    </td>
+                    <td class="text-right text-red-500 text-sm sm:text-base">
                       -{{ booking.discount }}%
                     </td>
                   </tr>
                   <tr v-if="booking.addon_price">
                     <td class="py-1 font-medium text-gray-600">Addon Extra</td>
-                    <td class="text-right">${{ booking.addon_price }}</td>
+                    <td class="text-right text-sm sm:text-base">
+                      ${{ booking.addon_price }}
+                    </td>
                   </tr>
                   <tr class="border-b">
-                    <td class="py-1 font-semibold text-gray-600 text-lg">
+                    <td
+                      class="py-1 font-semibold text-gray-600 text-sm sm:text-base"
+                    >
                       Total
                     </td>
                     <td
-                      class="text-right py-1 font-semibold text-lg text-black"
+                      class="text-right py-1 font-semibold text-sm sm:text-base text-black"
                     >
                       <strong>${{ booking.price }}</strong>
                     </td>
                   </tr>
                   <tr>
-                    <td class="py-1 font-semibold text-gray-600 text-lg">
+                    <td
+                      class="py-1 font-semibold text-gray-600 text-sm sm:text-base"
+                    >
                       Grand Total
                     </td>
                     <td
-                      class="text-right py-1 font-semibold text-lg text-black"
+                      class="text-right py-1 font-semibold text-sm sm:text-base text-black"
                     >
                       <strong>${{ grandTotal }}</strong>
                       <sub
@@ -233,7 +260,7 @@
           class="sm:rounded-3xl w-full bg-white p-4 space-y-3 md:p-6 lg:px-12 lg:py-8"
         >
           <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="space-y-2">
+            <div class="space-y-1 sm:space-y-2">
               <h2 class="text-xl font-semibold">Product Details</h2>
 
               <div class="flex items-center pb-4 pt-2">
@@ -243,7 +270,7 @@
                   v-if="product.status === 'pending'"
                 >
                   <p
-                    class="py-2 px-6 font-semibold text-xs rounded-full bg-brand-color-hover text-white mr-2"
+                    class="py-2 px-6 font-medium text-xs sm:text-base rounded-full bg-pending-color text-black mr-2"
                   >
                     Pending
                   </p>
@@ -251,13 +278,13 @@
 
                 <p
                   v-if="product.status === 'cancel'"
-                  class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+                  class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
                 >
                   Canceled
                 </p>
                 <p
                   v-if="product.status === 'approved'"
-                  class="py-2 px-4 text-approve-color border border-approve-color font-semibold text-xs rounded-full text-center"
+                  class="py-2 px-6 text-approve-color border border-approve-color font-medium text-xs sm:text-base rounded-full text-center"
                 >
                   Shipped
                 </p>
@@ -274,20 +301,20 @@
                   v-if="product.status === 'complete'"
                 >
                   <p
-                    class="text-center py-2 px-4 mr-2 bg-gray-500 text-white font-semibold text-xs rounded-full focus:outline-none"
+                    class="text-center py-2 px-6 mr-2 bg-gray-500 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
                   >
                     Completed
                   </p>
                   <nuxt-link
                     :to="`/users/product/${product.id}/review`"
-                    class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-full focus:outline-none"
+                    class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
                   >
                     Leave a Review
                   </nuxt-link>
                 </div>
               </div>
-              <div class="pb-6">
-                <h4 class="font-semibold text-lg text-dark">
+              <div class="pb-3 sm:pb-6">
+                <h4 class="font-semibold text-base sm:text-lg text-dark">
                   Delivery Address
                 </h4>
                 <div class="border p-4 max-w-xs">
@@ -296,14 +323,16 @@
                   </address>
                 </div>
               </div>
-              <div class="space-y-2">
-                <h4 class="font-semibold text-lg text-dark">Delivery Date</h4>
+              <div class="space-y-1 sm:space-y-2">
+                <h4 class="font-semibold text-base text-dark">Delivery Date</h4>
                 <p class="text-base font-bold text-gray-500 mr-2">
                   <span> {{ product.delivery_time }} </span>
                 </p>
               </div>
               <div class="py-4">
-                <h4 class="font-semibold text-lg text-dark">Payment Method</h4>
+                <h4 class="font-semibold text-base sm:text-lg text-dark">
+                  Payment Method
+                </h4>
                 <div
                   class="pt-2 font-semibold"
                   v-if="product.payment === 'local'"
@@ -311,7 +340,7 @@
                   Local
                 </div>
                 <div
-                  class="flex justify-between pt-2 items-center"
+                  class="flex justify-between pt-2 items-center text-sm sm:text-base"
                   v-if="product.payment === 'online'"
                 >
                   <span class="font-semibold text-brand-color">Online</span>
@@ -321,23 +350,29 @@
             <div class="space-y-4">
               <div>
                 <h3 class="font-semibold text-lg">Order Summary</h3>
-                <div class="px-4 py-6 bg-white rounded-md shadow-sm mt-4">
+                <div class="mt-4">
                   <div class="border-b w-full">
-                    <ul class="flex w-full pb-3">
-                      <li class="w-6/12">Items Summary</li>
-                      <li class="w-2/12 text-center text-sm">QTY</li>
-                      <li class="w-2/12 text-center text-sm">Varient</li>
-                      <li class="w-2/12 text-center text-sm">Item Total</li>
+                    <ul class="flex w-full max-sm:justify-between pb-3">
+                      <li class="w-40 sm:w-6/12">Items Summary</li>
+                      <li class="w-20 sm:w-2/12 text-center text-sm">QTY</li>
+                      <li class="w-20 sm:w-2/12 text-center text-sm">
+                        Varient
+                      </li>
+                      <li class="w-20 sm:w-2/12 text-center text-sm">
+                        Item Total
+                      </li>
                     </ul>
                   </div>
                   <div class="">
                     <ul>
                       <li
-                        class="flex py-5 items-center"
+                        class="flex py-5 max-sm:justify-between items-center"
                         v-for="service in product.services"
                         :key="service.id"
                       >
-                        <div class="flex w-6/12 items-center">
+                        <div
+                          class="flex max-sm:flex-col w-40 sm:w-6/12 sm:items-center"
+                        >
                           <div class="image pr-2">
                             <figure class="w-20">
                               <img
@@ -362,15 +397,14 @@
                           </div>
                         </div>
                         <div
-                          class="w-2/12 text-dark-sm font-normal text-center"
+                          class="w-20 sm:w-2/12 text-dark-sm font-normal text-center"
                         >
                           {{ service.quantity }}
                         </div>
                         <div
                           v-if="service.varient"
-                          class="w-2/12 text-dark-sm font-normal text-center"
+                          class="w-32 sm:w-2/12 text-dark-sm font-normal text-center"
                         >
-                          <p class="font-medium">Selected varient</p>
                           <p>
                             Name: <strong>{{ service?.varient?.name }}</strong>
                           </p>
@@ -379,10 +413,10 @@
                             class="bg-[var(--color)] size-10 mx-auto"
                           ></p>
                         </div>
-                        <div v-else class="w-2/12"></div>
+                        <div v-else class="w-20 sm:w-2/12"></div>
                         <div
                           v-if="service.total"
-                          class="w-3/12 text-dark-sm font-normal text-center"
+                          class="w-20 sm:w-2/12 text-dark-sm font-normal text-center"
                         >
                           ${{ service.total }}
                         </div>
@@ -391,56 +425,70 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="px-4 py-6 bg-white rounded-md shadow-sm mt-4 space-y-4"
-              >
+              <div class="mt-4 space-y-4">
                 <table class="w-full">
                   <tr>
-                    <td class="pb-3 font-medium text-gray-600">
+                    <td
+                      class="pb-3 font-medium text-gray-600 text-sm sm:text-base"
+                    >
                       Order Created
                     </td>
-                    <td class="text-right">
+                    <td class="text-right text-sm sm:text-base">
                       {{ $moment(product.created_at).format("MM/DD/y, ha") }}
                     </td>
                   </tr>
                   <tr>
-                    <td class="py-1 font-medium text-gray-600">Quantity</td>
+                    <td
+                      class="py-1 font-medium text-gray-600 text-sm sm:text-base"
+                    >
+                      Quantity
+                    </td>
                     <td class="text-right">{{ product.quantity }}</td>
                   </tr>
                   <tr v-if="product.discount">
-                    <td class="py-1 font-medium text-gray-600">Discount</td>
+                    <td
+                      class="py-1 font-medium text-gray-600 text-sm sm:text-base"
+                    >
+                      Discount
+                    </td>
                     <td class="text-right text-red-500">
                       -{{ product.discount }}%
                     </td>
                   </tr>
 
                   <tr>
-                    <td class="py-2 font-semibold text-gray-600 text-lg">
+                    <td
+                      class="py-2 font-semibold text-gray-600 text-sm sm:text-base"
+                    >
                       Total
                     </td>
 
                     <td
-                      class="text-right py-2 font-semibold text-lg text-black"
+                      class="text-right py-2 font-semibold text-sm sm:text-base text-black"
                     >
                       <strong>${{ product.price }}</strong>
                     </td>
                   </tr>
                   <tr v-if="product.payment === 'online'" class="border-b">
-                    <td class="py-2 font-semibold text-gray-600 text-lg">
+                    <td
+                      class="py-2 font-semibold text-gray-600 text-sm sm:text-base"
+                    >
                       Taxes
                     </td>
                     <td
-                      class="text-right py-2 font-semibold text-lg text-black"
+                      class="text-right py-2 font-semibold text-sm sm:text-base text-black"
                     >
                       <strong>+{{ product.taxes }}%</strong>
                     </td>
                   </tr>
                   <tr v-if="product.payment === 'online'">
-                    <td class="py-2 font-semibold text-gray-600 text-lg">
+                    <td
+                      class="py-2 font-semibold text-gray-600 text-sm sm:text-base"
+                    >
                       Grand Total
                     </td>
                     <td
-                      class="text-right py-2 font-semibold text-lg text-black"
+                      class="text-right py-2 font-semibold text-sm sm:text-base text-black"
                     >
                       <sub class="text-xs font-normal">(Texes Includes) </sub>
                       <strong>${{ totalWithTaxes }}</strong>
@@ -464,13 +512,13 @@
         >
           <h2 class="text-xl font-semibold">Contact Information</h2>
           <div class="space-y-5">
-            <div class="space-y-2">
+            <div class="space-y-1 sm:space-y-2">
               <h4 class="font-semibold text-brand-dark text-base">
                 Email Address
               </h4>
               <p>{{ user.email }}</p>
             </div>
-            <div class="space-y-2">
+            <div class="space-y-1 sm:space-y-2">
               <h4 class="font-semibold text-brand-dark text-base">
                 Phone Number
               </h4>
@@ -500,7 +548,16 @@
       </div>
     </div>
     <div v-else>
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 pt-6">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6 pt-6">
+        <div class="rounded-lg p-5 shadow-md">
+          <div class="animate-pulse flex space-x-4">
+            <div class="flex-1 space-y-4 py-1">
+              <div class="h-4 bg-blue-200 rounded w-full"></div>
+              <div class="h-4 bg-blue-200 rounded w-3/4"></div>
+              <div class="h-4 bg-blue-200 rounded w-3/6"></div>
+            </div>
+          </div>
+        </div>
         <div class="rounded-lg p-5 shadow-md">
           <div class="animate-pulse flex space-x-4">
             <div class="flex-1 space-y-4 py-1">

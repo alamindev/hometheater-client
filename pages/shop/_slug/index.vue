@@ -178,7 +178,7 @@
                       <span
                         v-if="product.sold_out > 0"
                         class="font-semibold text-red-500"
-                        >/ {{ product.sold_out }} Sold Out</span
+                        >/ {{ product.sold_out }} Sold</span
                       >
                     </p>
                   </div>

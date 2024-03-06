@@ -29,7 +29,9 @@
               class="w-full swiper-slide"
             >
               <nuxt-link
-                :to="'/booking/' + service.slug"
+                :to="`/${service.type === 0 ? 'booking' : 'shop'}/${
+                  service.slug
+                }`"
                 class="inline-block w-full h-full"
               >
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden">

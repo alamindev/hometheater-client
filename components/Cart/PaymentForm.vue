@@ -159,7 +159,6 @@ export default {
     },
     async submitPayment() {
       this.errorMessage = "";
-      this.$store.commit("cart/FINISH_STEP_LOADING", true);
       const { token, error } = await this.stripe.createToken(this.cardNumber);
 
       if (error) {
@@ -167,6 +166,7 @@ export default {
         return;
       }
       if (token) {
+        this.$store.commit("cart/FINISH_STEP_LOADING", true);
         this.$emit("finishedCheckout", token.id);
       }
     },

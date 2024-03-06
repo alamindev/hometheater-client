@@ -77,25 +77,25 @@
                     <div class="">
                       <p
                         v-if="booking.status === 'cancel'"
-                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-red-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-red-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
                         Canceled
                       </p>
                       <p
                         v-if="booking.status === 'pending'"
-                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-pending-color text-black font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
-                        Pending Approval
+                        Pending
                       </p>
                       <p
                         v-if="booking.status === 'approved'"
-                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 mx-auto md:max-w-[200px] bg-approve-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
                         Approved
                       </p>
                       <div class="" v-if="booking.status === 'complete'">
                         <p
-                          class="text-center py-2 px-2 mx-auto md:max-w-[200px] w-full bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                          class="text-center py-2 px-2 mx-auto md:max-w-[200px] w-full bg-gray-500 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                         >
                           Completed
                         </p>
@@ -206,19 +206,19 @@
               <div class="pb-2 pt-5 text-center">
                 <p
                   v-if="booking.status === 'cancel'"
-                  class="w-full bg-red-color sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full bg-red-color sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
                   Status: Canceled
                 </p>
                 <p
                   v-if="booking.status === 'pending'"
-                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-pending-color text-black font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
-                  Status: Pending Approval
+                  Status: Pending
                 </p>
                 <p
                   v-if="booking.status === 'approved'"
-                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-approve-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
                   Status: Approved
                 </p>
@@ -227,7 +227,7 @@
                   v-if="booking.status === 'complete'"
                 >
                   <p
-                    class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                    class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 mx-auto md:max-w-[200px] bg-gray-500 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                   >
                     Status: Completed
                   </p>

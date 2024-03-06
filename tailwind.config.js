@@ -15,7 +15,7 @@ module.exports = {
     extend: {
       colors: {
         dark: "#24364a",
-        "dark-sm": "#24364a",
+        "dark-sm": "#24364a", 
         "brand-color": "#4E81EE",
         "brand-color-hover": "#336EEB",
         "brand-gray": "#656d75",
@@ -36,9 +36,10 @@ module.exports = {
         "light-5": "#f7f8fde8",
         "light-blue-cart": "#F3F6FB",
         whitesmoke: "whitesmoke",
-        "pending-color": "#50aae1",
+        "pending-color": "#ffc61c",
         "review-color": "#fea31b",
         "red-color": "#e25050",
+        "brand-red-200": "#d52020",
         "approve-color": "#10b981",
         black: "#24364a",
         "red-dark": "#6A0208",

@@ -177,17 +177,26 @@
               >
             </div>
           </div>
-          <div v-else class="py-10">
-            <Register
-              v-if="is_register_form && !is_required_field"
-              @GotoLogin="GotoLogin"
-              @showLoginForm="showLoginForm"
-            />
-            <Login
-              v-if="!is_register_form && !is_required_field"
-              @showRegisterForm="showRegisterForm"
-            />
-            <RequiredFields v-if="is_required_field" />
+          <div v-else class="">
+            <div class="px-4 lg:px-10 pt-8">
+              <h1
+                class="text-xl sm:text-2xl font-bold font-rubik text-gray-600 border-b pb-1"
+              >
+                Login or Register to Continue
+              </h1>
+            </div>
+            <div class="py-4 sm:py-12">
+              <Register
+                v-if="is_register_form && !is_required_field"
+                @GotoLogin="GotoLogin"
+                @showLoginForm="showLoginForm"
+              />
+              <Login
+                v-if="!is_register_form && !is_required_field"
+                @showRegisterForm="showRegisterForm"
+              />
+              <RequiredFields v-if="is_required_field" />
+            </div>
           </div>
         </div>
         <div

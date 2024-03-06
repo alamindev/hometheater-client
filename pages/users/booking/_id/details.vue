@@ -23,12 +23,12 @@
           <div class="flex items-center">
             <div class="flex" v-if="booking.status === 'pending'">
               <p
-                class="py-2 px-4 font-semibold text-xs rounded-full pending--btn mr-2"
+                class="py-2 px-4 font-medium text-sm sm:text-base rounded-full bg-pending-color text-black mr-2"
               >
                 Pending
               </p>
               <button
-                class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+                class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
                 @click="canceled"
               >
                 Cancel Booking
@@ -37,13 +37,13 @@
 
             <p
               v-if="booking.status === 'cancel'"
-              class="py-2 px-4 bg-red-color text-white font-semibold text-xs rounded-full text-center"
+              class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
             >
               Canceled
             </p>
             <p
               v-if="booking.status === 'approved'"
-              class="py-2 px-4 text-approve-color border border-approve-color font-semibold text-xs rounded-full text-center"
+              class="py-2 px-4 text-6pprove-color border border-approve-color font-medium text-xs sm:text-base rounded-full text-center"
             >
               Approved
             </p>
@@ -52,13 +52,13 @@
               v-if="booking.status === 'complete'"
             >
               <p
-                class="text-center py-2 px-4 mr-2 bg-gray-500 text-white font-semibold text-xs rounded-full focus:outline-none"
+                class="text-center py-2 px-4 mr-6 bg-gray-500 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
               >
                 Completed
               </p>
               <nuxt-link
                 :to="`/users/booking/${booking.id}/review`"
-                class="sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-full focus:outline-none"
+                class="sm:block py-2 px-3 bg-review-color 6over:bg-yellow-400 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
               >
                 Leave a Review
               </nuxt-link>

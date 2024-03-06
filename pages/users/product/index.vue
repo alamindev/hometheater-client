@@ -81,25 +81,25 @@
                     <div class="">
                       <p
                         v-if="product.status === 'cancel'"
-                        class="py-2 px-2 md:max-w-[200px] mx-auto bg-red-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 md:max-w-[200px] mx-auto bg-red-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
                         Canceled
                       </p>
                       <p
                         v-if="product.status === 'pending'"
-                        class="py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-blackfont-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
                         Pending
                       </p>
                       <p
                         v-if="product.status === 'approved'"
-                        class="py-2 px-2 md:max-w-[200px] mx-auto bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                        class="py-2 px-2 md:max-w-[200px] mx-auto bg-approve-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
                         Shipped
                       </p>
                       <div class="" v-if="product.status === 'complete'">
                         <p
-                          class="text-center py-2 px-2 md:max-w-[200px] mx-auto w-full bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                          class="text-center py-2 px-2 md:max-w-[200px] mx-auto w-full bg-gray-500 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                         >
                           Completed
                         </p>
@@ -114,7 +114,7 @@
                       >
                         <nuxt-link
                           :to="`/users/product/${product.id}/review`"
-                          class="shadow-md sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                          class="shadow-md sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                         >
                           Review
                         </nuxt-link>
@@ -200,19 +200,19 @@
               <div class="pb-2 pt-5">
                 <p
                   v-if="product.status === 'cancel'"
-                  class="w-full bg-red-color sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full bg-red-color sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
                   Status: Canceled
                 </p>
                 <p
                   v-if="product.status === 'pending'"
-                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-blackfont-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
-                  Status: Pending Approval
+                  Status: Pending
                 </p>
                 <p
                   v-if="product.status === 'approved'"
-                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-approve-color text-white font-semibold text-xs rounded-sm text-center shadow-md"
+                  class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-approve-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
                   Status: Approved
                 </p>
@@ -221,7 +221,7 @@
                   v-if="product.status === 'complete'"
                 >
                   <p
-                    class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-gray-500 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                    class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-gray-500 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                   >
                     Status: Completed
                   </p>
@@ -234,7 +234,7 @@
                 >
                   <nuxt-link
                     :to="`/users/product/${product.id}/review`"
-                    class="w-full sm:w-auto md:w-full lg:w-auto block text-center mb-2 shadow-md sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-semibold text-xs rounded-sm focus:outline-none"
+                    class="w-full sm:w-auto md:w-full lg:w-auto block text-center mb-2 shadow-md sm:block py-2 px-3 bg-review-color hover:bg-yellow-400 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                   >
                     Review
                   </nuxt-link>
