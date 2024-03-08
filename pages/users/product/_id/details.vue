@@ -91,7 +91,7 @@
           </div>
           <div class="sm:pl-3 md:pl-0 md:pt-0 flex items-center">
             <h2 class="text-sm text-gray-600 mr-2">
-              <strong> Delivery Date:</strong>
+              <strong> Expected Delivery Date:</strong>
               <span> {{ product.delivery_time }} </span>
             </h2>
           </div>
@@ -125,7 +125,7 @@
                   </figure>
                 </div>
                 <div class="title">
-                  <h3 class="text-dark-sm font-rubik font-medium">
+                  <h3 class="text-dark-sm font-rubik font-medium line-clamp-2">
                     {{ service.title }}
                   </h3>
                   <div class="flex pt-2 flex-wrap">
@@ -200,15 +200,6 @@
                 Grand Total
               </td>
               <td class="text-right py-2 font-semibold text-lg text-black">
-                <sub
-                  v-if="product.payment === 'online'"
-                  class="text-xs text-brand-color"
-                  >(Paid)</sub
-                >
-                <sub v-else class="text-xs font-normal text-red-500"
-                  >(Not Paid)</sub
-                >
-                <sub class="text-xs font-normal">(Texes Includes) </sub>
                 <strong>${{ totalWithTaxes }}</strong>
               </td>
             </tr>

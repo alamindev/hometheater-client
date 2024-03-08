@@ -95,7 +95,8 @@
             @click="PaymentForm"
             v-if="step === 6"
           >
-            Pay Now
+            <span v-if="!loading_stripe" class="uppercase">Pay Now</span>
+            <Loader v-if="loading_stripe" />
           </button>
         </div>
         <div v-else>
@@ -105,7 +106,8 @@
             @click="PaymentForm"
             v-if="payment === 'online' && step === 6"
           >
-            Pay Now
+            <span v-if="!loading_stripe" class="uppercase">Pay Now</span>
+            <Loader v-if="loading_stripe" />
           </button>
           <button
             type="button"
@@ -124,9 +126,10 @@
           type="button"
           class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-center w-full rounded-md"
           @click="PaymentForm"
-          v-if="step === 2"
+          v-if="step === 3"
         >
-          Pay Now
+          <span v-if="!loading_stripe" class="uppercase">Pay Now</span>
+          <Loader v-if="loading_stripe" />
         </button>
       </div>
     </div>
@@ -134,6 +137,7 @@
 </template>
 
 <script>
+import Loader from "@/components/Loader/Loading-white";
 import { mapGetters } from "vuex";
 export default {
   props: ["isCheckout", "step", "currentTab"],
@@ -143,6 +147,9 @@ export default {
       item: 1,
       imgurl: process.env.imgUrl,
     };
+  },
+  components: {
+    Loader,
   },
   computed: {
     ...mapGetters({
@@ -182,6 +189,9 @@ export default {
     },
     finish_loading() {
       return this.$store.state.cart.finish_loading;
+    },
+    loading_stripe() {
+      return this.$store.state.cart.loading_stripe;
     },
     isQuestionCheck() {
       return (activeStep) => {

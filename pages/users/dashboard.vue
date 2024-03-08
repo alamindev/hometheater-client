@@ -95,7 +95,7 @@
                   Payment Method
                 </h4>
                 <div
-                  class="pt-2 font-semibold"
+                  class="pt-2 font-semibold text-brand-red-200"
                   v-if="booking.payment === 'local'"
                 >
                   Local
@@ -143,7 +143,7 @@
                           </div>
                           <div class="title max-sm:pt-2">
                             <h3
-                              class="text-dark-sm text-xs sm:text-sm font-rubik font-medium"
+                              class="text-dark-sm text-xs sm:text-sm font-rubik font-medium line-clamp-2"
                             >
                               {{ service.title }}
                             </h3>
@@ -242,12 +242,6 @@
                       class="text-right py-1 font-semibold text-sm sm:text-base text-black"
                     >
                       <strong>${{ grandTotal }}</strong>
-                      <sub
-                        v-if="booking.payment === 'online'"
-                        class="text-sm text-brand-color"
-                        >(Paid)</sub
-                      >
-                      <sub v-else class="text-sm text-red-500">(Not Paid)</sub>
                     </td>
                   </tr>
                 </table>
@@ -324,7 +318,9 @@
                 </div>
               </div>
               <div class="space-y-1 sm:space-y-2">
-                <h4 class="font-semibold text-base text-dark">Delivery Date</h4>
+                <h4 class="font-semibold text-base text-dark">
+                  Expected Delivery Date
+                </h4>
                 <p class="text-base font-bold text-gray-500 mr-2">
                   <span> {{ product.delivery_time }} </span>
                 </p>
@@ -385,7 +381,7 @@
                           </div>
                           <div class="title">
                             <h3
-                              class="text-dark-sm text-sm font-rubik font-medium"
+                              class="text-dark-sm text-sm font-rubik font-medium line-clamp-2"
                             >
                               {{ service.title }}
                             </h3>
@@ -490,16 +486,7 @@
                     <td
                       class="text-right py-2 font-semibold text-sm sm:text-base text-black"
                     >
-                      <sub class="text-xs font-normal">(Texes Includes) </sub>
                       <strong>${{ totalWithTaxes }}</strong>
-                      <sub
-                        v-if="product.payment === 'online'"
-                        class="text-xs text-brand-color"
-                        >(Paid)</sub
-                      >
-                      <sub v-else class="text-xs font-normal text-red-500"
-                        >(Not Paid)</sub
-                      >
                     </td>
                   </tr>
                 </table>

@@ -242,12 +242,13 @@
         </div>
       </div>
     </div>
-
-    <PaymentForm
-      @finishedCheckout="finishedCheckout"
-      @hideModal="hideModal"
-      :paymentModal="paymentModal"
-    />
+    <transition name="fade">
+      <PaymentForm
+        @finishedCheckout="finishedCheckout"
+        @hideModal="hideModal"
+        v-if="paymentModal"
+      />
+    </transition>
   </section>
 
   <div v-else class="loader-parent mt-16 mb-20">
@@ -499,10 +500,15 @@ export default {
     },
     PaymentForm() {
       this.current = "shopping-cart";
-      this.paymentModal = true;
+      let vm = this;
+      this.$store.dispatch("cart/GetStripeKey").then((res) => {
+        if (res === true) {
+          vm.paymentModal = true;
+        }
+      });
     },
-    finishedCheckout(token) {
-      this.$store.dispatch("cart/finishedCheckout", { token }).then((res) => {
+    finishedCheckout() {
+      this.$store.dispatch("cart/finishedCheckout").then((res) => {
         if (res.success == true) {
           if (
             this.step === 2 &&
@@ -579,4 +585,12 @@ export default {
 .number--bg {
   color: #999595;
 }
-</style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style> 

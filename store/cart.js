@@ -37,7 +37,13 @@ export const state = () => ({
     is_register_form: false, 
     checkQuetions: [],
     suggests: [],
-    limited_duration: false
+    limited_duration: false,
+    stripe_key: {
+        publisher: null,
+        secret: null,
+        payment_id: null
+    },
+    loading_stripe: false
 });
 
 export const getters = {
@@ -62,7 +68,7 @@ export const getters = {
         let maps = state.carts.map(el => parseFloat(el.price));
         if (maps.length > 0) {
             let total = maps.reduce((a, b) => a + b); 
-            return total;
+            return +total.toFixed(2);
         }
         return 0;
     },
@@ -74,6 +80,7 @@ export const getters = {
 
 export const mutations = {
     FETCH_SUGGEST_SERVICES: (state, datas) => (state.suggests = datas),
+    FETCH_STRIPE_KEY: (state, data) => (state.stripe_key = data),
     LIMITED_DURATION: (state, data) => (state.limited_duration = data),
     FETCH_DATA: (state, datas) => {
         if (datas.length > 0) { 
@@ -181,6 +188,7 @@ export const mutations = {
     UPDATE_TAXES: (state, data) => (state.rate = data),
     CHECK_QUESTION: (state, datas) => (state.checkQuetions = datas),
     FINISH_STEP_LOADING: (state, bool) => (state.finish_loading = bool),
+    LOADING_STRIPE: (state, bool) => (state.loading_stripe = bool),
     STEP_3_ACTIVE: (state, bool) => (state.step_3_active = bool),
     IS_AUTH: (state, bool) => (state.is_auth = bool),
     UPDATE_ANSWER: (state, obj) => {
@@ -689,7 +697,7 @@ export const actions = {
      *  fetch questions
      * @param {services id} param1
      */
-    async finishedCheckout({ commit, state, getters }, obj = null) {
+    async finishedCheckout({ commit, state, getters }) {
      
         const datas = {
             carts: state.carts,
@@ -701,9 +709,9 @@ export const actions = {
             discount: state.percent,
             user_id: this.$auth.user.id,
             answer: state.answer,
-            grand_total: state.grand_total,
-            token: obj.token,
-            taxes: state.rate
+            grand_total: state.grand_total, 
+            taxes: state.rate,
+            payment_id: state.stripe_key?.payment_id ? state.stripe_key.payment_id : null
         };
   
         let { data } = await this.$axios.post("/order/store", datas ); 
@@ -792,6 +800,25 @@ export const actions = {
         } catch (e) {
           return;
         }
-      }
-
+      },
+  /**
+     *  fetch stripe key
+     * @param {services id} param1
+     */
+    async GetStripeKey({ commit, state }) {
+        commit("LOADING_STRIPE", true);
+        let { data } = await this.$axios.post("/order/payment-intents", { grand_total: state.grand_total });
+        if (data.success == true) { 
+            commit(
+                "FETCH_STRIPE_KEY",
+                {
+                    publisher: data.publisher,
+                    secret: data.secret,
+                    payment_id: data.payment_id
+                }
+            );
+            commit("LOADING_STRIPE", false);
+            return true;
+        }
+    },
 };

@@ -116,7 +116,7 @@
                   </figure>
                 </div>
                 <div class="title">
-                  <h3 class="text-dark-sm font-rubik font-medium">
+                  <h3 class="text-dark-sm font-rubik font-medium line-clamp-2">
                     {{ service.title }}
                   </h3>
                   <div class="flex pt-2 flex-wrap">
@@ -184,12 +184,6 @@
               </td>
               <td class="text-right py-2 font-semibold text-lg text-black">
                 <strong>${{ grandTotal }}</strong>
-                <sub
-                  v-if="booking.payment === 'online'"
-                  class="text-sm text-brand-color"
-                  >(Paid)</sub
-                >
-                <sub v-else class="text-sm text-red-500">(Not Paid)</sub>
               </td>
             </tr>
           </table>

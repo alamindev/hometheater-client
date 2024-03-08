@@ -158,7 +158,8 @@
           @click="PaymentForm"
           v-if="step === 6"
         >
-          Pay Now
+          <span v-if="!loading_stripe" class="uppercase">Pay Now</span>
+          <Loader v-if="loading_stripe" />
         </button>
       </div>
       <div v-else>
@@ -168,7 +169,8 @@
           @click="PaymentForm"
           v-if="payment === 'online' && step === 6"
         >
-          Pay Now
+          <span v-if="!loading_stripe" class="uppercase">Pay Now</span>
+          <Loader v-if="loading_stripe" />
         </button>
         <button
           type="button"
@@ -189,7 +191,8 @@
         @click="PaymentForm"
         v-if="step === 3"
       >
-        Pay Now
+        <span v-if="!loading_stripe" class="uppercase">Pay Now</span>
+        <Loader v-if="loading_stripe" />
       </button>
     </div>
   </div>
@@ -283,6 +286,9 @@ export default {
     },
     finish_loading() {
       return this.$store.state.cart.finish_loading;
+    },
+    loading_stripe() {
+      return this.$store.state.cart.loading_stripe;
     },
     checkQuetions() {
       return this.$store.state.cart.checkQuetions;

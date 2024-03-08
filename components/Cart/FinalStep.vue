@@ -262,7 +262,7 @@ export default {
       let maps = products.map((el) => +el.price);
       if (maps.length > 0) {
         let total = maps.reduce((a, b) => a + b);
-        return total;
+        return +total.toFixed(2);
       }
       return 0;
     },
@@ -270,9 +270,9 @@ export default {
       if (this.percent) {
         let parcentVal =
           this.productsTotal - this.productsTotal * (this.percent / 100);
-        return (parcentVal + this.servicesTotalWithAddons).toFixed(2);
+        return +(parcentVal + this.servicesTotalWithAddons).toFixed(2);
       }
-      return this.productsTotal + this.servicesTotalWithAddons;
+      return +(this.productsTotal + this.servicesTotalWithAddons).toFixed(2);
     },
     service_payment: {
       get() {
