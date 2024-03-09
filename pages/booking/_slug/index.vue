@@ -26,7 +26,10 @@
                     />
                   </figure>
                 </div>
-                <figure class="pt-5 flex-1 xl:pl-2">
+                <figure
+                  class="pt-5 flex-1 xl:pl-2 cursor-pointer"
+                  @click="selectIndex"
+                >
                   <img
                     loading="lazy"
                     class="w-full effect-change-img rounded-md shadow-md"
@@ -35,6 +38,14 @@
                   />
                 </figure>
               </div>
+              <transition name="fade">
+                <LazyImgPopup
+                  @closeModal="closeModal"
+                  v-if="is_popup"
+                  :imageDatas="allImages"
+                  :select_name="select_name"
+                />
+              </transition>
             </div>
             <div class="lg:w-5/12 pt-6 lg:pt-0">
               <div class="w-full lg:pt-5">
@@ -360,6 +371,8 @@ export default {
       images: [],
       image: {},
       tab: "description",
+      select_name: null,
+      is_popup: false,
     };
   },
   computed: {
@@ -433,6 +446,16 @@ export default {
     review_paginator() {
       return this.$store.state.booking.reviews;
     },
+    allImages() {
+      let images = this.service.images;
+      let image = {
+        id: crypto.randomUUID(),
+        url: this.service.image,
+        is_active: false,
+      };
+
+      return [...images.map((el) => ({ ...el, is_active: false })), image];
+    },
   },
   methods: {
     ChangeImage(url) {
@@ -487,6 +510,20 @@ export default {
     },
     toggleTab(val) {
       this.tab = val;
+    },
+
+    selectIndex() {
+      const element = document.querySelector(".effect-change-img");
+      let image_name = element
+        .getAttribute("src")
+        .substring(element.getAttribute("src").lastIndexOf("/") + 1);
+
+      this.select_name = "/uploads/services/" + image_name;
+      this.is_popup = true;
+      document.body.classList.add("overflow-hidden");
+    },
+    closeModal() {
+      this.is_popup = false;
     },
   },
   mounted() {

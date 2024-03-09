@@ -43,7 +43,13 @@ export const state = () => ({
         secret: null,
         payment_id: null
     },
-    loading_stripe: false
+    loading_stripe: false,
+    address: {
+        address: "",
+        city: "",
+        state: "",
+        zipcode: "",
+    }
 });
 
 export const getters = {
@@ -245,6 +251,10 @@ export const mutations = {
     IS_LOGGEDIN: (state, bool) => (state.is_loggedin = bool),
     IS_REQUIRED_FIELD: (state, bool) => (state.is_required_field = bool), 
     IS_REGISTER_FORM: (state, bool) => (state.is_register_form = bool), 
+    UPDATE_ADDRESS: (state, value) => (state.address.address = value ), 
+    UPDATE_CITY: (state, value) => (state.address.city = value ), 
+    UPDATE_STATE: (state, value) => (state.address.state = value ), 
+    UPDATE_ZIPCODE: (state, value) => (state.address.zipcode = value ), 
 };
 
 export const actions = {
@@ -697,7 +707,7 @@ export const actions = {
      *  fetch questions
      * @param {services id} param1
      */
-    async finishedCheckout({ commit, state, getters }) {
+    async finishedCheckout({ commit, state, getters }, newData) {
      
         const datas = {
             carts: state.carts,
@@ -707,17 +717,17 @@ export const actions = {
             payment: state.payment, 
             addon_price: state.feature_price,
             discount: state.percent,
-            user_id: this.$auth.user.id,
+            user_id:  this.$auth.loggedIn ?? this.$auth.user.id,
             answer: state.answer,
             grand_total: state.grand_total, 
-            taxes: state.rate,
-            payment_id: state.stripe_key?.payment_id ? state.stripe_key.payment_id : null
+            taxes: state.rate, 
         };
-  
-        let { data } = await this.$axios.post("/order/store", datas ); 
+         
+        let { data } = await this.$axios.post("/order/store", newData ? newData : datas ); 
         
         if (data.success == true) {
             localStorage.removeItem("services");
+            localStorage.removeItem("confirm_data");
             commit("FETCH_DATA_CARTS", []);
             commit("FETCH_DATA", []);
             commit("UPDATE_ZIPCODE", null);
@@ -740,6 +750,30 @@ export const actions = {
                 timer: 6000
             });
         }
+    },
+    // add data to local storage
+    async AddDataLocalStorage({ commit, state, getters }) {
+        localStorage.removeItem("confirm_data");
+        const datas = {
+            carts: state.carts,
+            cartdata: state.cartobj, 
+            images: state.images,
+            datetime: state.datetime,
+            payment: state.payment, 
+            addon_price: state.feature_price,
+            discount: state.percent,
+            user_id: this.$auth.user.id,
+            answer: state.answer,
+            grand_total: state.grand_total, 
+            taxes: state.rate, 
+            address: state.address
+        };
+        
+       await localStorage.setItem("confirm_data", JSON.stringify(datas));
+       
+       if (localStorage.getItem("confirm_data")) {
+           return true;
+      }
     },
     /**
      *  fetch questions
@@ -805,9 +839,15 @@ export const actions = {
      *  fetch stripe key
      * @param {services id} param1
      */
-    async GetStripeKey({ commit, state }) {
+    async GetStripeKey({ commit, state, rootState }) {
         commit("LOADING_STRIPE", true);
-        let { data } = await this.$axios.post("/order/payment-intents", { grand_total: state.grand_total });
+        const datas = {
+            grand_total: state.grand_total,
+            name:  rootState.auth.user.first_name + " " +
+            rootState.auth.user.last_name,
+            email: rootState.auth.user.email, 
+        }
+        let { data } = await this.$axios.post("/order/payment-intents", datas);
         if (data.success == true) { 
             commit(
                 "FETCH_STRIPE_KEY",

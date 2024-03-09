@@ -228,25 +228,11 @@ export default {
           data: this.form,
         });
         if (this.authenticated) {
-          this.$router.push(
-            this.$route.query.redirect
-              ? this.$route.query.redirect == "cart?step=3" &&
-                typeof this.$route.query.zipcode !== "undefined"
-                ? this.$route.query.redirect +
-                  "&zipcode=" +
-                  this.$route.query.zipcode
-                : this.$route.query.redirect
-              : "/users/dashboard"
-          );
-          if (this.$route.query.redirect == "cart?step=3") {
-            this.$swal({
-              toast: true,
-              position: "top-end",
-              icon: "success",
-              title: "Your are now logged in! please continue",
-              showConfirmButton: false,
-              timer: 10000,
-            });
+          let path = this.$cookies.get("last-location");
+          if (path === "/login" || path === "/register") {
+            this.$router.push("/");
+          } else {
+            this.$router.push(this.$cookies.get("last-location"));
           }
         }
         this.loading = false;
@@ -260,9 +246,8 @@ export default {
     if (typeof this.$route.query.redirect !== "undefined") {
       this.query = this.$route.query.redirect;
       this.$cookies.set("last-location", this.$route.query.redirect);
-    } else {
-      this.$cookies.remove("last-location");
     }
+
     if (typeof this.$route.query.err !== "undefined") {
       this.err = this.$route.query.err;
     }

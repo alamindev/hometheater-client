@@ -12,7 +12,7 @@
     >
       <Sidebar @hidden="hidden" :isshowing="isshowing" />
       <div
-        class="lg:ml-64 2xl:ml-80 min-[1440px]:mr-80 sm:px-5 main--parent"
+        class="xl:ml-64 2xl:ml-80 min-[1440px]:mr-80 sm:px-5 main--parent"
         :class="isshowing || isshowingright ? 'showing' : ''"
       >
         <Header @clicked="onClicked" @rightSideClicked="toggleRightSidebar" />

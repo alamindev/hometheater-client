@@ -18,13 +18,13 @@
           v-if="Object.keys(booking).length !== 0"
           class="sm:rounded-3xl w-full bg-white p-4 space-y-3 md:p-6 lg:px-12 lg:py-8"
         >
-          <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="grid grid-cols-1 max-lg:gap-4 lg:grid-cols-2">
             <div class="space-y-1 sm:space-y-2">
               <h2 class="text-xl font-semibold">Home Service Details</h2>
 
-              <div class="flex items-center pb-4 pt-2">
+              <div class="flex flex-wrap items-center pb-4 pt-2">
                 <h3 class="font-semibold text-dark-sm text-lg mr-3">Status:</h3>
-                <div class="flex" v-if="booking.status === 'pending'">
+                <div class="flex flex-wrap" v-if="booking.status === 'pending'">
                   <p
                     class="py-2 px-6 font-medium text-xs sm:text-base rounded-full bg-pending-color text-black mr-2"
                   >
@@ -253,7 +253,7 @@
           v-if="Object.keys(product).length !== 0"
           class="sm:rounded-3xl w-full bg-white p-4 space-y-3 md:p-6 lg:px-12 lg:py-8"
         >
-          <div class="grid grid-cols-1 md:grid-cols-2">
+          <div class="grid grid-cols-1 max-lg:gap-4 lg:grid-cols-2">
             <div class="space-y-1 sm:space-y-2">
               <h2 class="text-xl font-semibold">Product Details</h2>
 

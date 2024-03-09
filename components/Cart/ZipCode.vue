@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="hidden lg:flex justify-between items-center border-b pb-3">
+    <div class="hidden lg:flex justify-between items-center border-b pb-2">
       <h1
         class="text-xl font-bold font-rubik text-gray-600 custom--text-cart-title"
       >

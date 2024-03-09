@@ -26,7 +26,10 @@
                     />
                   </figure>
                 </div>
-                <figure class="pt-5 flex-1 xl:pl-2">
+                <figure
+                  class="pt-5 flex-1 xl:pl-2 cursor-pointer"
+                  @click="selectIndex"
+                >
                   <img
                     loading="lazy"
                     class="w-full effect-change-img rounded-md shadow-md max-h-[600px] object-contain"
@@ -35,6 +38,14 @@
                   />
                 </figure>
               </div>
+              <transition name="fade">
+                <LazyImgPopup
+                  @closeModal="closeModal"
+                  v-if="is_popup"
+                  :imageDatas="allImages"
+                  :select_name="select_name"
+                />
+              </transition>
             </div>
             <div class="lg:w-5/12 pt-6 lg:pt-0">
               <div class="w-full lg:pt-5">
@@ -451,12 +462,24 @@ export default {
       image: {},
       tab: "description",
       varient: {},
+      select_name: null,
+      is_popup: false,
     };
   },
   computed: {
     ...mapGetters({
       getDatas: "cart/getDatas",
     }),
+    allImages() {
+      let images = this.product.images;
+      let image = {
+        id: crypto.randomUUID(),
+        url: this.product.image,
+        is_active: false,
+      };
+
+      return [...images.map((el) => ({ ...el, is_active: false })), image];
+    },
     meta() {
       let product = this.$store.state.product.product;
       let allreviews = [];
@@ -530,6 +553,16 @@ export default {
       let change_img = document.querySelector(".effect-change-img");
       change_img.setAttribute("src", url);
     },
+    selectIndex() {
+      const element = document.querySelector(".effect-change-img");
+      let image_name = element
+        .getAttribute("src")
+        .substring(element.getAttribute("src").lastIndexOf("/") + 1);
+
+      this.select_name = "/uploads/services/" + image_name;
+      this.is_popup = true;
+      document.body.classList.add("overflow-hidden");
+    },
     valueChanged(name, value) {
       this.varient = {
         name: name,
@@ -587,6 +620,9 @@ export default {
     },
     toggleTab(val) {
       this.tab = val;
+    },
+    closeModal() {
+      this.is_popup = false;
     },
   },
   mounted() {
@@ -653,5 +689,13 @@ export default {
 }
 .star--style i {
   color: #24364a8a;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

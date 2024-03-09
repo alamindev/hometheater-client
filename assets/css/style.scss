@@ -170,7 +170,7 @@ and also iPads specifically.
   display: none !important;
 }
 
-@media only screen and (max-width: 524px) {
+@media only screen and (max-width: 600px) {
   .desktop--design {
     display: none !important;
   }
@@ -1228,9 +1228,9 @@ table.table tr {
   }
 }
 
-@media (max-width: 968px) {
+@media (max-width: 600px) {
   .booking--details h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
   }
 }

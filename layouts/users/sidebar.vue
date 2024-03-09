@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sidebar bg-blug-10 py-5 px-5 w-64 -ml-64 2xl:w-80 lg:ml-0 fixed top-0 bottom-0 left-0 sidebar--click"
+    class="sidebar bg-blug-10 py-5 px-5 w-64 -ml-64 2xl:w-80 xl:ml-0 fixed top-0 bottom-0 left-0 sidebar--click"
     :class="isshowing ? 'showing' : ''"
   >
     <div class="logo__area flex items-center justify-between pb-10 border-b">

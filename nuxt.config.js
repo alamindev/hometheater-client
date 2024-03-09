@@ -219,7 +219,7 @@ export default {
     port: 8080, // default: 3000
   },
   router: {
-    middleware: ["clearValidationErrors" ],
+    middleware: ["clearValidationErrors", 'redirect' ],
     extendRoutes(routes, resolve) {
       routes.push({
         path: "/login",

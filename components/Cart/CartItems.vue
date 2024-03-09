@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="hidden lg:flex justify-between items-center border-b pb-3">
+    <div class="hidden lg:flex justify-between items-center border-b pb-2">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
         Cart items
       </h1>
@@ -19,31 +19,31 @@
     </div>
     <client-only>
       <div>
-        <div v-if="cartdata.services.length > 0">
-          <div class="md:pb-5 md:pt-5 py-2">
-            <h2 class="text-md font-medium lg:text-xl w-full border-b pb-1.5">
-              Services
-            </h2>
+        <div
+          v-if="cartdata.services.length > 0"
+          class="border-b last:border-b-0"
+        >
+          <div class="pt-3 pb-6">
             <table class="w-full text-sm sm:text-base desktop--design">
               <thead class="text-left">
                 <tr>
                   <th
-                    class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-1.5 md:py-2 border-b"
                   >
                     Service details
                   </th>
                   <th
-                    class="text-gray-500 font-medium w-28 lg:w-32 lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-24 xl:w-32 lg:px-2 py-2 md:py-3 border-b"
                   >
                     Price
                   </th>
                   <th
-                    class="text-gray-500 font-medium w-40 lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-28 xl:w-40 lg:px-2 py-2 md:py-3 border-b"
                   >
                     Quantity
                   </th>
                   <th
-                    class="text-gray-500 font-medium w-16 lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-24 lg:px-2 py-2 md:py-3 border-b"
                   >
                     Total
                   </th>
@@ -51,16 +51,16 @@
               </thead>
               <tbody>
                 <tr
-                  class="border-b"
+                  class="border-b last:border-b-0"
                   v-for="cart in cartdata.services"
                   :key="cart.id"
                 >
-                  <td class="py-2">
-                    <div class="flex pt-3">
-                      <figure class="w-24">
+                  <td class="py-3">
+                    <div class="flex">
+                      <figure class="w-20 sm:w-24 shrink-0">
                         <img
                           loading="lazy"
-                          class="w-24 h-20 object-cover rounded-md"
+                          class="w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-md"
                           :src="imgurl + 'storage' + cart.image"
                           :alt="cart.title"
                         />
@@ -70,7 +70,7 @@
                       >
                         <nuxt-link
                           :to="`/shop/${cart.slug}`"
-                          class="w-40 lg:w-auto inline-block font-medium text-sm sm:text-base overflow-ellipsis overflow-hidden pr-5"
+                          class="w-40 lg:w-auto font-medium text-sm xl:text-base pr-3 sm:pr-5 line-clamp-3"
                         >
                           {{ cart.title }}
                         </nuxt-link>
@@ -137,16 +137,16 @@
             </table>
             <div class="mobile--design">
               <div
-                class="w-full border-b pb-5 pt-5"
+                class="w-full last:border-b-0 border-b last:pb-2 pb-5"
                 v-for="cart in cartdata.services"
                 :key="cart.id"
               >
                 <div class="flex justify-between">
                   <div class="flex">
-                    <figure class="w-24">
+                    <figure class="w-20 sm:w-24 shrink-0">
                       <img
                         loading="lazy"
-                        class="w-24 h-20 object-cover rounded-md"
+                        class="w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-md"
                         :src="imgurl + 'storage' + cart.image"
                         :alt="cart.title"
                       />
@@ -156,10 +156,16 @@
                     >
                       <nuxt-link
                         :to="`/booking/${cart.slug}`"
-                        class="w-40 lg:w-auto font-medium text-sm sm:text-base pb-5 overflow-ellipsis overflow-hidden pr-5"
+                        class="w-40 lg:w-auto font-medium text-sm xl:text-base pr-3 sm:pr-5 line-clamp-3"
                       >
                         {{ cart.title }}
                       </nuxt-link>
+                      <p
+                        class="text-brand-color font-bold text-sm"
+                        v-if="cart.totalHour == 1"
+                      >
+                        Duration: {{ cart.totalHour }} hour
+                      </p>
                       <button
                         type="button"
                         class="text-red-600 text-sm"
@@ -205,30 +211,27 @@
           </div>
         </div>
         <div v-if="cartdata.products.length > 0">
-          <div class="md:pb-5 md:pt-5 py-2">
-            <h2 class="text-md font-medium lg:text-xl w-full border-b pb-1.5">
-              Products
-            </h2>
+          <div class="pb-3 pt-6">
             <table class="w-full text-sm sm:text-base desktop--design">
               <thead class="text-left">
                 <tr>
                   <th
-                    class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-72 md:w-80 lg:w-auto lg:px-2 py-1.5 md:py-2 border-b"
                   >
                     Product details
                   </th>
                   <th
-                    class="text-gray-500 font-medium w-28 lg:w-32 lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-24 xl:w-32 lg:px-2 py-2 md:py-3 border-b"
                   >
                     Price
                   </th>
                   <th
-                    class="text-gray-500 font-medium w-40 lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-28 xl:w-40 lg:px-2 py-2 md:py-3 border-b"
                   >
                     Quantity
                   </th>
                   <th
-                    class="text-gray-500 font-medium w-16 lg:px-2 py-2 md:py-3 border-b"
+                    class="text-gray-500 font-medium w-24 lg:px-2 py-2 md:py-3 border-b"
                   >
                     Total
                   </th>
@@ -236,16 +239,16 @@
               </thead>
               <tbody>
                 <tr
-                  class="border-b"
+                  class="border-b last:border-b-0"
                   v-for="cart in cartdata.products"
                   :key="cart.id"
                 >
-                  <td class="py-2">
-                    <div class="flex pt-3">
-                      <figure class="w-24">
+                  <td class="py-3">
+                    <div class="flex">
+                      <figure class="w-20 sm:w-24 shrink-0">
                         <img
                           loading="lazy"
-                          class="w-24 h-20 object-cover rounded-md"
+                          class="w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-md"
                           :src="imgurl + 'storage' + cart.image"
                           :alt="cart.title"
                         />
@@ -254,8 +257,8 @@
                         class="pl-4 font-rubik flex flex-col justify-between items-start"
                       >
                         <nuxt-link
-                          :to="`/booking/${cart.slug}`"
-                          class="w-40 lg:w-auto inline-block font-medium text-sm sm:text-base overflow-ellipsis overflow-hidden pr-5"
+                          :to="`/shop/${cart.slug}`"
+                          class="w-40 lg:w-auto font-medium text-sm xl:text-base pr-3 sm:pr-5 line-clamp-3"
                         >
                           {{ cart.title }}
                         </nuxt-link>
@@ -305,16 +308,16 @@
             </table>
             <div class="mobile--design">
               <div
-                class="w-full border-b pb-5 pt-5"
+                class="w-full border-b first:pt-0 pt-4 pb-4"
                 v-for="cart in cartdata.products"
                 :key="cart.id"
               >
                 <div class="flex justify-between">
                   <div class="flex">
-                    <figure class="w-24">
+                    <figure class="w-20 sm:w-24 shrink-0">
                       <img
                         loading="lazy"
-                        class="w-24 h-20 object-cover rounded-md"
+                        class="w-20 h-16 sm:w-24 sm:h-20 object-cover rounded-md"
                         :src="imgurl + 'storage' + cart.image"
                         :alt="cart.title"
                       />
@@ -324,7 +327,7 @@
                     >
                       <nuxt-link
                         :to="`/booking/${cart.slug}`"
-                        class="w-40 lg:w-auto font-medium text-sm sm:text-base pb-5 overflow-ellipsis overflow-hidden pr-5"
+                        class="w-40 lg:w-auto font-medium text-sm xl:text-base pr-3 sm:pr-5 line-clamp-3"
                       >
                         {{ cart.title }}
                       </nuxt-link>

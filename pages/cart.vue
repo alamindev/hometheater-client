@@ -1,6 +1,6 @@
 <template>
   <section
-    class="sm:px-4 lg:px-16 sm:pt-6 pb-20 cart--page"
+    class="sm:px-4 xl:px-16 sm:pt-6 pb-20 cart--page"
     :class="carts.length ? 'bg-custom' : 'empty-cart-gradient'"
     v-if="!loading"
   >
@@ -14,7 +14,7 @@
             <!-- cart for desktop -->
             <div v-if="!is_success && step !== 7">
               <div class="flex flex-col lg:flex-row items-start">
-                <div class="w-full px-4 py-4 lg:w-9/12 lg:px-10 lg:py-12">
+                <div class="w-full px-4 py-4 lg:w-full xl:px-10 xl:py-8">
                   <div
                     class="lg:hidden flex justify-between lg:mb-5 border-b sm:-mx-4 sm:px-10"
                   >
@@ -31,10 +31,10 @@
                       <span v-if="step === 1">Cart Items</span>
                       <span
                         v-if="
-                          step === 2 &&
+                          step === 3 &&
                           Object.keys(cartdata.services).length === 0
                         "
-                        >Payment Process</span
+                        >Checkout</span
                       >
                       <span
                         v-if="
@@ -85,7 +85,6 @@
                       Order Summary
                     </button>
                   </div>
-
                   <div
                     class=""
                     :class="current == 'shopping-cart' ? 'block' : 'hidden'"
@@ -103,13 +102,17 @@
                         :err="calendarerr"
                       />
                       <finalStep
+                        @finishedCheckout="finishedCheckout"
                         v-if="step === 6"
                         @prev="prev"
-                        :is_confirmation="false"
                       />
                     </div>
                     <div class="" v-else>
-                      <FinalStep v-if="step === 3" @prev="prev" />
+                      <FinalStep
+                        @finishedCheckout="finishedCheckout"
+                        v-if="step === 3"
+                        @prev="prev"
+                      />
                     </div>
                   </div>
 
@@ -123,8 +126,6 @@
                   </div>
                   <div class="lg:pt-10 lg:hidden">
                     <MobileFooter
-                      @PaymentForm="PaymentForm"
-                      @finishedCheckout="finishedCheckout"
                       :isCheckout="isDisabled"
                       @next="mobileNext"
                       :step="step"
@@ -133,19 +134,31 @@
                   </div>
                 </div>
                 <div
-                  class="hidden lg:block lg:w-3/12 font-rubik top-0 sticky h-full"
+                  v-if="
+                    Object.keys(cartdata.services).length !== 0 && step !== 6
+                  "
+                  class="hidden lg:block lg:w-[400px] shrink-0 font-rubik top-0 sticky h-full"
                 >
                   <OrderSummery
-                    @PaymentForm="PaymentForm"
-                    @finishedCheckout="finishedCheckout"
                     :isCheckout="isDisabled"
                     @next="next"
                     :step="step"
                   />
                 </div>
+                <div v-else>
+                  <div
+                    v-if="step !== 3 && step !== 6"
+                    class="hidden lg:block w-[300px] xl:w-[400px] shrink-0 font-rubik top-0 sticky h-full"
+                  >
+                    <OrderSummery
+                      :isCheckout="isDisabled"
+                      @next="next"
+                      :step="step"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <!-- last cart for success  -->
             <div
               class="flex px-10 py-20 flex-col items-center font-rubik"
               v-if="is_success || step === 7"
@@ -242,13 +255,6 @@
         </div>
       </div>
     </div>
-    <transition name="fade">
-      <PaymentForm
-        @finishedCheckout="finishedCheckout"
-        @hideModal="hideModal"
-        v-if="paymentModal"
-      />
-    </transition>
   </section>
 
   <div v-else class="loader-parent mt-16 mb-20">
@@ -270,7 +276,6 @@ import Register from "@/components/Cart/Register";
 import RequiredFields from "@/components/Cart/RequiredFields";
 import UploadImage from "@/components/Cart/UploadImage";
 import ZipCode from "@/components/Cart/ZipCode";
-import PaymentForm from "../components/Cart/PaymentForm.vue";
 
 export default {
   name: "Cart",
@@ -284,7 +289,6 @@ export default {
     UploadImage,
     Calendar,
     FinalStep,
-    PaymentForm,
     Login,
     Register,
     RequiredFields,
@@ -296,7 +300,6 @@ export default {
       calendarerr: "",
       current: "shopping-cart",
       is_next: false,
-      paymentModal: false,
       is_check_zipcode: false,
       is_success: false,
       only_product: false,
@@ -424,10 +427,6 @@ export default {
     showLoginForm() {
       this.$store.commit("cart/IS_REGISTER_FORM", false);
     },
-    hideModal() {
-      this.paymentModal = false;
-      this.$store.commit("cart/FINISH_STEP_LOADING", false);
-    },
     prev() {
       if (this.is_check_zipcode && this.step === 3) {
         this.step = 1;
@@ -498,17 +497,8 @@ export default {
     calendarErr() {
       this.calendarerr = "Please choose date and time";
     },
-    PaymentForm() {
-      this.current = "shopping-cart";
-      let vm = this;
-      this.$store.dispatch("cart/GetStripeKey").then((res) => {
-        if (res === true) {
-          vm.paymentModal = true;
-        }
-      });
-    },
     finishedCheckout() {
-      this.$store.dispatch("cart/finishedCheckout").then((res) => {
+      this.$store.dispatch("cart/finishedCheckout", null).then((res) => {
         if (res.success == true) {
           if (
             this.step === 2 &&
@@ -521,22 +511,21 @@ export default {
           if (res.type === 1) {
             this.only_product = true;
           }
-          this.paymentModal = false;
           this.$store.commit("cart/IS_NEXT", false);
-          this.$swal({
-            toast: true,
-            position: "top-end",
-            icon: "success",
-            title: "Your booking has been successfully completed!",
-            showConfirmButton: false,
-            timer: 6000,
-          });
         }
       });
     },
     CartTab(param) {
       this.current = param;
     },
+    handleResize() {
+      if (window.innerWidth < 1023) {
+        this.current = "shopping-cart";
+      }
+    },
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
   },
   created() {
     this.step = 1;
@@ -560,6 +549,7 @@ export default {
     this.$store.dispatch("cart/suggestData");
     this.$store.dispatch("cart/FetchTax");
     this.checkZipcodeCookie();
+    window.addEventListener("resize", this.handleResize);
   },
 };
 </script>

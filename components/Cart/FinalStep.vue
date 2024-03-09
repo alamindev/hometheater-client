@@ -1,12 +1,12 @@
 <template>
   <div class="relative">
-    <div class="hidden lg:flex justify-between items-center border-b pb-3">
+    <div class="hidden lg:flex justify-between items-center border-b pb-2">
       <h1 class="custom--text-cart-title font-bold font-rubik text-gray-600">
         Checkout
       </h1>
     </div>
-    <div class="min-h-[450px] flex justify-center items-center">
-      <div class="w-[540px] max-w-full space-y-6 pt-5 pb-2 md:pb-8">
+    <div class="min-h-[450px] grid grid-cols-1 md:grid-cols-2">
+      <div class="space-y-6 py-8 md:pr-6 lg:px-6 xl:px-20">
         <table
           class="w-full text-sm sm:text-base"
           v-if="Object.keys(cartdata.services).length !== 0"
@@ -14,12 +14,12 @@
           <thead class="text-left">
             <tr>
               <th
-                class="text-gray-500 text-base sm:text-xl font-bold lg:px-2 py-2 md:py-3 border-b"
+                class="text-gray-500 text-base sm:text-xl font-medium lg:px-2 py-1.5 border-b"
               >
                 Services
               </th>
               <th
-                class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b"
+                class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b font-medium"
               >
                 Payment Option
               </th>
@@ -35,10 +35,10 @@
                     v-for="cart in cartdata.services"
                   >
                     <div class="flex gap-3 items-start">
-                      <figure class="w-24">
+                      <figure class="w-16 shrink-0">
                         <img
                           loading="lazy"
-                          class="w-24 h-20 shadow-md border object-cover rounded-md"
+                          class="w-16 h-14 shadow border object-cover rounded-md"
                           :src="imgurl + 'storage' + cart.image"
                           :alt="cart.title"
                         />
@@ -56,9 +56,9 @@
             </tr>
             <tr class="border-b">
               <td class="py-2 lg:px-2">
-                <h4 class="font-semibold text-sm sm:text-base">
+                <h4 class="text-sm sm:text-base">
                   Total with Addons <br />
-                  ${{ servicesTotalWithAddons }}
+                  <strong>${{ servicesTotalWithAddons }}</strong>
                 </h4>
               </td>
               <td class="py-2 lg:px-2">
@@ -103,12 +103,12 @@
           <thead class="text-left">
             <tr>
               <th
-                class="text-gray-500 text-base sm:text-xl font-bold lg:px-2 py-2 md:py-3 border-b"
+                class="text-gray-500 text-base sm:text-xl font-medium lg:px-2 py-1.5 border-b"
               >
                 Products
               </th>
               <th
-                class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b"
+                class="text-gray-500 text-right text-base lg:px-2 py-2 md:py-3 border-b font-medium"
               >
                 Payment Option
               </th>
@@ -124,10 +124,10 @@
                     v-for="cart in cartdata.products"
                   >
                     <div class="flex gap-3 items-start">
-                      <figure class="w-24">
+                      <figure class="w-16 shrink-0">
                         <img
                           loading="lazy"
-                          class="w-24 h-20 shadow-md border object-cover rounded-md"
+                          class="w-16 h-14 shadow border object-cover rounded-md"
                           :src="imgurl + 'storage' + cart.image"
                           :alt="cart.title"
                         />
@@ -145,8 +145,8 @@
             </tr>
             <tr class="border-b">
               <td class="py-2 lg:px-2">
-                <h4 class="font-semibold text-sm sm:text-base">
-                  Total: ${{ productsTotal }}
+                <h4 class="text-sm sm:text-base">
+                  Total: <strong>${{ productsTotal }}</strong>
                 </h4>
               </td>
               <td class="py-2 lg:px-2">
@@ -167,9 +167,9 @@
         <table class="w-full text-sm sm:text-base pt-3">
           <tbody>
             <tr class="">
-              <td class="py-2 lg:px-2">Total</td>
+              <td class="py-2 lg:px-2">Sub Total</td>
               <td class="py-2 lg:px-2">
-                <h4 class="font-semibold text-right">
+                <h4 class="font-medium text-right">
                   ${{ serviceAndProductAddition }}
                 </h4>
               </td>
@@ -183,7 +183,7 @@
             >
               <td class="py-2 lg:px-2">Pay at appointment</td>
               <td class="py-2 lg:px-2">
-                <h4 class="font-semibold text-right">
+                <h4 class="font-medium text-right">
                   -${{ servicesTotalWithAddons }}
                 </h4>
               </td>
@@ -194,20 +194,28 @@
             >
               <td class="py-2 lg:px-2">Taxes <sub>(Only for Products)</sub></td>
               <td class="py-2 lg:px-2">
-                <h4 class="font-semibold text-right">+{{ rate }}%</h4>
+                <h4 class="font-medium text-right">+{{ rate }}%</h4>
               </td>
             </tr>
             <tr class="">
               <td class="py-2 lg:px-2"><strong>Grand Total</strong></td>
               <td class="py-2 lg:px-2">
-                <h4 class="font-semibold text-right">${{ grandTotal }}</h4>
+                <h4 class="font-bold text-right">${{ grandTotal }}</h4>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
+      <div class="md:border-l max-md:border-t">
+        <transition name="fade">
+          <PaymentForm
+            @SubmitLocalPayment="SubmitLocalPayment"
+            :is_payment="is_payment"
+          />
+        </transition>
+      </div>
     </div>
-    <div class="border-t lg:pt-10">
+    <div class="border-t lg:pt-6">
       <button
         class="flex items-center absolute -bottom-8 lg:relative lg:bottom-0"
         @click="onClickPrevious"
@@ -220,11 +228,15 @@
 </template>
 
 <script>
+import Loader from "@/components/Loader/Loading-white";
 import { mapGetters } from "vuex";
+import PaymentForm from "./PaymentForm.vue";
 export default {
   name: "FinalStep",
-
-  props: ["is_confirmation"],
+  components: {
+    PaymentForm,
+    Loader,
+  },
   data() {
     return {
       imgurl: process.env.imgUrl,
@@ -239,6 +251,9 @@ export default {
     },
     percent_val() {
       return this.$store.state.cart.percent_val;
+    },
+    finish_loading() {
+      return this.$store.state.cart.finish_loading;
     },
     percent() {
       return this.$store.state.cart.percent;
@@ -266,6 +281,7 @@ export default {
       }
       return 0;
     },
+
     serviceAndProductAddition() {
       if (this.percent) {
         let parcentVal =
@@ -281,6 +297,16 @@ export default {
       set(value) {
         this.$store.commit("cart/UPDATE_PAYMENT", value);
       },
+    },
+    is_payment() {
+      if (Object.keys(this.cartdata.products).length !== 0) {
+        return true;
+      } else {
+        if (this.service_payment === "online") {
+          return true;
+        }
+        return false;
+      }
     },
     promocode() {
       return this.$store.state.cart.promocode;
@@ -312,6 +338,9 @@ export default {
   methods: {
     onClickPrevious() {
       this.$emit("prev");
+    },
+    SubmitLocalPayment() {
+      this.$emit("finishedCheckout");
     },
   },
 };

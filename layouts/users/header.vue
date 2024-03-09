@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center">
       <h1 class="text-gray-700 text-base flex items-center">
         <button
-          class="block lg:hidden bars--click"
+          class="block xl:hidden bars--click"
           type="button"
           @click="toggle"
         >
