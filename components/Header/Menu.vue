@@ -1,6 +1,6 @@
 <template>
   <div
-    class="lg:px-16 px-5 flex py-2 justify-between"
+    class="xl:px-20 2xl:px-24 px-5 flex py-2 justify-between"
     :class="hidden"
     id="menu"
   >
@@ -10,7 +10,7 @@
       >
         <li>
           <nuxt-link
-            class="relative custom--margin md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
+            class="relative custom--margin first:ml-0 md:mx-3 !text-xl lg:!text-base xl:mx-5 py-1 md:py-3 px-0 block text-gray-700 hover:text-blue-500"
             to="/"
             exact
             >Home</nuxt-link
@@ -61,11 +61,9 @@
         </li>
       </ul>
     </nav>
-    <div
-      class="hidden w-full md:w-auto lg:flex justify-between items-center xl:pr-12"
-    >
+    <div class="hidden w-full md:w-auto lg:flex justify-between items-center">
       <Search />
-      <div class="flex-2 relative pr-2 lg:pr-0">
+      <div class="flex-2 relative mr-3">
         <nuxt-link to="/cart">
           <div
             class="absolute -top-3 -right-1 lg:-right-4 rounded-full w-6 sm:w-8 h-6 sm:h-8 bg-brand-color flex justify-center items-center text-white"

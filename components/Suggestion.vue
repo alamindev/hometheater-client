@@ -1,7 +1,7 @@
 <template>
   <div class="pt-12" v-if="suggests.length > 0">
     <h3 class="text-2xl pb-10 font-medium text-gray-800 font-rubik">
-      Services you might like
+      Suggestions
     </h3>
 
     <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">

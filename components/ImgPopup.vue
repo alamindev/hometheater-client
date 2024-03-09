@@ -28,7 +28,7 @@
       class="flex flex-col lg:flex-row gap-4 sm:px-4 min-h-[calc(100vh-80px)] max-h-[calc(100vh-80px)]"
     >
       <div
-        class="w-full bg-[#faf8f5] px-4 sm:px-6 py-8 rounded-xl relative max-md:min-h-[calc(100vh-190px)] md:max-lg:min-h-[calc(100vh-230px)] max-xl:flex justify-center items-center"
+        class="w-full bg-[#faf8f5] px-4 sm:px-6 py-5 sm:py-8 rounded-xl relative max-md:min-h-[calc(100vh-210px)] md:max-lg:min-h-[calc(100vh-230px)] max-xl:flex justify-center items-center"
       >
         <div
           class="absolute max-lg:bottom-4 w-full left-0 flex gap-6 justify-center lg:top-1/2 lg:-translate-y-1/2"
@@ -86,7 +86,9 @@
         ref="container"
         class="w-full lg:w-[200px] lg:shrink-0 overflow-y-auto max-h-[calc(100vh-100px)]"
       >
-        <div class="flex overflow-x-auto lg:grid grid-cols-1 gap-4 py-3">
+        <div
+          class="flex overflow-x-auto pb-3 lg:grid grid-cols-1 gap-4 pt-1.5 sm:py-3 max-lg:pl-4"
+        >
           <div
             v-for="image in images"
             :key="image.id"

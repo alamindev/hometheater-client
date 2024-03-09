@@ -69,7 +69,7 @@
                         class="pl-4 font-rubik flex flex-col justify-between items-start"
                       >
                         <nuxt-link
-                          :to="`/shop/${cart.slug}`"
+                          :to="`/booking/${cart.slug}`"
                           class="w-40 lg:w-auto font-medium text-sm xl:text-base pr-3 sm:pr-5 line-clamp-3"
                         >
                           {{ cart.title }}
@@ -326,7 +326,7 @@
                       class="pl-4 font-rubik flex flex-col justify-between items-start"
                     >
                       <nuxt-link
-                        :to="`/booking/${cart.slug}`"
+                        :to="`/shop/${cart.slug}`"
                         class="w-40 lg:w-auto font-medium text-sm xl:text-base pr-3 sm:pr-5 line-clamp-3"
                       >
                         {{ cart.title }}

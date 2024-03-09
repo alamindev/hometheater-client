@@ -22,7 +22,9 @@
     <div class="custom-gradient-two relative py-12 px-4 lg:px-16">
       <div class="container mx-auto pb-20 md:pb-40">
         <div class="relative z-30">
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          <div
+            class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6"
+          >
             <div
               v-for="service in services"
               :key="service.id"

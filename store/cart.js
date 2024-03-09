@@ -254,7 +254,7 @@ export const mutations = {
     UPDATE_ADDRESS: (state, value) => (state.address.address = value ), 
     UPDATE_CITY: (state, value) => (state.address.city = value ), 
     UPDATE_STATE: (state, value) => (state.address.state = value ), 
-    UPDATE_ZIPCODE: (state, value) => (state.address.zipcode = value ), 
+    UPDATE_ADDRESS_ZIPCODE: (state, value) => (state.address.zipcode = value ), 
 };
 
 export const actions = {
@@ -803,10 +803,14 @@ export const actions = {
     },
     checkAnswer({ commit, state, getters }, { id, obj }) {
         let arrays = [...state.checkQuetions];
+      
         let maped = arrays.map(el => {
             let arr = [...el.question];
             if (el.id === id) {
-                arr.push(obj);
+                let some = arr.some(el => el.question_id == obj.question_id);
+                if (!some) {
+                    arr.push(obj); 
+                }
             }
             return {
                 id: el.id,

@@ -41,20 +41,19 @@
 <script>
 import Loader from "@/components/Loader/Loading-white";
 export default {
-  middleware: ["auth"],
   components: {
     Loader,
   },
   data() {
     return {
-      is_loading: false,
+      is_loading: true,
       payment_id: null,
       status: null,
       only_product: false,
     };
   },
 
-  async created() {
+  async mounted() {
     this.is_loading = true;
     this.status = this.$route.query.redirect_status;
     this.payment_id = this.$route.query.payment_intent;

@@ -19,7 +19,7 @@
       >
         <p class="uppercase text-center w-full">NEXT</p>
       </button>
-      <div>
+      <div v-if="Object.keys(this.cartdata.services).length !== 0">
         <button
           type="button"
           class="disabled:opacity-50 py-3 px-5 text-base sm:text-xl text-white bg-brand-color hover:bg-brand-color-hover flex items-center justify-between w-full rounded-md"

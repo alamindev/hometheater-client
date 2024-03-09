@@ -77,7 +77,7 @@ export default {
         return this.$store.state.cart.address.zipcode;
       },
       set(value) {
-        this.$store.commit("cart/UPDATE_ZIPCODE", value);
+        this.$store.commit("cart/UPDATE_ADDRESS_ZIPCODE", value);
       },
     },
     is_logged_in() {

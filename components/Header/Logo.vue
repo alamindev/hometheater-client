@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-wrap items-center py-4 lg:px-16 px-5 border-b border-gray-200"
+    class="flex flex-wrap items-center py-4 xl:px-16 px-5 border-b border-gray-200"
   >
     <div class="flex-1 flex justify-start items-center">
       <figure class="hidden lg:block">

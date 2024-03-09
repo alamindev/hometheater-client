@@ -1,13 +1,13 @@
 <template>
-  <div class="pt-12 pb-10 sm:pb-0 hidden lg:block" v-if="suggests.length > 0">
+  <div class="pt-40 pb-10 sm:pb-0 hidden lg:block" v-if="suggests.length > 0">
     <h3
       class="text-lg sm:text-xl lg:text-2xl pb-8 font-medium text-gray-800 font-rubik"
     >
-      Services you might like
+      Suggestions
     </h3>
 
     <div
-      class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-y-10 gap-x-5 sm:gap-6"
+      class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-y-10 gap-x-5 sm:gap-6"
     >
       <div
         class="relative cursor-pointer"

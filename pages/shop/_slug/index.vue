@@ -4,16 +4,16 @@
       <div class="bg-white shadow-lg px-4 py-8 sm:p-10 rounded-md">
         <div v-show="!loading">
           <div class="flex flex-col lg:flex-row pb-10">
-            <div class="lg:w-7/12 lg:pr-5 xl:pr-16">
+            <div class="lg:w-7/12 lg:pr-5 xl:pr-16 pb-3">
               <div
                 v-if="product.images && product.images.length > 0"
                 class="flex flex-col-reverse xl:flex-row"
               >
                 <div
-                  class="xl:pr-3 flex flex-row max-sm:overflow-x-auto xl:flex-col flex-2 pt-5"
+                  class="xl:pr-3 flex pb-3 flex-row max-sm:overflow-x-auto xl:flex-col flex-2 pt-5"
                 >
                   <figure
-                    class="cursor-pointer h-16 w-20 sm:h-20 sm:w-24 xl:h-24 xl:w-28 mb-4 shrink-0 mr-3 xl:mr-0"
+                    class="cursor-pointer h-16 w-20 sm:h-20 sm:w-24 xl:h-24 xl:w-28 shrink-0 mr-3 xl:mr-0"
                     v-for="image in product.images"
                     @click="ChangeImage(imgurl + 'storage' + image.url)"
                     :key="image.id"
@@ -47,7 +47,7 @@
                 />
               </transition>
             </div>
-            <div class="lg:w-5/12 pt-6 lg:pt-0">
+            <div class="lg:w-5/12 pt-6 lg:pt-0 max-sm:-mx-4">
               <div class="w-full lg:pt-5">
                 <h1
                   class="font-rubik text-lg sm:text-2xl lg:text-3xl font-medium text-dark-sm"
@@ -623,6 +623,7 @@ export default {
     },
     closeModal() {
       this.is_popup = false;
+      document.body.classList.remove("overflow-hidden");
     },
   },
   mounted() {
