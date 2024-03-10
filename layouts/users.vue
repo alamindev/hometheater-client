@@ -135,7 +135,7 @@ export default {
   margin-left: 250px;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1279px) {
   .main--parent.showing {
     margin-left: 0;
 

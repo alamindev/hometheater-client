@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-light-blue-cart h-full px-5 py-12">
+  <div class="bg-light-blue-cart h-full px-5 py-7">
     <h2
       class="font-medium custom--text-order-title text-gray-700 border-b pb-4 text-center"
     >
-      Order Summary
+      Summary
     </h2>
     <div class="flex justify-between py-4">
       <p class="text-base uppercase" v-if="count === 1">ITEM {{ count }}</p>

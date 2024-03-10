@@ -2,7 +2,7 @@
   <div class="md:pl-6 lg:px-6 xl:px-20 py-10 space-y-8">
     <div class="space-y-6">
       <div v-if="is_logged_in">
-        <div class="cursor-pointer">
+        <div class=" ">
           <input
             type="radio"
             name="delivery"
@@ -10,7 +10,7 @@
             v-model="delivery"
             id="current_address"
           />
-          <label for="current_address" class="font-semibold pl-1"
+          <label for="current_address" class="font-semibold pl-1 cursor-pointer"
             >Current Address
           </label>
         </div>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div>
-        <div class="cursor-pointer">
+        <div class="">
           <input
             type="radio"
             name="delivery"
@@ -27,7 +27,7 @@
             v-model="delivery"
             id="address_new"
           />
-          <label for="address_new" class="font-semibold pl-1"
+          <label for="address_new" class="font-semibold cursor-pointer pl-1"
             >Add new Address</label
           >
         </div>
@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div v-if="is_payment">
+    <div v-show="is_payment">
       <form v-show="!is_load" id="payment-form" @submit.prevent="handleSubmit">
         <div id="payment-element"></div>
         <div class="flex justify-center pt-6">
@@ -58,7 +58,7 @@
         <div class="loader"></div>
       </div>
     </div>
-    <div v-else class="h-full flex justify-center items-center">
+    <div v-show="!is_payment" class="h-full flex justify-center items-center">
       <div class="space-y-4">
         <p class="text-gray-400 font-medium">
           Payment will received at appointment!
@@ -83,7 +83,7 @@ import Loader from "@/components/Loader/Loading-white";
 import Address from "./Address.vue";
 export default {
   name: "PaymentForm",
-  props: ["is_payment"],
+  props: ["is_payment", "loaded"],
   components: {
     Loader,
     Address,
@@ -173,22 +173,24 @@ export default {
   },
   async mounted() {
     this.is_load = true;
-    await this.$store.dispatch("cart/GetStripeKey");
-    if (this.stripe_key.secret) {
-      this.stripe = Stripe(this.stripe_key.publisher);
-      const clientSecret = `${this.stripe_key.secret}`;
-      const appearance = {};
-      const options = {
-        layout: {
-          type: "tabs",
-          defaultCollapsed: false,
-        },
-        billingDetails: "never",
-      };
-      this.elements = this.stripe.elements({ clientSecret, appearance });
-      const paymentElement = this.elements.create("payment", options);
-      paymentElement.mount("#payment-element");
-      this.is_load = false;
+    if (this.loaded) {
+      await this.$store.dispatch("cart/GetStripeKey");
+      if (this.stripe_key.secret) {
+        this.stripe = Stripe(this.stripe_key.publisher);
+        const clientSecret = `${this.stripe_key.secret}`;
+        const appearance = {};
+        const options = {
+          layout: {
+            type: "tabs",
+            defaultCollapsed: false,
+          },
+          billingDetails: "never",
+        };
+        this.elements = this.stripe.elements({ clientSecret, appearance });
+        const paymentElement = this.elements.create("payment", options);
+        paymentElement.mount("#payment-element");
+        this.is_load = false;
+      }
     }
   },
 };

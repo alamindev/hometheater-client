@@ -166,7 +166,7 @@ export default {
 
 <style lang="scss" scoped>
 .ps {
-  max-height: 300px;
+  max-height: 400px;
 }
 .nuxt-link-active {
   background: rgb(126, 166, 250);

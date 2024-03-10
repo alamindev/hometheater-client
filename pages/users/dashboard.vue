@@ -32,7 +32,7 @@
                   </p>
                   <button
                     class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
-                    @click="canceled"
+                    @click="canceled(booking.id)"
                   >
                     Cancel Booking
                   </button>
@@ -671,7 +671,7 @@ export default {
     },
   },
   methods: {
-    canceled() {
+    canceled(id) {
       this.$swal({
         title: "Do you want to Cancel Booking?",
         showDenyButton: true,
@@ -680,7 +680,7 @@ export default {
         denyButtonText: `Cancel`,
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$store.dispatch("users/booking/canceled", this.$route.params.id);
+          this.$store.dispatch("users/dashboard/canceled", id);
         }
       });
     },

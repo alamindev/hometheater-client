@@ -17,8 +17,7 @@ export const mutations = {
     USER: (state, data) => (state.user = data),
     PRODUCT_COUNT: (state, data) => (state.product_count = data),
     REVIEW_COUNT: (state, data) => (state.review_count = data),
-    TOTAL_SPAN: (state, data) => (state.total_span = data),
-    UPDATE_BOOKINGS: (state, id) =>   (state.recent_booking = state.recent_booking.filter(el => el.id !== id))
+    TOTAL_SPAN: (state, data) => (state.total_span = data), 
 };
 
 export const actions = {
@@ -45,10 +44,14 @@ export const actions = {
        }
        
     },
-    async delete({ commit, state }, id) {
-        const { data } = await this.$axios.post(`booking/delete`, { id: id });
-        if (data.success == true) {
-            commit("UPDATE_BOOKINGS",  id );
+    async canceled({ commit, state }, id) {
+        let obj = {
+            id: id,
+            user_id: this.$auth.user.id
+        };
+        const { data } = await this.$axios.post(`booking/canceled`, obj);
+        if (data.success == true) { 
+            commit("RECENT_BOOKING", data.booking);
         }
-    }
+    },
 };
