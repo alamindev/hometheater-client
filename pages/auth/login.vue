@@ -259,7 +259,7 @@ export default {
       this.is_register = true;
     }
   },
-  async fetch(store) {
+  async fetch({ store }) {
     await store.dispatch("meta/fetchMetaInfo", "login");
   },
 };

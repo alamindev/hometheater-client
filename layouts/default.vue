@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <Nuxt keep-alive />
+      <Nuxt />
       <LazyDefaultFooter />
     </div>
   </div>
@@ -114,8 +114,8 @@ export default {
       this.is_popup = false;
     },
   },
-  async fetch({ store }) {
-    await store.dispatch("fetchSetting");
+  async fetch() {
+    await this.$store.dispatch("fetchSetting");
   },
 };
 </script>

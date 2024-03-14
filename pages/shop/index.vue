@@ -63,11 +63,11 @@ export default {
       return this.$store.state.product.product_header;
     },
   },
-  async fetch({ store }) {
-    if (store.state.product.products <= 0) {
+  async fetch() {
+    if (this.$store.state.product.products <= 0) {
       await Promise.all([
-        store.dispatch("meta/fetchMetaInfo", "booking"),
-        store.dispatch("product/fetchProducts"),
+        this.$store.dispatch("meta/fetchMetaInfo", "booking"),
+        this.$store.dispatch("product/fetchProducts"),
       ]);
     }
   },
