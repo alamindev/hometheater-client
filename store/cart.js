@@ -865,4 +865,15 @@ export const actions = {
             return true;
         }
     },
+  /**
+     *  fetch stripe key
+     * @param {services id} param1
+     */
+    async CheckProductStock({ commit, state }) {
+        let {data} = await this.$axios.post("/check/quantity", {products: state.cartobj.products});
+        if (data.success) {
+            return true;
+        }
+        return false
+    },
 };

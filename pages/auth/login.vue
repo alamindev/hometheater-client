@@ -259,8 +259,8 @@ export default {
       this.is_register = true;
     }
   },
-  async fetch() {
-    await this.$store.dispatch("meta/fetchMetaInfo", "login");
+  async fetch(store) {
+    await store.dispatch("meta/fetchMetaInfo", "login");
   },
 };
 </script>

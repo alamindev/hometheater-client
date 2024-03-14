@@ -25,12 +25,12 @@ export default {
       return this.$store.state.loading.loading;
     },
   },
-  async fetch() {
-    if (this.$store.state.services.length <= 0) {
+  async fetch({ store }) {
+    if (store.state.services.length <= 0) {
       await Promise.all([
-        this.$store.dispatch("fetchHomePageData"),
-        this.$store.dispatch("meta/fetchMetaInfo", "home"),
-        this.$store.dispatch("fetchServices"),
+        store.dispatch("fetchHomePageData"),
+        store.dispatch("meta/fetchMetaInfo", "home"),
+        store.dispatch("fetchServices"),
       ]);
     }
   },

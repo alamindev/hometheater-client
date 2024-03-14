@@ -155,12 +155,12 @@ export default {
       return this.$store.state.service.service_header;
     },
   },
-  async fetch() {
-    if (this.$store.state.service.categories <= 0) {
+  async fetch({ store }) {
+    if (store.state.service.categories <= 0) {
       await Promise.all([
-        this.$store.dispatch("service/fetchServiceHeader"),
-        this.$store.dispatch("service/fetchServiceCategory"),
-        this.$store.dispatch("meta/fetchMetaInfo", "service"),
+        store.dispatch("service/fetchServiceHeader"),
+        store.dispatch("service/fetchServiceCategory"),
+        store.dispatch("meta/fetchMetaInfo", "service"),
       ]);
     }
   },

@@ -490,8 +490,8 @@ export default {
     //   }
     // });
   },
-  async fetch() {
-    await this.$store.dispatch("meta/fetchMetaInfo", "register");
+  async fetch({ store }) {
+    await store.dispatch("meta/fetchMetaInfo", "register");
   },
 };
 </script>

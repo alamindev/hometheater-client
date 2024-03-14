@@ -68,11 +68,11 @@ export default {
     },
   },
   methods: {},
-  async fetch() {
-    if (this.$store.state.booking.services <= 0) {
+  async fetch({ store }) {
+    if (store.state.booking.services <= 0) {
       await Promise.all([
-        this.$store.dispatch("meta/fetchMetaInfo", "booking"),
-        this.$store.dispatch("booking/fetchServices"),
+        store.dispatch("meta/fetchMetaInfo", "booking"),
+        store.dispatch("booking/fetchServices"),
       ]);
     }
   },

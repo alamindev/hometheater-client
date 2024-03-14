@@ -234,8 +234,8 @@ export default {
       this.mySwiper.slideNext();
     },
   },
-  async fetch() {
-    await this.$store.dispatch("about/fetchAboutData");
+  async fetch({ store }) {
+    await store.dispatch("about/fetchAboutData");
   },
 };
 </script>

@@ -123,8 +123,8 @@ export default {
   created() {
     this.$store.dispatch("gallery/fetchCategories");
   },
-  fetch() {
-    this.$store.dispatch("meta/fetchMetaInfo", "gallery");
+  fetch({ store }) {
+    store.dispatch("meta/fetchMetaInfo", "gallery");
   },
 };
 </script>

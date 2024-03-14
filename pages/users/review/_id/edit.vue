@@ -73,6 +73,7 @@ import EditImage from "@/components/Review/EditImage";
 export default {
   middleware: ["auth", "checkSetting"],
   layout: "users",
+  name: "EditReview",
   data() {
     return {
       imgurl: process.env.imgUrl,

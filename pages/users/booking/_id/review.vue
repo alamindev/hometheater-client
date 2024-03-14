@@ -122,6 +122,7 @@ import ShowImg from "@/components/Review/ShowImg";
 export default {
   middleware: ["auth", "checkSetting"],
   layout: "users",
+  name: "BookingReview",
   components: {
     AddImage,
     ShowImg,
@@ -196,12 +197,9 @@ export default {
       }
     },
   },
-  async fetch() {
-    this.$store.commit("users/review/FETCH_DEFAULT_FORM", []);
-    await this.$store.dispatch(
-      "users/review/OrderServices",
-      this.$route.params.id
-    );
+  async fetch({ params, store }) {
+    store.commit("users/review/FETCH_DEFAULT_FORM", []);
+    await store.dispatch("users/review/OrderServices", params.id);
   },
 };
 </script>

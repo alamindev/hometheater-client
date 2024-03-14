@@ -89,7 +89,7 @@
                         v-if="product.status === 'pending'"
                         class="py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-blackfont-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                       >
-                        Pending
+                        Awaiting Shipment
                       </p>
                       <p
                         v-if="product.status === 'approved'"
@@ -101,7 +101,7 @@
                         <p
                           class="text-center py-2 px-2 md:max-w-[200px] mx-auto w-full bg-gray-500 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                         >
-                          Completed
+                          Delivered
                         </p>
                       </div>
                     </div>
@@ -208,13 +208,13 @@
                   v-if="product.status === 'pending'"
                   class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-pending-color text-blackfont-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
-                  Status: Pending
+                  Awaiting Shipment
                 </p>
                 <p
                   v-if="product.status === 'approved'"
                   class="w-full sm:w-auto md:w-full lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-approve-color text-white font-medium text-xs sm:text-base rounded-sm text-center shadow-md"
                 >
-                  Status: Approved
+                  Shipped
                 </p>
                 <div
                   class="flex items-center"
@@ -223,7 +223,7 @@
                   <p
                     class="w-full sm:w-auto md:w-full text-center lg:w-auto py-2 px-2 md:max-w-[200px] mx-auto bg-gray-500 text-white font-medium text-xs sm:text-base rounded-sm focus:outline-none"
                   >
-                    Status: Completed
+                    Delivered
                   </p>
                 </div>
               </div>

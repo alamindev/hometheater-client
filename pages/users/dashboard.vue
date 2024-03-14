@@ -28,7 +28,7 @@
                   <p
                     class="py-2 px-6 font-medium text-xs sm:text-base rounded-full bg-pending-color text-black mr-2"
                   >
-                    Pending
+                    Awaiting Shipment
                   </p>
                   <button
                     class="py-2 px-6 bg-red-color text-white font-medium text-xs sm:text-base rounded-full text-center"
@@ -47,7 +47,7 @@
                   v-if="booking.status === 'approved'"
                   class="py-2 px-6 text-approve-color border border-approve-color font-medium text-xs sm:text-base rounded-full text-center"
                 >
-                  Approved
+                  Shipped
                 </p>
                 <div
                   class="flex flex-wrap md:flex-nowrap"
@@ -56,7 +56,7 @@
                   <p
                     class="text-center py-2 px-6 mr-2 bg-gray-500 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
                   >
-                    Completed
+                    Delivered
                   </p>
                   <nuxt-link
                     :to="`/users/booking/${booking.id}/review`"
@@ -351,9 +351,7 @@
                     <ul class="flex w-full max-sm:justify-between pb-3">
                       <li class="w-40 sm:w-6/12">Items Summary</li>
                       <li class="w-20 sm:w-2/12 text-center text-sm">QTY</li>
-                      <li class="w-20 sm:w-2/12 text-center text-sm">
-                        Varient
-                      </li>
+                      <li class="w-20 sm:w-2/12 text-center text-sm">Color</li>
                       <li class="w-20 sm:w-2/12 text-center text-sm">
                         Item Total
                       </li>
@@ -402,7 +400,7 @@
                           class="w-32 sm:w-2/12 text-dark-sm font-normal text-center"
                         >
                           <p>
-                            Name: <strong>{{ service?.varient?.name }}</strong>
+                            <strong>{{ service?.varient?.name }}</strong>
                           </p>
                           <p
                             :style="`--color: ${service?.varient?.value}`"
@@ -686,12 +684,10 @@ export default {
     },
   },
   async created() {
-    if (!this.$store.state.users.dashboard.order) {
-      await Promise.all([
-        this.$store.dispatch("users/dashboard/fetchRecentOrder"),
-        this.$store.dispatch("users/dashboard/fetchAllRequiredDatas"),
-      ]);
-    }
+    await Promise.all([
+      this.$store.dispatch("users/dashboard/fetchRecentOrder"),
+      this.$store.dispatch("users/dashboard/fetchAllRequiredDatas"),
+    ]);
   },
 };
 </script>

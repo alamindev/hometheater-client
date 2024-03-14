@@ -133,17 +133,14 @@ export default {
       title: "Edit Booking | Home Theater Proz",
     };
   },
-  async fetch() {
+  async fetch({ store, params, router }) {
     if (
       this.edit_booking.status === "cancel" ||
       this.edit_booking.status === "complete"
     ) {
-      this.$router.go(-1);
+      router.go(-1);
     }
-    await this.$store.dispatch(
-      "users/booking/fetchBooking",
-      this.$route.params.id
-    );
+    await store.dispatch("users/booking/fetchBooking", params.id);
   },
   updated() {
     this.$store.commit("users/booking/UPDATE_NEWIMG", []);

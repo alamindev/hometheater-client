@@ -166,11 +166,24 @@ export default {
     nextQuestion() {
       this.$store.commit("cart/UPDATE_STEP_NEXT");
     },
-    onClickNext() {
-      if (this.currentTab == "order-summary") {
-        this.$emit("next");
+    async onClickNext() {
+      let response = await this.$store.dispatch("cart/CheckProductStock");
+
+      if (response) {
+        if (this.currentTab == "order-summary") {
+          this.$emit("next");
+        } else {
+          this.$emit("next");
+        }
       } else {
-        this.$emit("next");
+        this.$swal({
+          toast: true,
+          position: "top-end",
+          icon: "error",
+          title: "Product Stock Limitted! Remove items and try again",
+          showConfirmButton: false,
+          timer: 6000,
+        });
       }
     },
   },

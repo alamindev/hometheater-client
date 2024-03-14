@@ -12,7 +12,7 @@
     >
       <Sidebar @hidden="hidden" :isshowing="isshowing" />
       <div
-        class="xl:ml-64 2xl:ml-80 min-[1440px]:mr-80 sm:px-5 main--parent"
+        class="xl:ml-64 2xl:ml-80 2xl:mr-80 sm:px-5 main--parent"
         :class="isshowing || isshowingright ? 'showing' : ''"
       >
         <Header @clicked="onClicked" @rightSideClicked="toggleRightSidebar" />
@@ -108,9 +108,9 @@ export default {
       this.isshowingright = false;
     },
   },
-  async fetch() {
-    await this.$store.dispatch("fetchSetting");
-    await this.$store.dispatch("activity/fetchActivities");
+  async fetch({ store }) {
+    await store.dispatch("fetchSetting");
+    await store.dispatch("activity/fetchActivities");
   },
 };
 </script>

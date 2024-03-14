@@ -21,28 +21,28 @@ export const mutations = {
 };
 
 export const actions = {
-    async fetchAllRequiredDatas({ commit, dispatch }) {
-        dispatch("loading/setLoading", null, { root: true });
+    async fetchAllRequiredDatas({ commit, dispatch }) { 
         const { data } = await this.$axios.get(
             "users/dashboard/" + this.$auth.user.id
         ); 
         commit("PRODUCT_COUNT", data.product_count);
         commit("BOOKING_COUNT", data.booking_count);
         commit("REVIEW_COUNT", data.reviews_count);
-        commit("TOTAL_SPAN", data.total_span);
-        dispatch("loading/clearLoading", null, { root: true });
+        commit("TOTAL_SPAN", data.total_span); 
     },
     
     async fetchRecentOrder({ commit, dispatch }) { 
+        dispatch("loading/setLoading", null, { root: true });
         const { data } = await this.$axios.get(
             "users/recent-orders/" + this.$auth.user.id
         );
         if (data.success) {
-            commit("RECENT_PRODUCT", data.product);
-            commit("RECENT_BOOKING", data.booking);
-            commit("USER", data.user);
+            await commit("RECENT_PRODUCT", data.product);
+            await  commit("RECENT_BOOKING", data.booking);
+            await commit("USER", data.user);
+            dispatch("loading/clearLoading", null, { root: true });
        }
-       
+      
     },
     async canceled({ commit, state }, id) {
         let obj = {

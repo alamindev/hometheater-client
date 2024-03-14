@@ -30,7 +30,7 @@
               <p
                 class="py-2 px-6 font-medium text-sm sm:text-base rounded-full bg-pending-color text-black mr-2"
               >
-                Pending
+                Awaiting Shipment
               </p>
               <div v-if="product.payment === 'online'">
                 <small class="text-brand-red-200"
@@ -79,7 +79,7 @@
               <p
                 class="text-center py-2 px-6 mr-2 bg-gray-500 text-white font-medium text-xs sm:text-base rounded-full focus:outline-none"
               >
-                Completed
+                Delivered
               </p>
               <nuxt-link
                 :to="`/users/product/${product.id}/review`"
@@ -102,7 +102,7 @@
           <ul class="flex w-full pb-3">
             <li class="w-6/12">Items Summary</li>
             <li class="w-3/12 text-center">QTY</li>
-            <li class="w-3/12 text-center">Varient</li>
+            <li class="w-3/12 text-center">Color</li>
             <li class="w-3/12 text-center">Item Total</li>
           </ul>
         </div>
@@ -143,7 +143,7 @@
                 class="w-3/12 text-dark-sm font-normal text-center"
               >
                 <p>
-                  Name: <strong>{{ service?.varient?.name }}</strong>
+                  <strong>{{ service?.varient?.name }}</strong>
                 </p>
                 <p
                   :style="`--color: ${service?.varient?.value}`"

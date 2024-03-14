@@ -29,16 +29,16 @@
         <div class="flex pb-4 items-center">
           <h3 class="text-base pr-2">Rating:</h3>
           <client-only>
-          <star-rating
-            v-bind:max-rating="5"
-            v-bind:star-size="25"
-            v-bind:increment="0.5"
-            :show-rating="false"
-            :rating="Number(review.rating)"
-            read-only
-          >
-          </star-rating>
-         </client-only>
+            <star-rating
+              v-bind:max-rating="5"
+              v-bind:star-size="25"
+              v-bind:increment="0.5"
+              :show-rating="false"
+              :rating="Number(review.rating)"
+              read-only
+            >
+            </star-rating>
+          </client-only>
         </div>
         <div>
           <p class="text-gray-500">{{ review.details }}</p>
@@ -57,6 +57,7 @@ import ShowImg from "@/components/Review/ShowImg";
 export default {
   middleware: ["auth", "checkSetting"],
   layout: "users",
+  name: "DetailsReview",
   components: {
     ShowImg,
   },

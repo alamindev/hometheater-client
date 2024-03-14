@@ -593,7 +593,7 @@ export default {
     HideViewImage(id) {
       this.$modal.hide("ImageModal");
     },
-    addToCart(data) {
+    async addToCart(data) {
       let ids = [];
       for (let i = 0; i < this.item; i++) {
         ids.push(data.id);

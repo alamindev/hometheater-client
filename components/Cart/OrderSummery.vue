@@ -272,8 +272,21 @@ export default {
       }
       this.$store.dispatch("cart/applyPromo");
     },
-    onClickNext() {
-      this.$emit("next");
+    async onClickNext() {
+      let response = await this.$store.dispatch("cart/CheckProductStock");
+
+      if (response) {
+        this.$emit("next");
+      } else {
+        this.$swal({
+          toast: true,
+          position: "top-end",
+          icon: "error",
+          title: "Product Stock Limitted! Remove items and try again",
+          showConfirmButton: false,
+          timer: 6000,
+        });
+      }
     },
   },
 };
