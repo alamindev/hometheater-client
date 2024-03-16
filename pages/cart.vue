@@ -428,10 +428,18 @@ export default {
       this.$store.commit("cart/IS_REGISTER_FORM", false);
     },
     prev() {
-      if (this.is_check_zipcode && this.step === 3) {
+      if (
+        this.is_check_zipcode &&
+        this.step === 3 &&
+        Object.keys(this.cartdata.services).length !== 0
+      ) {
         this.step = 1;
       } else {
-        this.step--;
+        if (Object.keys(this.cartdata.services).length === 0) {
+          this.step = 1;
+        } else {
+          this.step--;
+        }
       }
       this.is_next = false;
       if (this.step === 3) {

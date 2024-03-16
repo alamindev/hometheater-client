@@ -148,6 +148,14 @@ export default {
           });
           if (error) {
             this.$store.commit("cart/FINISH_STEP_LOADING", false);
+            this.$swal({
+              toast: true,
+              position: "top-end",
+              icon: "error",
+              title: error.message,
+              showConfirmButton: false,
+              timer: 3000,
+            });
           }
         }
       }

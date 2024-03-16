@@ -1,6 +1,6 @@
 <template>
   <div
-    class="xl:px-20 2xl:px-24 px-5 flex py-2 justify-between"
+    class="xl:px-20 2xl:px-24 px-5 lg:px-12 flex py-2 justify-between"
     :class="hidden"
     id="menu"
   >

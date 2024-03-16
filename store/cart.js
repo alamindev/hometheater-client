@@ -717,7 +717,7 @@ export const actions = {
             payment: state.payment, 
             addon_price: state.feature_price,
             discount: state.percent,
-            user_id:  this.$auth.loggedIn ?? this.$auth.user.id,
+            user_id: this.$auth.user.id,
             answer: state.answer,
             grand_total: state.grand_total, 
             taxes: state.rate, 

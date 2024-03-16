@@ -1,10 +1,10 @@
 <template>
-  <section class="custom-gradient relative px-4 lg:px-24">
+  <section class="custom-gradient relative px-4 lg:px-6 xl:px-24">
     <div class="container mx-auto">
       <div
         class="flex flex-col-reverse lg:flex-row pt-4 sm:pt-12 pb-12 lg:py-20 lg:items-center"
       >
-        <div class="lg:w-6/12 lg:pr-8 xl:pl-16 xl:pr-24">
+        <div class="lg:w-6/12 lg:pr-4 xl:pl-16 xl:pr-24">
           <h1
             v-if="topheader"
             class="text-2xl sm:text-3xl lg:text-4xl xl:text-brand-header py-3 text-center lg:text-left text-dark-sm leading-relaxed font-semibold"
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div
-          class="lg:w-6/12 py-5 h-full px-5 sm:px-0 lg:py-0 lg:pl-8 xl:pl-12 flex justify-center lg:justify-end"
+          class="lg:w-6/12 py-5 h-full px-5 sm:px-0 lg:py-0 lg:pl-4 xl:pl-12 flex justify-center lg:justify-end"
           v-if="topheader"
         >
           <div

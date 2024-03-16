@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mr-3 md:mr-5 lg:mr-8" :class="classes">
+  <div class="relative mr-3 md:mr-5 xl:mr-8" :class="classes">
     <div class="flex flex-1 relative">
       <input
         type="text"
@@ -7,7 +7,7 @@
         autocomplete="off"
         v-on:keyup="getResults"
         placeholder="Search"
-        class="border-2 w-full focus:ring-0 lg:w-72 xl:w-98 border-gray-200 py-2 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none text-gray-600"
+        class="border-2 w-full focus:ring-0 lg:w-64 xl:w-98 border-gray-200 py-2 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none text-gray-600"
       />
       <img
         class="absolute right-2 top-1/2 -translate-y-1/2"

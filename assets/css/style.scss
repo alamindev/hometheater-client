@@ -1048,10 +1048,6 @@ strong {
   color: rgb(34, 56, 77);
 }
 
-.home--page .xl\:pr-24 {
-  padding-right: 3rem;
-}
-
 .cart--page > h1 {
   text-align: center;
 }
@@ -1097,12 +1093,6 @@ strong {
 .cart--page .text-gray-500 {
   --tw-text-opacity: 1;
   color: #24364a;
-}
-
-@media (max-width: 600px) {
-  .home--page .xl\:pr-24 {
-    padding-right: 0rem !important;
-  }
 }
 
 .cart--page .w-8\/12 {

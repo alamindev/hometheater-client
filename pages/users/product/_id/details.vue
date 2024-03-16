@@ -33,15 +33,15 @@
                 Awaiting Shipment
               </p>
               <div v-if="product.payment === 'online'">
-                <small class="text-brand-red-200"
-                  >You made payment by online if need to cancel order please
-                  <a
+                <small class="text-dark"
+                  >Your online payment was successful. If you need to cancel
+                  order or have a question please (<a
                     target="_blank"
                     class="text-brand-color underline"
                     href="/contact-us"
-                    >ccontact us / text</a
-                  ></small
-                >
+                    >contact us</a
+                  >).
+                </small>
               </div>
               <button
                 v-else

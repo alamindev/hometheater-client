@@ -261,7 +261,7 @@ export default {
         name: "",
         phone: "",
         email: "",
-        reason: "",
+        reason: "general",
         details: "",
       },
       loader: false,
@@ -306,6 +306,14 @@ export default {
         return;
       }
     },
+  },
+  mounted() {
+    if (this.$auth.loggedIn) {
+      this.data.email = this.$auth.user.email;
+      this.data.phone = this.$auth.user.phone;
+      this.data.name =
+        this.$auth.user.first_name + " " + this.$auth.user.last_name;
+    }
   },
   async fetch() {
     await this.$store.dispatch("contact/fetchContactData");
