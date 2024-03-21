@@ -66,7 +66,7 @@ export default {
   async fetch() {
     if (this.$store.state.product.products <= 0) {
       await Promise.all([
-        this.$store.dispatch("meta/fetchMetaInfo", "booking"),
+        this.$store.dispatch("meta/fetchMetaInfo", "product"),
         this.$store.dispatch("product/fetchProducts"),
       ]);
     }

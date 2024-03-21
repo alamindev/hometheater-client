@@ -7,7 +7,7 @@
         autocomplete="off"
         v-on:keyup="getResults"
         placeholder="Search"
-        class="border-2 w-full focus:ring-0 lg:w-64 xl:w-98 border-gray-200 py-2 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none text-gray-600"
+        class="border-2 w-full focus:ring-0 xl:w-98 border-gray-200 py-2 md:py-3 pl-5 pr-10 rounded-lg focus:outline-none text-gray-600"
       />
       <img
         class="absolute right-2 top-1/2 -translate-y-1/2"
@@ -25,7 +25,7 @@
           class="pt-3 pb-2 text-gray-500 px-3 font-medium"
         >
           <p><i class="fas fa-briefcase pr-2"></i>Services</p>
-          <ul class="sm:pl-4 pt-2" v-if="!error">
+          <ul class="sm:pl-4 md:pl-2 xl:pl-4 pt-2" v-if="!error">
             <template v-for="data in datas">
               <li
                 class="py-2 px-2 hover:bg-gray-100"
@@ -41,7 +41,9 @@
                     class="w-8 h-8 rounded-full flex-shrink-0"
                     alt=""
                   />
-                  <p>{{ data.title }}, ${{ data.price }}</p>
+                  <p class="text-sm xl:text-base">
+                    {{ data.title }}, ${{ data.price }}
+                  </p>
                 </nuxt-link>
               </li>
             </template>
@@ -55,7 +57,7 @@
           class="pt-3 pb-2 text-gray-500 px-3 font-medium"
         >
           <p><i class="fas fa-briefcase pr-2"></i>Products</p>
-          <ul class="sm:pl-4 pt-2" v-if="!error">
+          <ul class="sm:pl-4 md:pl-2 xl:pl-4 pt-2" v-if="!error">
             <template v-for="data in products">
               <li
                 class="py-2 px-2 hover:bg-gray-100"
@@ -71,7 +73,9 @@
                     class="w-8 h-8 rounded-full flex-shrink-0"
                     alt=""
                   />
-                  <p>{{ data.title }}, ${{ data.price }}</p>
+                  <p class="text-sm xl:text-base">
+                    {{ data.title }}, ${{ data.price }}
+                  </p>
                 </nuxt-link>
               </li>
             </template>

@@ -59,7 +59,7 @@
       <div class="pt-2">
         <div class="flex justify-end gap-4 pb-2 sm:pb-3 px-2">
           <h2 class="uppercase text-gray-500 text-sm sm:text-base font-medium">
-            <span v-if="subTotal != ''">Sub Total:</span>
+            <span v-if="subTotal">Sub Total:</span>
             <span v-else>Total:</span>
           </h2>
           <p class="text-gray-700 font-bold">${{ total }}</p>
@@ -80,7 +80,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full pb-6 px-2" v-if="subTotal != ''">
+      <div class="w-full pb-6 px-2" v-if="subTotal">
         <hr />
         <div class="flex justify-end gap-4 pt-1">
           <h2 class="uppercase text-gray-500 text-base font-medium">Total:</h2>

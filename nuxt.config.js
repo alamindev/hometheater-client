@@ -85,6 +85,7 @@ export default {
     { src: "./plugins/calendar.js", ssr: false },
     { src: "./plugins/star-rating.js", ssr: false },
     { src: "./plugins/underscore.js", ssr: false },
+    
   ],
   static: {
     prefix: true,
@@ -144,7 +145,7 @@ export default {
     ],
     "@nuxtjs/amp",
     "nuxt-compress", 
-    "nuxt-beastcss",
+    "nuxt-beastcss", 
   ],  
   beastcss: {  
     config: { 
@@ -205,7 +206,7 @@ export default {
     //https://admin.hometheaterproz.com/  http://localhost:8000/
     mainDomain: "https://hometheaterproz.com/",
     url: "https://hometheaterproz.com", 
-    MAP_API_KEY: "AIzaSyBjVRkL8MOLaVd-fjloQguTIQDLAAzA4w0", 
+    MAP_API_KEY: "AIzaSyBjVRkL8MOLaVd-fjloQguTIQDLAAzA4w0",  
   },
   /*
    ** Axios module configuration
